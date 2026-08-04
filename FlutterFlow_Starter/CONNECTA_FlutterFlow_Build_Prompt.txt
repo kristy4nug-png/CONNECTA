@@ -1,0 +1,56 @@
+BUILD CONNECTA AS A RESPONSIVE FLUTTERFLOW WEB AND MOBILE APP
+
+PROJECT
+Name: CONNECTA
+Tagline: Together as one
+Purpose: A recovery safety and continuity app for people in recovery, rehabilitation,
+healthcare, prison release and community resettlement in the UK.
+
+DESIGN
+Use the supplied green CONNECTA icon and lock-up.
+Primary dark green: #355846
+Secondary green: #5F8167
+Warm amber: #E3A53C
+Soft sage: #E1EBDD
+Warm white: #F8F8F3
+Main text: #1F2933
+Use large accessible text, generous spacing, rounded cards and calm non-institutional screens.
+No neon colours, shame-based streaks, surveillance imagery or punitive language.
+
+BOTTOM NAVIGATION
+Today | Meetings | Reflect | Tools | My Plan
+
+CORE SCREENS
+1. Welcome and safety check:
+   I'm steady / I'm struggling / I don't feel safe.
+2. Get me through 20 minutes:
+   five-step coping flow, timer and emergency contact actions.
+3. One-task mode:
+   show only the next safe action.
+4. Meetings:
+   AA, NA and ACA official finder links plus a private personal meeting calendar.
+5. Daily reflection:
+   original recovery reading, private note, and link to official fellowship literature.
+6. Quiet Room:
+   YouTube-embedded Lavendaire meditation playlist with clear attribution.
+7. Coffee shop finder:
+   location permission, nearby café results, walking directions, no location storage.
+8. Coping toolbox:
+   HALT, grounding, urge surfing, pause, meeting preparation and boundaries.
+9. Support ladder:
+   ordered list of trusted contacts.
+10. Service promises:
+   what was promised, responsible service, due date and status.
+11. Transition checklist:
+   identification, phone, medication, accommodation, GP, benefits, bank, transport,
+   food, probation/key worker, trusted contact and first meeting.
+12. Privacy:
+   clear consent, export and delete controls.
+
+FREE PROTOTYPE RULES
+Use local state and test data only.
+Do not store real health, prison, safeguarding or identifying information.
+Do not add paid APIs.
+Play videos through YouTube. Do not copy or rehost audio.
+Open official fellowship sources rather than reproducing protected literature.
+Make all screens responsive for mobile and desktop.

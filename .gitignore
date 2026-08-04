@@ -1,0 +1,20 @@
+# Dependencies and generated coverage
+node_modules/
+coverage/
+.nyc_output/
+
+# CONNECTA private data, browser exports and local configuration
+*.connecta-backup.json
+connecta-*-export-*.json
+connecta-*-safety-plan-*.json
+*.local.json
+.env
+.env.*
+!.env.example
+
+# Test-user, diagnostic and operating-system files
+test-user-data/
+diagnostics/
+*.log
+Thumbs.db
+Desktop.ini

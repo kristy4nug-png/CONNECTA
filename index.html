@@ -1,0 +1,1294 @@
+﻿<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#16324F">
+  <meta name="description" content="A free, private-first recovery safety and continuity beta.">
+  <script>
+    try{
+      if(localStorage.getItem("connectaPrivacyLockV1") && sessionStorage.getItem("connectaPrivacyUnlocked")!=="yes"){
+        document.documentElement.classList.add("connecta-start-locked");
+      }
+    }catch{}
+  </script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="assets/branding/connecta-final-logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/connecta-icon-32.png">
+  <link rel="mask-icon" href="assets/branding/connecta-final-logo.svg" color="#16324F">
+  <title>CONNECTA | Recovery Safety Net</title>
+  <style>
+    :root{
+      --navy:#355846;--navy2:#4C7059;--teal:#5F8167;--teal2:#46664F;
+      --amber:#E3A53C;--sage:#E1EBDD;--mist:#E8F0E4;--paper:#F8F8F3;
+      --white:#FFFFFF;--ink:#1F2933;--muted:#596774;--line:#CBD6D2;
+      --danger:#B42318;--danger-bg:#FDE8E6;--success:#236B4B;
+      --shadow:0 10px 30px rgba(22,50,79,.11);--radius:20px;
+      --text-scale:1;
+    }
+    *{box-sizing:border-box}
+    html{font-size:calc(16px * var(--text-scale));scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    button,input,select,textarea{font:inherit}
+    button,a{touch-action:manipulation}
+    a{color:var(--navy2)}
+    .skip{position:absolute;left:-999px;top:0;background:#fff;padding:10px;z-index:100}
+    .skip:focus{left:10px;top:10px}
+    .app-shell{max-width:760px;margin:auto;min-height:100vh;background:var(--paper);padding-bottom:92px}
+    header{background:linear-gradient(145deg,var(--navy),var(--navy2));color:#fff;padding:16px 18px 24px;border-radius:0 0 28px 28px;box-shadow:var(--shadow)}
+    .header-top{display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px}
+    .logo-container{display:flex;align-items:center;justify-content:center;width:100%;text-align:center;padding:4px 0}
+    .logo-container img{display:block;width:min(100%,280px);height:auto;max-height:100px;object-fit:contain;object-position:center;margin-inline:auto}
+    .icon-btn{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);color:white;border-radius:12px;padding:9px 11px;cursor:pointer}
+    .welcome{margin-top:20px}
+    .welcome h2{font-size:1.75rem;line-height:1.15;margin:0 0 6px}
+    .welcome p{margin:0;color:#E9F2F7}
+    main{padding:18px}
+    .view{display:none}
+    .view.active{display:block}
+    .card{background:var(--white);border:1px solid #E3E9E6;border-radius:var(--radius);padding:18px;margin-bottom:15px;box-shadow:0 5px 18px rgba(22,50,79,.055)}
+    .card h2,.card h3{margin-top:0}
+    .eyebrow{text-transform:uppercase;font-size:.72rem;font-weight:800;letter-spacing:1.25px;color:var(--teal)}
+    .muted{color:var(--muted)}
+    .small{font-size:.86rem}
+    .safety-card{background:linear-gradient(155deg,#fff,#F2F8F5)}
+    .choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .choice{border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px 8px;min-height:78px;cursor:pointer;font-weight:700;color:var(--ink)}
+    .choice span{display:block;font-size:1.35rem;margin-bottom:5px}
+    .choice.selected{outline:3px solid var(--teal);border-color:transparent;background:var(--sage)}
+    .primary,.secondary,.danger-btn,.ghost{border:0;border-radius:14px;padding:13px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .primary{background:var(--teal);color:#fff}
+    .primary:hover{background:var(--teal2)}
+    .secondary{background:var(--navy);color:#fff}
+    .ghost{background:#EEF3F1;color:var(--ink)}
+    .danger-btn{background:var(--danger);color:#fff}
+    .full{width:100%}
+    .action-row{display:flex;gap:9px;flex-wrap:wrap}
+    .urgent-box{display:none;margin-top:14px;background:var(--danger-bg);border-left:5px solid var(--danger);padding:14px;border-radius:12px}
+    .urgent-box.show{display:block}
+    .one-task{display:flex;gap:10px}
+    input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:12px}
+    textarea{min-height:90px;resize:vertical}
+    label{font-weight:700;display:block;margin:12px 0 6px}
+    .task-done{text-decoration:line-through;color:var(--muted)}
+    .progress-bar{height:10px;background:#E5ECE9;border-radius:999px;overflow:hidden;margin:10px 0}
+    .progress-bar i{display:block;height:100%;width:0;background:var(--teal);transition:.25s}
+    .reading{font-size:1.08rem;line-height:1.7}
+    .reflection-prompt{background:var(--sage);border-radius:14px;padding:13px;margin-top:12px}
+    .official-grid,.tool-grid,.finder-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .official-card,.finder-card,.tool-card{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+    .official-card strong,.finder-card strong,.tool-card strong{display:block;margin-bottom:5px}
+    .pill{display:inline-block;border-radius:999px;padding:5px 9px;font-size:.74rem;font-weight:800;background:var(--mist);color:var(--navy)}
+    .pill.aa{background:#E6EEF8}.pill.na{background:#E7F3ED}.pill.aca{background:#F8EDD5}.pill.other{background:#EEE9F5}
+    .meeting-list{display:grid;gap:10px;margin-top:14px}
+    .video-shell{position:relative;width:100%;aspect-ratio:16/9;background:#0D1C2A;border-radius:17px;overflow:hidden;margin:12px 0}
+    .video-shell iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .meditation-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}
+    .meditation-choice{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px;text-align:left;cursor:pointer;color:var(--ink)}
+    .meditation-choice strong{display:block;margin-bottom:3px}
+    .meditation-choice.active{outline:3px solid var(--teal);background:var(--sage);border-color:transparent}
+    .cafe-controls{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:end}
+    .cafe-list{display:grid;gap:10px;margin-top:14px}
+    .cafe{border:1px solid var(--line);background:#fff;border-radius:15px;padding:14px}
+    .cafe h4{margin:0 0 4px}
+    .cafe-meta{display:flex;gap:7px;flex-wrap:wrap;margin:7px 0}
+    .distance{display:inline-block;border-radius:999px;background:var(--sage);padding:4px 8px;font-size:.76rem;font-weight:800}
+    .source-note{font-size:.75rem;color:var(--muted);margin-top:10px}
+    .meeting{border:1px solid var(--line);border-radius:15px;padding:13px;background:#fff}
+    .meeting-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .meeting h4{margin:5px 0 2px}
+    .meeting p{margin:3px 0}
+    .meeting-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:15px}
+    .meeting-tab{border:1px solid var(--line);border-radius:13px;padding:11px 7px;background:#fff;color:var(--ink);font-weight:800;cursor:pointer}
+    .meeting-tab.active,.meeting-tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+    .meeting-panel[hidden]{display:none}
+    .meeting-offline{background:var(--danger-bg);border-left:5px solid var(--danger);border-radius:14px;padding:14px;margin-bottom:14px}
+    .reminder-due{border-left:5px solid var(--amber);background:#FFF9EC}
+    .meeting-data{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+    .form-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:10px 0 16px}
+    .day{border:1px solid var(--line);border-radius:12px;padding:8px 3px;text-align:center;background:#fff;font-size:.75rem}
+    .day.today{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .day.has-meeting::after{content:"";display:block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin:5px auto 0}
+    dialog{border:0;border-radius:22px;max-width:620px;width:calc(100% - 24px);padding:0;box-shadow:0 25px 80px rgba(0,0,0,.25)}
+    dialog::backdrop{background:rgba(13,28,42,.72)}
+    .modal-head{background:var(--navy);color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+    .modal-body{padding:20px;max-height:75vh;overflow:auto}
+    .close{background:transparent;color:#fff;border:0;font-size:1.5rem;cursor:pointer}
+    .timer{font-size:2.5rem;font-weight:900;text-align:center;color:var(--navy);font-variant-numeric:tabular-nums}
+    .support-step{display:none}
+    .support-step.active{display:block}
+    .step-dots{display:flex;gap:6px;justify-content:center;margin:12px 0}
+    .step-dots i{width:10px;height:10px;border-radius:50%;background:#D7DEDB}
+    .step-dots i.active{background:var(--teal)}
+    details{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;margin-bottom:9px}
+    summary{font-weight:800;cursor:pointer}
+    .promise{border-left:5px solid var(--amber);padding-left:12px}
+    .promise.complete{border-color:var(--success)}
+    .bridge-hero{background:linear-gradient(155deg,#fff,#F0F6F2);border-top:5px solid var(--teal)}
+    .bridge-status{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--mist);border-radius:14px;padding:12px;margin:12px 0}
+    .bridge-countdown{font-size:1.05rem;font-weight:900;color:var(--navy)}
+    .bridge-progress{font-size:.82rem;font-weight:800;color:var(--muted)}
+    .bridge-checkins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+    .bridge-checkin{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 8px;font-weight:800;cursor:pointer;color:var(--ink)}
+    .bridge-checkin.green{border-bottom:5px solid var(--success)}
+    .bridge-checkin.amber{border-bottom:5px solid var(--amber)}
+    .bridge-checkin.red{border-bottom:5px solid var(--danger)}
+    .bridge-guidance{border-left:5px solid var(--amber);background:#FFF9EC;border-radius:12px;padding:12px;margin:10px 0}
+    .bridge-guidance:empty{display:none}
+    .bridge-practical{background:var(--mist);border-radius:14px;padding:12px;margin:12px 0}
+    .bridge-practical p{margin:5px 0}
+    .bridge-window{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+    .bridge-window h4{margin:0 0 8px;color:var(--navy)}
+    .bridge-task{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:11px;margin-bottom:7px;font-weight:600}
+    .bridge-task input{width:auto;margin-top:3px}
+    .bridge-task.complete span{text-decoration:line-through;color:var(--muted)}
+    .passport-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+    .passport-option{display:flex;align-items:flex-start;gap:8px;border:1px solid var(--line);border-radius:12px;padding:10px;font-weight:600;margin:0}
+    .passport-option input{width:auto;margin-top:3px}
+    .passport-sheet{border:2px solid var(--navy);border-radius:15px;padding:16px;margin:14px 0;background:#fff}
+    .empty{border:1px dashed var(--line);padding:18px;border-radius:15px;text-align:center;color:var(--muted)}
+    .privacy-note{background:var(--mist);border-radius:14px;padding:14px}
+    .capital-area{border:1px solid var(--line);border-radius:15px;padding:12px;margin:10px 0;background:#fff}
+    .capital-area legend{font-weight:900;color:var(--navy);padding:0 6px}
+    .appointment-list{display:grid;gap:10px;margin-top:14px}
+    .appointment-card{border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:15px;padding:14px;background:#fff}
+    .appointment-card.completed{border-left-color:var(--success);background:#F2F8F5}
+    .appointment-card.cancelled{border-left-color:var(--muted);opacity:.82}
+    .appointment-card h3{margin:7px 0 3px}
+    .appointment-card p{margin:4px 0}
+    .privacy-lock-screen{position:fixed;inset:0;z-index:200;background:linear-gradient(145deg,var(--navy),var(--navy2));color:#fff;display:flex;align-items:center;justify-content:center;padding:20px}
+    .privacy-lock-screen[hidden]{display:none}
+    .privacy-lock-card{width:min(420px,100%);background:#fff;color:var(--ink);border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.35)}
+    .privacy-lock-card h1{margin-top:0;color:var(--navy)}
+    body.privacy-locked{overflow:hidden}
+    .connecta-start-locked .app-shell{visibility:hidden}
+    .beta-badge{display:inline-block;background:#FFF3D8;color:#704D0A;border-radius:999px;padding:5px 9px;font-size:.74rem;font-weight:900}
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 6px max(7px,env(safe-area-inset-bottom));z-index:20}
+    .nav-btn{border:0;background:transparent;color:var(--muted);font-size:.72rem;font-weight:700;padding:6px 2px;cursor:pointer}
+    .nav-btn span{display:block;font-size:1.25rem}
+    .nav-btn.active{color:var(--teal)}
+    .toast{position:fixed;left:50%;bottom:95px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 14px;border-radius:12px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .disclaimer{font-size:.78rem;color:var(--muted);padding:10px 18px 24px}
+    .status-line{font-size:.86rem;color:var(--muted);margin-top:8px}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:560px){
+      .official-grid,.tool-grid,.finder-grid,.meditation-grid{grid-template-columns:1fr}
+      .cafe-controls{grid-template-columns:1fr}
+      .choice-grid{grid-template-columns:1fr}
+      .choice{min-height:auto;text-align:left}
+      .choice span{display:inline;margin-right:8px}
+      .one-task{flex-direction:column}
+      .meeting-tabs{grid-template-columns:1fr 1fr}
+      .form-pair{grid-template-columns:1fr}
+      .bridge-checkins,.passport-options{grid-template-columns:1fr}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    @media print{
+      body *{visibility:hidden!important}
+      #recoveryPassportPreview,#recoveryPassportPreview *,#workerHandoverPreview,#workerHandoverPreview *{visibility:visible!important}
+      #recoveryPassportPreview,#workerHandoverPreview{position:absolute;inset:0;width:100%;background:#fff}
+    }
+      /* CONNECTA FINAL LOGO CSS START */
+    .connecta-final-top-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 18px 12px 18px;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+        border-radius: 18px;
+    }
+
+    .connecta-final-top-logo img {
+        display: block;
+        width: min(92%, 420px);
+        height: auto;
+        max-height: 140px;
+        object-fit: contain;
+        object-position: center;
+        margin-inline: auto;
+        image-rendering: auto;
+        filter: drop-shadow(0 10px 20px rgba(13,28,42,0.18));
+        -webkit-filter: drop-shadow(0 10px 20px rgba(13,28,42,0.18));
+        transition: transform .18s ease;
+    }
+
+    .connecta-final-top-logo img:focus,
+    .connecta-final-top-logo img:hover {
+        transform: translateY(-2px);
+    }
+
+    /* hide legacy logo container (duplicate) so only the polished top logo shows */
+    .logo-container { display: none !important; }
+
+    @media (max-width: 560px) {
+        .connecta-final-top-logo img {
+            max-height: 110px;
+            width: min(94%, 320px);
+        }
+    }
+    /* CONNECTA FINAL LOGO CSS END */
+</style>
+  <link rel="apple-touch-icon" href="icons/connecta-icon-192.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="app-shell" id="appContent">
+  <header>
+  <!-- CONNECTA FINAL TOP LOGO START -->
+  <div class="connecta-final-top-logo" aria-hidden="false">
+    <img
+      src="assets/branding/connecta-final-logo.svg"
+      srcset="assets/branding/connecta-final-logo.svg 1x, icons/connecta-icon-512.png 2x"
+      loading="eager"
+      alt="CONNECTA — Together as one"
+      width="420"
+      height="140"
+      role="img">
+  </div>
+  <!-- CONNECTA FINAL TOP LOGO END -->
+    <div class="header-top">
+      <button class="icon-btn" id="textSizeBtn" aria-label="Increase text size">A+</button>
+      <button class="icon-btn" id="openBetaInfo">Beta info</button>
+      <button class="icon-btn" id="openBetaSettings">Settings</button>
+      <button class="icon-btn" id="lockNow">Lock now</button>
+      <button class="icon-btn" id="installBtn" hidden>Install</button>
+    </div>
+    <div class="welcome" style="text-align:center">
+      <h2 id="greeting">Welcome back</h2>
+      <p>Only the next safe step matters.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="view active" data-view="today">
+
+      <article class="card safety-card">
+        <div class="eyebrow">Private check-in</div>
+        <h2>How safe do you feel right now?</h2>
+        <div class="choice-grid" id="safetyChoices">
+          <button class="choice" data-safety="steady"><span>●</span>I’m steady</button>
+          <button class="choice" data-safety="struggling"><span>◐</span>I’m struggling</button>
+          <button class="choice" data-safety="unsafe"><span>!</span>I don’t feel safe</button>
+        </div>
+        <div class="urgent-box" id="urgentBox">
+          <strong>You do not have to handle this alone.</strong>
+          <p>If there is immediate danger, call emergency services now. You can also call Samaritans free on <a href="tel:116123">116 123</a>.</p>
+          <div class="action-row">
+            <a class="danger-btn" href="tel:999">Call 999</a>
+            <a class="secondary" href="tel:116123">Call Samaritans</a>
+          </div>
+        </div>
+        <button class="primary full" style="margin-top:14px" id="open20">Get me through 20 minutes</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">One-task mode</div>
+        <h2>My next safe action</h2>
+        <div class="one-task">
+          <input id="oneTaskInput" maxlength="120" placeholder="Example: message my sponsor">
+          <button class="secondary" id="saveTask">Save</button>
+        </div>
+        <div id="savedTaskWrap" hidden>
+          <p id="savedTask" style="font-weight:800"></p>
+          <div class="action-row">
+            <button class="primary" id="completeTask">Mark complete</button>
+            <button class="ghost" id="editTask">Change</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Today’s original reflection</div>
+        <h2 id="readingTitle">A quieter next step</h2>
+        <div class="reading" id="readingText"></div>
+        <div class="reflection-prompt"><strong>Consider:</strong> <span id="readingPrompt"></span></div>
+        <label for="journal">My private note</label>
+        <textarea id="journal" placeholder="This stays in this browser on this device."></textarea>
+        <button class="ghost" id="saveJournal">Save note</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Today’s official literature</div>
+        <h2>Open the original source</h2>
+        <p class="muted small">CONNECTA does not copy AA, NA or ACA daily-reading text. These buttons open the official publishers’ pages.</p>
+        <div class="official-grid">
+          <div class="official-card"><span class="pill aa">AA</span><strong>Daily Reflections</strong><a href="https://www.aa.org/daily-reflections" target="_blank" rel="noopener">Open official reading</a></div>
+          <div class="official-card"><span class="pill na">NA</span><strong>Just for Today</strong><a href="https://na.org/daily-meditations/jft/" target="_blank" rel="noopener">Open official reading</a></div>
+          <div class="official-card"><span class="pill aca">ACA</span><strong>Meditation of the Day</strong><a href="https://adultchildren.org/aca-daily-affirmation/" target="_blank" rel="noopener">Open official reading</a></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" data-view="meetings">
+      <article class="card">
+        <div class="eyebrow">Recovery Fellowship Finder</div>
+        <h2>Meetings and reminders</h2>
+        <p class="muted small">Official finders open in your browser. Personal Meetings stay privately on this device.</p>
+        <div class="meeting-tabs" role="tablist" aria-label="Meeting sections">
+          <button class="meeting-tab active" data-meeting-tab="find" role="tab" aria-selected="true">Find a Meeting</button>
+          <button class="meeting-tab" data-meeting-tab="mine" role="tab" aria-selected="false">My Meetings</button>
+          <button class="meeting-tab" data-meeting-tab="reminders" role="tab" aria-selected="false">Reminders</button>
+          <button class="meeting-tab" data-meeting-tab="archived" role="tab" aria-selected="false">Archived</button>
+        </div>
+      </article>
+
+      <div class="meeting-panel" data-meeting-panel="find" role="tabpanel">
+        <div class="meeting-offline" id="meetingOffline" hidden>
+          <strong>You are offline</strong>
+          <p>The official meeting finder needs an internet connection. Your saved Personal Meetings remain available.</p>
+          <div class="action-row"><button class="secondary" id="retryMeetingConnection">Try Again</button><button class="ghost" id="openMyMeetings">Open My Meetings</button></div>
+        </div>
+        <article class="card">
+          <div class="eyebrow">Official UK sources</div>
+          <h2>Find a meeting</h2>
+          <p class="muted small">Meeting details can change. Confirm the official listing before travelling. Links open in your normal browser.</p>
+          <div class="finder-grid">
+            <div class="finder-card"><span class="pill aa">AA</span><strong>Alcoholics Anonymous GB</strong><a data-official-finder href="https://www.alcoholics-anonymous.org.uk/find-a-meeting/" target="_blank" rel="noopener">Open official AA finder</a><p class="small">Free helpline: <a href="tel:08009177650">0800 917 7650</a></p></div>
+            <div class="finder-card"><span class="pill na">NA</span><strong>Narcotics Anonymous UK</strong><a data-official-finder href="https://meetings.ukna.org/" target="_blank" rel="noopener">Open official NA finder</a><p class="small">Helpline: <a href="tel:03009991212">0300 999 1212</a> (10:00–midnight)</p></div>
+            <div class="finder-card"><span class="pill aca">ACA</span><strong>Adult Children</strong><a data-official-finder href="https://adultchildren.org/meeting-search/" target="_blank" rel="noopener">Open official ACA finder</a><p class="small">ACA WSO: <a data-official-finder href="https://adultchildren.org/contact-us/" target="_blank" rel="noopener">official contact form</a></p></div>
+          </div>
+          <p class="source-note">CONNECTA is independent and is not affiliated with AA, NA or ACA. Meeting information is maintained by each fellowship.</p>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="mine" role="tabpanel" hidden>
+        <article class="card">
+          <div class="eyebrow">Next seven days</div>
+          <h2>My meeting calendar</h2>
+          <div class="week-strip" id="weekStrip"></div>
+          <div class="action-row"><button class="primary" id="openMeetingForm">Add Personal Meeting</button><button class="ghost" id="continueMeetingDraft" hidden>Continue unfinished meeting</button></div>
+        </article>
+        <article class="card"><h2>My Meetings</h2><div id="meetingList" class="meeting-list"></div>
+          <div class="meeting-data"><h3>Import meeting information</h3><p class="muted small">Choose a CONNECTA export. Existing records are kept unless you choose otherwise during duplicate review.</p><input id="meetingImportFile" type="file" accept="application/json,.json"><button class="ghost" id="importMeetings" style="margin-top:9px">Review import</button><p class="status-line" id="meetingImportStatus" role="status"></p></div>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="reminders" role="tabpanel" hidden>
+        <article class="card"><div class="eyebrow">Private and local</div><h2>Upcoming reminders</h2><p class="muted small">Reminders appear while CONNECTA is open. There are no background or server notifications.</p><div id="reminderList" class="meeting-list"></div></article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="archived" role="tabpanel" hidden>
+        <article class="card"><div class="eyebrow">View only</div><h2>Archived Meetings</h2><p class="muted small">Archived meetings cannot be restored. Permanent deletion requires confirmation.</p><div id="archivedMeetingList" class="meeting-list"></div></article>
+      </div>
+    </section>
+
+    <section class="view" data-view="read">
+      <article class="card">
+        <div class="eyebrow">Daily recovery</div>
+        <h2>Read, reflect, act</h2>
+        <p>The app’s readings are original prompts based on broad recovery themes such as honesty, connection, boundaries, acceptance and taking the next right action.</p>
+        <div class="progress-bar"><i id="readingProgress"></i></div>
+        <p class="status-line" id="readingStatus"></p>
+        <button class="primary" id="markRead">Mark today’s reflection read</button>
+      </article>
+
+      <article class="card">
+        <h2>Three-part reflection</h2>
+        <label for="feelField">What am I feeling?</label>
+        <textarea id="feelField"></textarea>
+        <label for="needField">What do I need?</label>
+        <textarea id="needField"></textarea>
+        <label for="actionField">What safe action can I take?</label>
+        <textarea id="actionField"></textarea>
+        <button class="secondary" id="saveReflection">Save reflection</button>
+      </article>
+
+      <article class="card">
+        <h2>Reading boundaries</h2>
+        <div class="privacy-note">
+          <strong>Permission-safe by design</strong>
+          <p class="small">No protected book chapters or daily meditations are stored here. The Free Beta uses original writing and official links. Licensed text can be added later only with written permission.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" data-view="tools">
+      <article class="card">
+        <div class="eyebrow">Quiet room</div>
+        <h2>Lavendaire guided meditations</h2>
+        <p class="muted small">These are played by YouTube from Lavendaire’s official channel. CONNECTA does not download, copy or rehost the videos or audio.</p>
+        <div class="video-shell">
+          <iframe
+            id="meditationPlayer"
+            src="https://www.youtube-nocookie.com/embed/videoseries?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+            title="Lavendaire guided meditation player"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <p><strong id="meditationNow">Lavendaire guided-meditation playlist</strong></p>
+        <div class="meditation-grid" id="meditationChoices">
+          <button class="meditation-choice active"
+                  data-meditation-src="videoseries?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+                  data-meditation-url="https://www.youtube.com/playlist?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+                  data-meditation-title="Full guided-meditation playlist">
+            <strong>Full playlist</strong><span class="muted small">Choose from Lavendaire’s meditation collection.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="86m4RC_ADEY"
+                  data-meditation-url="https://www.youtube.com/watch?v=86m4RC_ADEY"
+                  data-meditation-title="Positive energy, relaxation and peace">
+            <strong>Peace and positive energy</strong><span class="muted small">Approximately 20 minutes.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="H_uc-uQ3Nkc"
+                  data-meditation-url="https://www.youtube.com/watch?v=H_uc-uQ3Nkc"
+                  data-meditation-title="Release stress and anxiety">
+            <strong>Release stress</strong><span class="muted small">A 10-minute body relaxation.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="rvaqPPjtxng"
+                  data-meditation-url="https://www.youtube.com/watch?v=rvaqPPjtxng"
+                  data-meditation-title="Sleep and deep relaxation">
+            <strong>Sleep and deep relaxation</strong><span class="muted small">Approximately 20 minutes.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="8bBPJ1EEUCc"
+                  data-meditation-url="https://www.youtube.com/watch?v=8bBPJ1EEUCc"
+                  data-meditation-title="Morning meditation for abundance">
+            <strong>Five-minute morning</strong><span class="muted small">Positive energy and visualisation.</span>
+          </button>
+        </div>
+        <a class="secondary" id="openMeditationYoutube"
+           href="https://www.youtube.com/playlist?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+           target="_blank" rel="noopener">Open this on YouTube</a>
+        <p class="source-note">Independent link to Lavendaire. Availability, adverts, recommendations and playback are controlled by YouTube and the creator.</p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Safe public places</div>
+        <h2>Find a nearby coffee shop</h2>
+        <p>A café can provide light, people, warmth, a drink and a neutral place to pause. Check opening information before travelling.</p>
+        <div class="cafe-controls">
+          <div>
+            <label for="cafeRadius">Search distance</label>
+            <select id="cafeRadius">
+              <option value="1000">Within 1 km</option>
+              <option value="2500" selected>Within 2.5 km</option>
+              <option value="5000">Within 5 km</option>
+              <option value="10000">Within 10 km</option>
+            </select>
+          </div>
+          <button class="primary" id="findCafes">Use my location</button>
+        </div>
+        <p id="cafeStatus" class="status-line" aria-live="polite">Your location is used only for this search and is not saved by CONNECTA.</p>
+        <div id="cafeResults" class="cafe-list"></div>
+        <details style="margin-top:12px">
+          <summary>Search by town or postcode instead</summary>
+          <label for="cafePlace">Town or postcode</label>
+          <input id="cafePlace" placeholder="Example: DT5 1DQ">
+          <button class="secondary" id="searchCafePlace" style="margin-top:9px">Search on Google Maps</button>
+        </details>
+        <p class="source-note">Nearby results use community map data from OpenStreetMap through the free Overpass service. Results are not guaranteed live business information.</p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Coping toolbox</div>
+        <h2>Choose what fits this moment</h2>
+        <div class="tool-grid">
+          <button class="tool-card" data-tool="halt"><strong>HALT check</strong><span class="muted small">Hungry, angry, lonely or tired?</span></button>
+          <button class="tool-card" data-tool="ground"><strong>5-4-3-2-1 grounding</strong><span class="muted small">Return attention to the room.</span></button>
+          <button class="tool-card" data-tool="urge"><strong>Ride the urge</strong><span class="muted small">Observe it without obeying it.</span></button>
+          <button class="tool-card" data-tool="pause"><strong>Pause before action</strong><span class="muted small">Delay a risky decision.</span></button>
+          <button class="tool-card" data-tool="meeting"><strong>Prepare for a meeting</strong><span class="muted small">Reduce fear before attending.</span></button>
+          <button class="tool-card" data-tool="boundary"><strong>Set a boundary</strong><span class="muted small">Protect recovery without a fight.</span></button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Support ladder</div>
+        <h2>Who can I contact?</h2>
+        <p class="muted small">Add people in the order you would normally try them. Do not add anyone who makes you feel unsafe.</p>
+        <div id="contactList"></div>
+        <button class="primary" id="addContact">Add support contact</button>
+      </article>
+    </section>
+
+    <section class="view" data-view="plan">
+      <article class="card safety-card">
+        <div class="eyebrow">Private safety planning</div><h2>My Safety Plan</h2>
+        <p class="muted small">Record warning signs, helpful actions and support you choose. CONNECTA does not monitor this plan or replace emergency or professional care.</p>
+        <div id="safetyPlanSummary"></div><button class="primary" id="openSafetyPlan">Create or edit My Safety Plan</button>
+      </article>
+      <article class="card bridge-hero">
+        <div class="eyebrow">Recovery Bridge</div>
+        <h2>My First 72 Hours</h2>
+        <p class="muted small">Turn a release, discharge or major move into calm practical steps. Everything stays privately on this device.</p>
+
+        <div id="bridgeEmpty" class="empty">
+          <p>No 72-hour plan has been created yet.</p>
+          <button class="primary" id="openBridgePlan">Create My First 72 Hours</button>
+        </div>
+
+        <div id="bridgeActive" hidden>
+          <div class="bridge-status">
+            <span class="bridge-countdown" id="bridgeCountdown"></span>
+            <span class="bridge-progress" id="bridgeProgress"></span>
+          </div>
+
+          <h3>How does the plan feel right now?</h3>
+          <div class="bridge-checkins" aria-label="Recovery Bridge check-in">
+            <button class="bridge-checkin green" data-bridge-checkin="green">Green · steady</button>
+            <button class="bridge-checkin amber" data-bridge-checkin="amber">Amber · struggling</button>
+            <button class="bridge-checkin red" data-bridge-checkin="red">Red · need support</button>
+          </div>
+          <div class="bridge-guidance" id="bridgeGuidance" role="status"></div>
+
+          <h3>Practical information</h3>
+          <div class="bridge-practical" id="bridgePracticalSummary"></div>
+          <div class="action-row">
+            <button class="secondary" id="editBridgePlan">Edit plan</button>
+            <button class="primary" id="openRecoveryPassport">Recovery Passport</button>
+            <button class="ghost" id="deleteBridgePlan">Delete plan</button>
+          </div>
+
+          <h3 style="margin-top:20px">My 72-hour steps</h3>
+          <div id="bridgeTaskList"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Keep the thread</div>
+        <h2>Personal Appointments</h2>
+        <p class="muted small">Save worker, health, probation, treatment, recovery, housing and other appointments. Private notes stay inside CONNECTA and never enter a Worker Handover.</p>
+        <button class="primary" id="openAppointmentForm">Add Personal Appointment</button>
+        <div id="appointmentList" class="appointment-list"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Strengths and next steps</div>
+        <h2>Recovery Capital Map</h2>
+        <p class="muted small">Review seven areas separately from 1 (needs attention) to 5 (strong today). CONNECTA never creates a combined rating.</p>
+        <form id="capitalForm">
+          <div id="capitalAreas"></div>
+          <p id="capitalGuidance" class="privacy-note" role="status"></p>
+          <button class="primary full" type="submit">Save Recovery Capital review</button>
+        </form>
+        <h3 style="margin-top:20px">Review history</h3>
+        <div id="capitalHistory"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Consent-controlled sharing</div>
+        <h2>Worker Handover</h2>
+        <p>Select only the practical sections you want. Fresh consent is required for every preview, download or print. Nothing is sent or stored automatically.</p>
+        <button class="secondary" id="openWorkerHandover">Create Worker Handover</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Continuity</div>
+        <h2>Promises made to me</h2>
+        <p class="muted small">Record what a service, worker or organisation agreed to do, who owns it and when it is due.</p>
+        <div id="promiseList"></div>
+        <button class="primary" id="addPromise">Add a promise</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Transition checklist</div>
+        <h2>My practical safety net</h2>
+        <div id="checklist"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Privacy</div>
+        <h2>Your local CONNECTA data</h2>
+        <div class="privacy-note">
+          <p>CONNECTA keeps entered information in your browser’s local storage. It does not create a cloud account or send your recovery notes to a server.</p>
+          <p class="small"><strong>Do not use this beta as a clinical, prison, probation, legal or safeguarding record.</strong></p>
+        </div>
+        <div class="action-row" style="margin-top:12px">
+          <button class="secondary" id="exportData">Export my data</button>
+          <label class="visually-hidden" for="restoreDataFile">Choose a CONNECTA backup to restore</label><input id="restoreDataFile" type="file" accept="application/json,.json">
+          <button class="ghost" id="restoreData">Restore a backup</button>
+          <button class="danger-btn" id="clearMeetingData">Delete all meeting information</button>
+          <button class="danger-btn" id="clearData">Clear this device</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <p class="disclaimer"><span class="beta-badge">Free</span> Independent planning tool. Not affiliated with, endorsed by or a replacement for AA, NA, ACA, the NHS, emergency services or professional treatment.</p>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" data-go="today"><span>⌂</span>Today</button>
+    <button class="nav-btn" data-go="meetings"><span>▦</span>Meetings</button>
+    <button class="nav-btn" data-go="read"><span>☰</span>Reflect</button>
+    <button class="nav-btn" data-go="tools"><span>✦</span>Tools</button>
+    <button class="nav-btn" data-go="plan"><span>✓</span>My plan</button>
+  </nav>
+</div>
+
+<dialog id="supportDialog">
+  <div class="modal-head"><strong>Get me through 20 minutes</strong><button class="close" data-close="supportDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <div class="timer" id="timer">20:00</div>
+    <div class="step-dots" id="stepDots"></div>
+    <div class="support-step active">
+      <h2>1. Make the next few minutes safer</h2>
+      <p>Move away from substances, weapons, traffic, unsafe people or anything you might use to harm yourself. Go somewhere more public or closer to a safe person when possible.</p>
+    </div>
+    <div class="support-step">
+      <h2>2. Slow the body down</h2>
+      <p>Place both feet on the floor. Breathe in gently, then make the out-breath a little longer. Repeat without forcing it.</p>
+    </div>
+    <div class="support-step">
+      <h2>3. Contact one human being</h2>
+      <p>Send a plain message: “I am struggling and need someone to stay in contact with me for twenty minutes.”</p>
+    </div>
+    <div class="support-step">
+      <h2>4. Delay the decision</h2>
+      <p>You do not need to solve your life tonight. Agree not to use, leave, confront anyone or make a permanent decision until the timer ends.</p>
+    </div>
+    <div class="support-step">
+      <h2>5. Choose what happens next</h2>
+      <p>Go to a meeting, call support, eat something, take prescribed medication, rest somewhere safe, or seek urgent professional help.</p>
+      <div class="action-row"><a class="danger-btn" href="tel:999">Call 999</a><a class="secondary" href="tel:116123">Samaritans 116 123</a></div>
+    </div>
+    <div class="action-row" style="margin-top:14px">
+      <button class="ghost" id="prevSupport">Back</button>
+      <button class="primary" id="nextSupport">Next</button>
+      <button class="secondary" id="timerToggle">Start timer</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="meetingDialog">
+  <div class="modal-head"><strong>Personal Meeting</strong><button class="close" data-close="meetingDialog" aria-label="Close and keep draft">×</button></div>
+  <form class="modal-body" id="meetingForm">
+    <input id="meetingId" type="hidden">
+    <label for="fellowship">Fellowship</label>
+    <select id="fellowship" required><option>AA</option><option>NA</option><option>ACA</option></select>
+    <label for="meetingName">Meeting name</label>
+    <input id="meetingName" required maxlength="80">
+    <div class="form-pair">
+      <div><label for="meetingRecurrence">Repeats</label><select id="meetingRecurrence"><option value="weekly">Weekly</option><option value="oneOff">One-off</option></select></div>
+      <div id="meetingDayWrap"><label for="meetingDay">Day</label><select id="meetingDay"><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option><option value="0">Sunday</option></select></div>
+      <div id="meetingDateWrap" hidden><label for="meetingDate">Date</label><input id="meetingDate" type="date"></div>
+    </div>
+    <label for="meetingTime">Time</label>
+    <input id="meetingTime" type="time">
+    <label for="meetingFormat">Format</label>
+    <select id="meetingFormat"><option value="inPerson">In person</option><option value="online">Online</option></select>
+    <label for="meetingPlace">Venue address</label>
+    <input id="meetingPlace" maxlength="180">
+    <label for="meetingPostcode">Postcode</label>
+    <input id="meetingPostcode" maxlength="10">
+    <label for="meetingOnlineLink">Online link</label>
+    <input id="meetingOnlineLink" type="text" inputmode="url" maxlength="300" placeholder="https://…">
+    <label for="meetingNotes">Private notes</label>
+    <textarea id="meetingNotes" maxlength="500"></textarea>
+    <label for="meetingAccessibility">Accessibility information</label>
+    <textarea id="meetingAccessibility" maxlength="500" placeholder="Please verify details with the venue."></textarea>
+    <div class="form-pair">
+      <div><label for="meetingOpenness">Attendance</label><select id="meetingOpenness"><option value="unknown">Unknown — check with meeting</option><option value="open">Open — visitors may attend</option><option value="closed">Closed — fellowship members</option></select></div>
+      <div><label for="meetingReminder">In-app reminder</label><select id="meetingReminder"><option value="off">No reminder</option><option value="oneHour" selected>One hour before</option><option value="morningOf">Morning of meeting</option><option value="oneDay">One day before</option></select></div>
+    </div>
+    <p class="muted small">Only Fellowship and Meeting Name are required. This stays on your device.</p>
+    <button class="primary full" type="submit">Save Personal Meeting</button>
+  </form>
+</dialog>
+
+<dialog id="meetingDetailsDialog">
+  <div class="modal-head"><strong>Meeting details</strong><button class="close" data-close="meetingDetailsDialog" aria-label="Close">×</button></div>
+  <div class="modal-body"><div id="meetingDetailsBody"></div><div class="action-row" style="margin-top:16px"><button class="secondary" id="editMeeting">Edit</button><button class="ghost" id="archiveMeeting">Archive</button></div></div>
+</dialog>
+
+<dialog id="meetingImportDialog">
+  <div class="modal-head"><strong>Review meeting import</strong><button class="close" data-close="meetingImportDialog" aria-label="Cancel import">×</button></div>
+  <div class="modal-body"><p>No existing meeting information changes until you apply this import.</p><div id="meetingImportConflicts"></div><button class="primary full" id="applyMeetingImport">Apply import</button></div>
+</dialog>
+
+<dialog id="toolDialog">
+  <div class="modal-head"><strong id="toolTitle">Coping tool</strong><button class="close" data-close="toolDialog" aria-label="Close">×</button></div>
+  <div class="modal-body" id="toolBody"></div>
+</dialog>
+
+<dialog id="bridgePlanDialog">
+  <div class="modal-head"><strong>My First 72 Hours</strong><button class="close" data-close="bridgePlanDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="bridgePlanForm">
+    <p class="muted small">Only the transition date and time are required. Add the practical details you know now and edit them later.</p>
+    <label for="bridgeTransitionType">What is the transition?</label>
+    <select id="bridgeTransitionType">
+      <option value="release">Release from prison</option>
+      <option value="discharge">Discharge from treatment or hospital</option>
+      <option value="move">Move to community or supported accommodation</option>
+      <option value="other">Another major transition</option>
+    </select>
+    <div class="form-pair">
+      <div><label for="bridgeTransitionDate">Date *</label><input id="bridgeTransitionDate" type="date" required></div>
+      <div><label for="bridgeTransitionTime">Time *</label><input id="bridgeTransitionTime" type="time" required></div>
+    </div>
+    <label for="bridgeFirstNight">Where will I sleep on the first night?</label><input id="bridgeFirstNight" maxlength="180" placeholder="Address or safe accommodation plan">
+    <label for="bridgeMedication">Medication or pharmacy plan</label><textarea id="bridgeMedication" maxlength="400" placeholder="What needs collecting, where and when? Do not change medication without professional advice."></textarea>
+    <label for="bridgeAppointment">Key appointment</label><input id="bridgeAppointment" maxlength="220" placeholder="Worker, service, date, time and place">
+    <label for="bridgeTransport">Transport plan</label><input id="bridgeTransport" maxlength="220" placeholder="Route, ticket, pickup or travel support">
+    <div class="form-pair">
+      <div><label for="bridgeContactName">Safe contact</label><input id="bridgeContactName" maxlength="100" placeholder="Name or service"></div>
+      <div><label for="bridgeContactPhone">Phone</label><input id="bridgeContactPhone" type="tel" maxlength="40"></div>
+    </div>
+    <label for="bridgePrivateNotes">Private notes</label><textarea id="bridgePrivateNotes" maxlength="800" placeholder="These stay inside CONNECTA and are never included in a Recovery Passport."></textarea>
+    <button class="primary full" type="submit">Save My First 72 Hours</button>
+  </form>
+</dialog>
+
+<dialog id="recoveryPassportDialog">
+  <div class="modal-head"><strong>Recovery Passport</strong><button class="close" data-close="recoveryPassportDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <p>Select only the practical information you want to print or share. Private notes are never available here.</p>
+    <form id="recoveryPassportForm">
+      <div class="passport-options">
+        <label class="passport-option"><input type="checkbox" data-passport-section="transition">Transition date and type</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="firstNight">First-night plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="medication">Medication plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="appointment">Key appointment</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="transport">Transport plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="safeContact">Safe contact</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="tasks">72-hour task progress</label>
+      </div>
+      <label class="passport-option"><input id="passportConsent" type="checkbox">I consent to create this one Recovery Passport using the sections selected above.</label>
+      <button class="primary full" id="previewRecoveryPassport" type="submit" style="margin-top:10px">Create private preview</button>
+    </form>
+    <div id="recoveryPassportPreview"></div>
+    <div class="action-row">
+      <button class="secondary" id="downloadRecoveryPassport" type="button">Download selected information</button>
+      <button class="ghost" id="printRecoveryPassport" type="button">Print selected information</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="onboardingDialog">
+  <div class="modal-head"><strong>Welcome to CONNECTA Free</strong></div>
+  <form class="modal-body" id="onboardingForm">
+    <p>CONNECTA is a private planning tool for day-to-day recovery support. It does not diagnose, prescribe, monitor you, contact emergency services or replace professional care.</p>
+    <div class="privacy-note small"><strong>Your information:</strong> records stay on this device by default and nothing is shared automatically. In My plan, you can export a backup, restore a valid backup, or delete CONNECTA records from this device. Settings lets you change text size and Privacy Lock. If you or someone else is in danger, call 999 or go to A&amp;E; for urgent mental-health support call 111 and select the mental-health option.</div>
+    <label for="setupDisplayName">What should CONNECTA call you? (optional)</label>
+    <input id="setupDisplayName" maxlength="60" autocomplete="nickname">
+    <label for="setupTextSize">Text size</label>
+    <select id="setupTextSize"><option value="normal">Normal</option><option value="large">Large</option><option value="extraLarge">Extra large</option></select>
+    <fieldset class="capital-area">
+      <legend>Recovery pathways (optional)</legend>
+      <div class="passport-options">
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="AA">AA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="NA">NA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="ACA">ACA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="SMART">SMART Recovery</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Treatment">Treatment</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Faith">Faith or spiritual</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Other">Other</label>
+      </div>
+    </fieldset>
+    <h3>One trusted contact (optional)</h3>
+    <div class="form-pair">
+      <div><label for="setupContactName">Name or role</label><input id="setupContactName" maxlength="80"></div>
+      <div><label for="setupContactPhone">Phone</label><input id="setupContactPhone" type="tel" maxlength="40"></div>
+    </div>
+    <div class="action-row" style="margin-top:16px">
+      <button class="primary" type="submit">Save setup</button>
+      <button class="ghost" id="skipOnboarding" type="button">Skip for now</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="safetyPlanDialog">
+  <div class="modal-head"><strong>My Safety Plan</strong><button class="close" data-close="safetyPlanDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="safetyPlanForm">
+    <p class="small">Keep this plan practical and personal. Nothing is sent automatically.</p>
+    <label for="safetyPlanWarningSigns">Personal warning signs</label><textarea id="safetyPlanWarningSigns" maxlength="1000" placeholder="What tells me I may need extra support?"></textarea>
+    <label for="safetyPlanHelpfulActions">Helpful actions</label><textarea id="safetyPlanHelpfulActions" maxlength="1000" placeholder="Small actions that can help me pause or reconnect"></textarea>
+    <label for="safetyPlanSafePeople">Safe people</label><textarea id="safetyPlanSafePeople" maxlength="1000" placeholder="People or services I choose to contact"></textarea>
+    <label for="safetyPlanSafePlaces">Safe places</label><textarea id="safetyPlanSafePlaces" maxlength="1000" placeholder="Places where I can be safer or less alone"></textarea>
+    <label for="safetyPlanProfessionalSupport">Professional support contacts</label><textarea id="safetyPlanProfessionalSupport" maxlength="1000" placeholder="GP, treatment, worker or other professional contacts"></textarea>
+    <label for="safetyPlanReasonsToKeepGoing">Reasons to keep going</label><textarea id="safetyPlanReasonsToKeepGoing" maxlength="1000" placeholder="People, hopes, values or plans that matter to me"></textarea>
+    <section class="urgent-box show"><strong>Urgent help is separate from this plan.</strong><p>If you or someone else is in danger, call <a href="tel:999">999</a> or go to A&amp;E. For urgent mental-health support that is not an emergency, call <a href="tel:111">111</a> and select the mental-health option. Samaritans: <a href="tel:116123">116 123</a>, free day or night.</p></section>
+    <div class="action-row" style="margin-top:14px"><button class="primary" type="submit">Save Safety Plan</button><button class="danger-btn" id="deleteSafetyPlan" type="button">Delete Safety Plan</button></div>
+    <label class="passport-option" style="margin-top:14px"><input id="safetyPlanExportConsent" type="checkbox">I choose to create a downloadable copy to share myself.</label><button class="secondary" id="exportSafetyPlan" type="button">Download selected Safety Plan</button>
+  </form>
+</dialog>
+
+<dialog id="betaSettingsDialog">
+  <div class="modal-head"><strong>Privacy and diagnostics</strong><button class="close" data-close="betaSettingsDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <h2>Privacy Lock</h2>
+    <p>Privacy Lock discourages casual access to CONNECTA. It is not full device, browser-profile or disk encryption. Use a protected Windows account for stronger protection.</p>
+    <form id="privacyLockForm">
+      <div class="form-pair">
+        <div><label for="privacyPin">New PIN (4–8 digits)</label><input id="privacyPin" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="new-password" required></div>
+        <div><label for="privacyPinConfirm">Confirm PIN</label><input id="privacyPinConfirm" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="new-password" required></div>
+      </div>
+      <button class="primary" type="submit">Set or change Privacy Lock</button>
+      <button class="ghost" id="removePrivacyLock" type="button">Turn off Privacy Lock</button>
+    </form>
+    <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+    <h2>Diagnostic Report</h2>
+    <p class="small">Downloads only app version, date, browser/platform, online state, feature availability and the number of local entries. It never includes keys, values, notes, contacts, appointments, PIN material or recovery content. Nothing is sent automatically.</p>
+    <button class="secondary" id="downloadDiagnostics" type="button">Download Diagnostic Report</button>
+  </div>
+</dialog>
+
+<dialog id="betaInfoDialog">
+  <div class="modal-head"><strong>CONNECTA Free information</strong><button class="close" data-close="betaInfoDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <section><span class="beta-badge">Free</span><h2>About</h2><p>CONNECTA is a free, independent, private-first recovery planning and continuity tool for Windows. It is not treatment, diagnosis, a clinical decision system, a professional record or emergency care.</p></section>
+    <section><h2>Privacy</h2><p>Your entries are kept in this browser’s local storage on this device. CONNECTA has no cloud account and does not automatically send recovery information. Clearing browser site data may permanently remove it. A downloaded export may contain sensitive information; protect it carefully.</p></section>
+    <section><h2>Using CONNECTA</h2><p>CONNECTA is provided for voluntary personal planning. Check appointments, meeting details, travel, services and medical information with the responsible official source. Do not rely on CONNECTA where delay or error could cause harm. You remain in control of what you enter and share.</p></section>
+    <section><h2>Support</h2><p>If there is immediate danger in the UK, call <a href="tel:999">999</a>. Samaritans can be reached free on <a href="tel:116123">116 123</a>. For urgent medical help that is not an emergency, use <a href="tel:111">NHS 111</a>. CONNECTA cannot monitor messages or call for help.</p></section>
+    <p class="privacy-note small">This information is built into the app and remains available offline.</p>
+  </div>
+</dialog>
+
+<dialog id="appointmentDialog">
+  <div class="modal-head"><strong>Personal Appointment</strong><button class="close" data-close="appointmentDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="appointmentForm">
+    <input id="appointmentId" type="hidden">
+    <label for="appointmentType">Type</label>
+    <select id="appointmentType"><option value="worker">Worker</option><option value="health">GP or health</option><option value="probation">Probation</option><option value="treatment">Treatment</option><option value="recoveryMeeting">Recovery meeting</option><option value="housingBenefits">Housing or benefits</option><option value="other">Other</option></select>
+    <label for="appointmentTitle">Appointment name *</label><input id="appointmentTitle" required maxlength="120">
+    <div class="form-pair">
+      <div><label for="appointmentDate">Date *</label><input id="appointmentDate" type="date" required></div>
+      <div><label for="appointmentTime">Time</label><input id="appointmentTime" type="time"></div>
+    </div>
+    <label for="appointmentPerson">Person or service</label><input id="appointmentPerson" maxlength="140">
+    <label for="appointmentLocation">Location or link</label><input id="appointmentLocation" maxlength="260">
+    <label for="appointmentReminder">In-app reminder</label><select id="appointmentReminder"><option value="off">No reminder</option><option value="oneHour">One hour before</option><option value="morningOf">Morning of</option><option value="oneDay">One day before</option><option value="oneWeek">One week before</option></select>
+    <label for="appointmentPrivateNotes">Private notes</label><textarea id="appointmentPrivateNotes" maxlength="800" placeholder="These never appear in a Worker Handover."></textarea>
+    <button class="primary full" type="submit">Save Personal Appointment</button>
+  </form>
+</dialog>
+
+<dialog id="workerHandoverDialog">
+  <div class="modal-head"><strong>Worker Handover</strong><button class="close" data-close="workerHandoverDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <p>Select only the sections you intend to share. Private notes, PIN information, journals, check-ins and full app storage are never available here.</p>
+    <div class="passport-options" id="handoverSections">
+      <label class="passport-option"><input type="checkbox" data-handover-section="profile" checked>Beta profile</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="bridge" checked>Recovery Bridge practical plan</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="appointments" checked>Upcoming appointments</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="capital">Latest Recovery Capital review</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="trustedContact">Trusted contact</label>
+    </div>
+    <div class="privacy-note small">Each button asks for fresh consent. Preview information is held only in this open page. Downloads and printouts leave CONNECTA and should be protected.</div>
+    <div class="action-row" style="margin-top:12px">
+      <button class="primary" id="previewWorkerHandover" type="button">Consent and preview</button>
+      <button class="secondary" id="downloadWorkerHandover" type="button">Consent and download</button>
+      <button class="ghost" id="printWorkerHandover" type="button">Consent and print</button>
+    </div>
+    <div id="workerHandoverPreview"></div>
+  </div>
+</dialog>
+
+<dialog id="contactDialog">
+  <div class="modal-head"><strong>Add support contact</strong><button class="close" data-close="contactDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="contactForm">
+    <label for="contactName">Name or role</label><input id="contactName" required maxlength="80">
+    <label for="contactPhone">Phone</label><input id="contactPhone" type="tel" maxlength="40">
+    <label for="contactNote">How this person helps</label><input id="contactNote" maxlength="120">
+    <button class="primary full" type="submit">Save contact</button>
+  </form>
+</dialog>
+
+<dialog id="promiseDialog">
+  <div class="modal-head"><strong>Add a service promise</strong><button class="close" data-close="promiseDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="promiseForm">
+    <label for="promiseText">What was promised?</label><input id="promiseText" required maxlength="140">
+    <label for="promiseOwner">Who owns the action?</label><input id="promiseOwner" required maxlength="100">
+    <label for="promiseDue">Due date</label><input id="promiseDue" type="date" required>
+    <button class="primary full" type="submit">Save promise</button>
+  </form>
+</dialog>
+
+<div class="privacy-lock-screen" id="privacyLockScreen" hidden role="dialog" aria-modal="true" aria-labelledby="privacyLockTitle">
+  <div class="privacy-lock-card">
+    <span class="beta-badge">Private local session</span>
+    <h1 id="privacyLockTitle">CONNECTA is locked</h1>
+    <p>Enter your Privacy Lock PIN to open recovery content on this device.</p>
+    <form id="unlockForm">
+      <label for="unlockPin">PIN</label>
+      <input id="unlockPin" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="current-password" required>
+      <button class="primary full" type="submit" style="margin-top:12px">Unlock CONNECTA</button>
+    </form>
+    <p id="unlockMessage" role="status"></p>
+    <p class="small">Privacy Lock discourages casual access. It is not device or disk encryption.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="meeting-domain.js"></script>
+<script src="meeting-ui.js"></script>
+<script src="recovery-bridge-domain.js"></script>
+<script src="recovery-bridge-ui.js"></script>
+<script src="beta-domain.js"></script>
+<script src="beta-ui.js"></script>
+<script src="recovery-capital-domain.js"></script>
+<script src="recovery-capital-ui.js"></script>
+<script src="continuity-domain.js"></script>
+<script src="continuity-ui.js"></script>
+<script src="connecta-storage.js"></script>
+<script src="safety-plan-domain.js"></script>
+<script src="safety-plan-ui.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const store = {
+  get(k, fallback){ try{return JSON.parse(localStorage.getItem(k)) ?? fallback}catch{return fallback}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))},
+  remove(k){localStorage.removeItem(k)}
+};
+const todayKey = new Date().toISOString().slice(0,10);
+let deferredInstall;
+let timerRemaining=1200, timerHandle=null, supportStep=0;
+
+const reflections = [
+  {t:"A quieter next step",b:"Recovery does not always arrive as a dramatic decision. Sometimes it is a glass of water, a returned call, a meeting attended quietly, or ten minutes spent away from danger. Small safe actions are not small when they interrupt an old pattern.",q:"What is the smallest action that would make the next hour safer?"},
+  {t:"Progress survives difficult days",b:"A difficult day does not delete the work that came before it. The honest response is not to punish yourself. It is to notice what happened, reduce danger, reconnect and learn what extra support is needed.",q:"What support would make it easier to reconnect instead of hide?"},
+  {t:"Borrowed strength",b:"There are times when our own reasons feel faint. Recovery allows us to borrow steadiness from a meeting, a worker, a friend, a routine or a promise we made while thinking clearly.",q:"Whose steadiness can you borrow today?"},
+  {t:"The body speaks first",b:"Hunger, exhaustion, pain and fear can disguise themselves as hopelessness or craving. Before judging your whole life, check what your body has been trying to say.",q:"What basic physical need needs attention?"},
+  {t:"Honesty without punishment",b:"Honesty is useful when it opens a door. It becomes harmful when it is used as another weapon against ourselves. We can name what happened plainly and still speak to ourselves with dignity.",q:"What truth can you admit without insulting yourself?"},
+  {t:"A boundary is information",b:"A boundary is not a threat or a performance. It is clear information about what you will do to protect your safety and recovery. You do not need everyone to agree before it becomes real.",q:"Which boundary would reduce confusion today?"},
+  {t:"Connection before confidence",b:"You do not need to feel confident before entering a meeting or asking for help. Confidence often comes after the action, quietly following you through the door.",q:"What could you do before you feel fully ready?"},
+  {t:"One promise at a time",b:"Trust can be rebuilt through promises small enough to keep. Choose one action you can complete rather than ten actions designed to impress.",q:"Which promise to yourself is realistic today?"},
+  {t:"The pause belongs to you",b:"An urge can sound like an instruction, but it is still an experience passing through the body. A pause creates room between the feeling and the action. That room belongs to you.",q:"How could you create ten minutes of distance?"},
+  {t:"Your story is not paperwork",b:"Forms and assessments may describe parts of your life, but they cannot contain the whole person. You are allowed to have strengths, preferences, humour, skills and hopes alongside support needs.",q:"What part of you deserves more room today?"},
+  {t:"Prepare on the easier day",b:"A steady day is not empty time. It is the day to charge the phone, save numbers, plan transport, collect medication and decide who to contact when thinking becomes harder.",q:"What can your steadier self prepare?"},
+  {t:"Repair starts with return",b:"After conflict, avoidance or a setback, the first repair may simply be returning. Returning to the conversation, the meeting, the plan or the truth is an act of courage.",q:"Where would returning help more than explaining?"},
+  {t:"Enough for today",b:"Recovery can become another place where perfection hides. Today does not require a transformed life. It asks only for enough safety, enough honesty and enough connection to reach tomorrow.",q:"What would ‘enough’ look like today?"},
+  {t:"You can change the route",b:"A plan is there to support life, not trap it. When a route repeatedly fails, the answer may be more support, fewer steps, different timing or a different person beside you.",q:"Which part of your plan needs redesign rather than blame?"}
+];
+
+const tools = {
+  halt:{title:"HALT check",html:"<p>Ask four simple questions:</p><ol><li>Am I hungry?</li><li>Am I angry or frightened?</li><li>Am I lonely or disconnected?</li><li>Am I tired?</li></ol><p>Meet the most basic need first. Eat, rest, move away from conflict or contact someone safe before making a bigger decision.</p>"},
+  ground:{title:"5-4-3-2-1 grounding",html:"<p>Name, slowly:</p><ol><li>5 things you can see</li><li>4 things you can feel</li><li>3 things you can hear</li><li>2 things you can smell</li><li>1 thing you can taste, or one slow breath</li></ol><p>This is not a test. The aim is to bring attention back to the present room.</p>"},
+  urge:{title:"Ride the urge",html:"<p>Notice where the urge sits in your body. Give it a number from 0 to 10. Describe the sensation without arguing with it. Set a ten-minute timer and watch for any change, even a small one.</p><p>An urge can rise and fall without becoming an action.</p>"},
+  pause:{title:"Pause before action",html:"<ol><li>Do not send, buy, travel, use or confront yet.</li><li>Move to a safer place.</li><li>Tell one person what you are considering.</li><li>Wait twenty minutes.</li><li>Choose again when the intensity changes.</li></ol>"},
+  meeting:{title:"Prepare for a meeting",html:"<ol><li>Check the official listing.</li><li>Plan transport or test the online link.</li><li>Arrive ten minutes early if possible.</li><li>You may listen without speaking.</li><li>Stay near the exit if that feels safer.</li><li>Save one contact before leaving.</li></ol>"},
+  boundary:{title:"Set a boundary",html:"<p>Try this structure:</p><p><strong>“When this happens, I feel unsafe or pulled away from recovery. I will now do this instead.”</strong></p><p>Example: “I will not discuss money while we are shouting. I will leave and return to the conversation tomorrow.”</p>"}
+};
+
+function toast(msg){
+  const t=$("#toast");t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+function greeting(){
+  const h=new Date().getHours();
+  $("#greeting").textContent=h<12?"Good morning":h<18?"Good afternoon":"Good evening";
+}
+function showView(name){
+  $$(".view").forEach(v=>v.classList.toggle("active",v.dataset.view===name));
+  $$(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.go===name));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$$(".nav-btn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.go)));
+
+$("#safetyChoices").addEventListener("click",e=>{
+  const b=e.target.closest("[data-safety]"); if(!b)return;
+  $$(".choice").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  store.set("safety-"+todayKey,{value:b.dataset.safety,time:new Date().toISOString()});
+  $("#urgentBox").classList.toggle("show",b.dataset.safety==="unsafe");
+  toast("Check-in saved on this device");
+});
+
+function loadTask(){
+  const t=store.get("oneTask",null);
+  if(t){
+    $("#savedTaskWrap").hidden=false;$("#oneTaskInput").parentElement.hidden=true;
+    $("#savedTask").textContent=t.text;$("#savedTask").classList.toggle("task-done",!!t.done);
+    $("#completeTask").textContent=t.done?"Completed ✓":"Mark complete";
+  }else{
+    $("#savedTaskWrap").hidden=true;$("#oneTaskInput").parentElement.hidden=false;
+  }
+}
+$("#saveTask").onclick=()=>{const v=$("#oneTaskInput").value.trim();if(!v)return;store.set("oneTask",{text:v,done:false});loadTask();toast("Next action saved")};
+$("#completeTask").onclick=()=>{const t=store.get("oneTask",null);if(!t)return;t.done=!t.done;store.set("oneTask",t);loadTask();toast(t.done?"Action completed":"Action reopened")};
+$("#editTask").onclick=()=>{const t=store.get("oneTask",null);$("#oneTaskInput").value=t?.text||"";localStorage.removeItem("oneTask");loadTask()};
+
+function loadReading(){
+  const day=Math.floor(Date.now()/86400000);
+  const r=reflections[day%reflections.length];
+  $("#readingTitle").textContent=r.t;$("#readingText").textContent=r.b;$("#readingPrompt").textContent=r.q;
+  $("#journal").value=store.get("journal-"+todayKey,"");
+  const reads=store.get("readDays",[]);
+  $("#readingProgress").style.width=Math.min(100,(reads.length%8)/7*100)+"%";
+  $("#readingStatus").textContent=reads.includes(todayKey)?"Today’s reflection marked complete.":"Read at your own pace. There are no lost streaks.";
+}
+$("#saveJournal").onclick=()=>{store.set("journal-"+todayKey,$("#journal").value);toast("Private note saved")};
+$("#markRead").onclick=()=>{let a=store.get("readDays",[]);if(!a.includes(todayKey))a.push(todayKey);store.set("readDays",a);loadReading();toast("Reflection marked complete")};
+$("#saveReflection").onclick=()=>{store.set("reflection-"+todayKey,{feel:$("#feelField").value,need:$("#needField").value,action:$("#actionField").value});toast("Reflection saved")};
+function loadReflection(){
+  const r=store.get("reflection-"+todayKey,{});
+  $("#feelField").value=r.feel||"";$("#needField").value=r.need||"";$("#actionField").value=r.action||"";
+}
+
+$$("[data-tool]").forEach(b=>b.onclick=()=>{
+  const t=tools[b.dataset.tool];$("#toolTitle").textContent=t.title;$("#toolBody").innerHTML=t.html;$("#toolDialog").showModal();
+});
+
+$$("[data-meditation-src]").forEach(button=>button.addEventListener("click",()=>{
+  const source=button.dataset.meditationSrc;
+  const player=$("#meditationPlayer");
+  const isPlaylist=source.startsWith("videoseries?");
+  player.src=isPlaylist
+    ? `https://www.youtube-nocookie.com/embed/${source}`
+    : `https://www.youtube-nocookie.com/embed/${source}?rel=0`;
+  $("#meditationNow").textContent=button.dataset.meditationTitle;
+  $("#openMeditationYoutube").href=button.dataset.meditationUrl;
+  $$(".meditation-choice").forEach(item=>item.classList.toggle("active",item===button));
+  player.scrollIntoView({behavior:"smooth",block:"center"});
+}));
+
+function degreesToRadians(value){return value*Math.PI/180}
+function distanceKm(lat1,lon1,lat2,lon2){
+  const earth=6371;
+  const dLat=degreesToRadians(lat2-lat1);
+  const dLon=degreesToRadians(lon2-lon1);
+  const a=Math.sin(dLat/2)**2+
+    Math.cos(degreesToRadians(lat1))*Math.cos(degreesToRadians(lat2))*Math.sin(dLon/2)**2;
+  return earth*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function cafeAddress(tags={}){
+  const parts=[
+    [tags["addr:housenumber"],tags["addr:street"]].filter(Boolean).join(" "),
+    tags["addr:place"],
+    tags["addr:city"]||tags["addr:town"]||tags["addr:village"],
+    tags["addr:postcode"]
+  ].filter(Boolean);
+  return [...new Set(parts)].join(", ");
+}
+function renderCafes(items,userLat,userLon){
+  const box=$("#cafeResults");
+  box.innerHTML="";
+  if(!items.length){
+    box.innerHTML='<div class="empty">No mapped cafés were found in that distance. Try a larger radius or search by town/postcode.</div>';
+    return;
+  }
+  items.slice(0,12).forEach(cafe=>{
+    const article=document.createElement("article");
+    article.className="cafe";
+
+    const title=document.createElement("h4");
+    title.textContent=cafe.name;
+    article.appendChild(title);
+
+    const meta=document.createElement("div");
+    meta.className="cafe-meta";
+    const distance=document.createElement("span");
+    distance.className="distance";
+    distance.textContent=cafe.distance<1
+      ? `${Math.round(cafe.distance*1000)} metres away`
+      : `${cafe.distance.toFixed(1)} km away`;
+    meta.appendChild(distance);
+
+    if(cafe.opening){
+      const hours=document.createElement("span");
+      hours.className="pill";
+      hours.textContent=cafe.opening;
+      meta.appendChild(hours);
+    }
+    article.appendChild(meta);
+
+    if(cafe.address){
+      const address=document.createElement("p");
+      address.className="small";
+      address.textContent=cafe.address;
+      article.appendChild(address);
+    }
+
+    const actions=document.createElement("div");
+    actions.className="action-row";
+
+    const directions=document.createElement("a");
+    directions.className="secondary";
+    directions.target="_blank";
+    directions.rel="noopener";
+    directions.href=`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${cafe.lat},${cafe.lon}&travelmode=walking`;
+    directions.textContent="Walking directions";
+    actions.appendChild(directions);
+
+    const map=document.createElement("a");
+    map.className="ghost";
+    map.target="_blank";
+    map.rel="noopener";
+    map.href=`https://www.openstreetmap.org/?mlat=${cafe.lat}&mlon=${cafe.lon}#map=18/${cafe.lat}/${cafe.lon}`;
+    map.textContent="Open map";
+    actions.appendChild(map);
+
+    article.appendChild(actions);
+    box.appendChild(article);
+  });
+}
+async function queryNearbyCafes(lat,lon,radius){
+  const query=`[out:json][timeout:25];
+  (
+    node["amenity"="cafe"](around:${radius},${lat},${lon});
+    way["amenity"="cafe"](around:${radius},${lat},${lon});
+    relation["amenity"="cafe"](around:${radius},${lat},${lon});
+  );
+  out center tags;`;
+  const endpoints=[
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+  ];
+  let lastError;
+  for(const endpoint of endpoints){
+    try{
+      const response=await fetch(`${endpoint}?data=${encodeURIComponent(query)}`);
+      if(!response.ok)throw new Error(`Map service returned ${response.status}`);
+      return await response.json();
+    }catch(error){lastError=error}
+  }
+  throw lastError||new Error("Coffee-shop map service is unavailable");
+}
+$("#findCafes").onclick=()=>{
+  if(!navigator.geolocation){
+    $("#cafeStatus").textContent="This browser cannot provide a location. Use the town or postcode search below.";
+    return;
+  }
+  $("#findCafes").disabled=true;
+  $("#cafeStatus").textContent="Requesting your location…";
+  $("#cafeResults").innerHTML="";
+  navigator.geolocation.getCurrentPosition(async position=>{
+    const lat=position.coords.latitude;
+    const lon=position.coords.longitude;
+    const radius=Number($("#cafeRadius").value);
+    $("#cafeStatus").textContent="Searching nearby community map listings…";
+    try{
+      const data=await queryNearbyCafes(lat,lon,radius);
+      const cafes=(data.elements||[]).map(item=>{
+        const cafeLat=item.lat??item.center?.lat;
+        const cafeLon=item.lon??item.center?.lon;
+        if(!Number.isFinite(cafeLat)||!Number.isFinite(cafeLon))return null;
+        const tags=item.tags||{};
+        return{
+          name:tags.name||tags.brand||"Unnamed café",
+          lat:cafeLat,
+          lon:cafeLon,
+          distance:distanceKm(lat,lon,cafeLat,cafeLon),
+          address:cafeAddress(tags),
+          opening:tags.opening_hours||""
+        };
+      }).filter(Boolean).sort((a,b)=>a.distance-b.distance);
+      renderCafes(cafes,lat,lon);
+      $("#cafeStatus").textContent=`Found ${cafes.length} mapped café${cafes.length===1?"":"s"} within ${radius/1000} km. Location was not saved.`;
+    }catch(error){
+      $("#cafeStatus").textContent="The live map search could not connect. Use the town or postcode search below.";
+      $("#cafeResults").innerHTML='<div class="empty">Coffee finder is temporarily unavailable. No location was saved.</div>';
+    }finally{
+      $("#findCafes").disabled=false;
+    }
+  },error=>{
+    const messages={
+      1:"Location permission was declined. Use the town or postcode search below.",
+      2:"Your location could not be determined. Try again or search by postcode.",
+      3:"The location request timed out. Try again or search by postcode."
+    };
+    $("#cafeStatus").textContent=messages[error.code]||"Location could not be used.";
+    $("#findCafes").disabled=false;
+  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
+};
+$("#searchCafePlace").onclick=()=>{
+  const place=$("#cafePlace").value.trim();
+  if(!place){toast("Enter a town or postcode first");return}
+  const url=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`coffee shops near ${place}`)}`;
+  window.open(url,"_blank","noopener");
+};
+
+function renderContacts(){
+  const list=$("#contactList"),a=store.get("contacts",[]);list.innerHTML="";
+  if(!a.length)list.innerHTML='<div class="empty">No contacts added. Add a sponsor, fellow, trusted friend, worker or service.</div>';
+  a.forEach((c,i)=>{
+    const d=document.createElement("details");d.innerHTML=`<summary>${i+1}. ${escapeHtml(c.name)}</summary><p>${escapeHtml(c.note||"Support contact")}</p><div class="action-row">${c.phone?`<a class="secondary" href="tel:${encodeURIComponent(c.phone)}">Call</a>`:""}<button class="ghost" data-del-contact="${c.id}">Remove</button></div>`;list.appendChild(d);
+  });
+}
+$("#addContact").onclick=()=>$("#contactDialog").showModal();
+$("#contactForm").onsubmit=e=>{e.preventDefault();let a=store.get("contacts",[]);a.push({id:crypto.randomUUID(),name:$("#contactName").value,phone:$("#contactPhone").value,note:$("#contactNote").value});store.set("contacts",a);e.target.reset();$("#contactDialog").close();renderContacts();toast("Support contact saved")};
+$("#contactList").onclick=e=>{const b=e.target.closest("[data-del-contact]");if(!b)return;store.set("contacts",store.get("contacts",[]).filter(c=>c.id!==b.dataset.delContact));renderContacts()};
+
+function renderPromises(){
+  const list=$("#promiseList"),a=store.get("promises",[]);list.innerHTML="";
+  if(!a.length)list.innerHTML='<div class="empty">No service promises recorded.</div>';
+  a.forEach(p=>{
+    const d=document.createElement("div");d.className="promise card "+(p.complete?"complete":"");
+    d.innerHTML=`<strong>${escapeHtml(p.text)}</strong><p class="small">Owner: ${escapeHtml(p.owner)} · Due: ${formatDate(p.due)}</p><div class="action-row"><button class="primary" data-complete-promise="${p.id}">${p.complete?"Completed ✓":"Mark completed"}</button><button class="ghost" data-del-promise="${p.id}">Remove</button></div>`;list.appendChild(d);
+  });
+}
+$("#addPromise").onclick=()=>$("#promiseDialog").showModal();
+$("#promiseForm").onsubmit=e=>{e.preventDefault();let a=store.get("promises",[]);a.push({id:crypto.randomUUID(),text:$("#promiseText").value,owner:$("#promiseOwner").value,due:$("#promiseDue").value,complete:false});store.set("promises",a);e.target.reset();$("#promiseDialog").close();renderPromises();toast("Promise recorded")};
+$("#promiseList").onclick=e=>{
+  const c=e.target.closest("[data-complete-promise]"),d=e.target.closest("[data-del-promise]");let a=store.get("promises",[]);
+  if(c){const p=a.find(x=>x.id===c.dataset.completePromise);p.complete=!p.complete;store.set("promises",a);renderPromises()}
+  if(d){store.set("promises",a.filter(x=>x.id!==d.dataset.delPromise));renderPromises()}
+};
+
+const checkItems=["Photo identification","Phone and charger","Medication and prescription plan","Safe accommodation","GP registration","Benefits or income","Bank account","Transport to first appointment","Food for the first day","Probation or key-worker appointment","Trusted support contact","First recovery meeting"];
+function renderChecklist(){
+  const saved=store.get("checklist",{});
+  $("#checklist").innerHTML=checkItems.map((x,i)=>`<label style="font-weight:500"><input type="checkbox" data-check="${i}" style="width:auto;margin-right:8px" ${saved[i]?"checked":""}>${x}</label>`).join("");
+}
+$("#checklist").addEventListener("change",e=>{if(!e.target.dataset.check)return;const s=store.get("checklist",{});s[e.target.dataset.check]=e.target.checked;store.set("checklist",s)});
+
+$("#open20").onclick=()=>{supportStep=0;renderSupport();$("#supportDialog").showModal()};
+function renderSupport(){
+  $$(".support-step").forEach((x,i)=>x.classList.toggle("active",i===supportStep));
+  const dots=$("#stepDots");dots.innerHTML="";
+  $$(".support-step").forEach((_,i)=>{const d=document.createElement("i");d.classList.toggle("active",i===supportStep);dots.appendChild(d)});
+  $("#prevSupport").disabled=supportStep===0;$("#nextSupport").textContent=supportStep===4?"Start again":"Next";
+}
+$("#nextSupport").onclick=()=>{supportStep=supportStep===4?0:supportStep+1;renderSupport()};
+$("#prevSupport").onclick=()=>{supportStep=Math.max(0,supportStep-1);renderSupport()};
+function updateTimer(){const m=Math.floor(timerRemaining/60),s=timerRemaining%60;$("#timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+$("#timerToggle").onclick=()=>{
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;$("#timerToggle").textContent="Resume timer"}
+  else{timerHandle=setInterval(()=>{timerRemaining--;updateTimer();if(timerRemaining<=0){clearInterval(timerHandle);timerHandle=null;toast("Twenty minutes completed. Choose the next safe action.");timerRemaining=1200}},1000);$("#timerToggle").textContent="Pause timer"}
+};
+
+$$("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());
+
+$("#textSizeBtn").onclick=()=>{
+  const current=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--text-scale"))||1;
+  const next=current>=1.2?1:current+.1;document.documentElement.style.setProperty("--text-scale",next);store.set("textScale",next);toast(next===1?"Text size reset":"Text enlarged");
+  const profile=store.get("connectaBetaProfileV1",null);if(profile){profile.textScale=next;store.set("connectaBetaProfileV1",profile)}
+};
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").hidden=false});
+$("#installBtn").onclick=async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").hidden=true};
+
+$("#exportData").onclick=()=>{
+  const data=CONNECTAStorage.exportData(localStorage);
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`connecta-recovery-export-${todayKey}.json`;a.click();URL.revokeObjectURL(a.href);
+};
+$("#restoreData").onclick=async()=>{
+  const file=$("#restoreDataFile").files[0];
+  if(!file){toast("Choose a CONNECTA backup first");return}
+  try{
+    const backup=JSON.parse(await file.text());
+    CONNECTAStorage.validateImport(backup);
+    if(!confirm("Replace CONNECTA information on this device with this backup? Other websites’ data will not be changed."))return;
+    CONNECTAStorage.restore(localStorage,backup);location.reload();
+  }catch(error){toast(error.message||"This backup could not be restored")}
+};
+$("#clearData").onclick=()=>{if(confirm("Delete all CONNECTA information saved in this browser on this device? Other websites’ data will not be changed.")){CONNECTAStorage.clear(localStorage);location.reload()}};
+
+function escapeHtml(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function linkify(s=""){const safe=escapeHtml(s);if(/^https?:\/\//i.test(s))return `<a href="${safe}" target="_blank" rel="noopener">Open meeting link</a>`;return safe}
+function formatDate(s){if(!s)return "";return new Date(s+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
+
+function init(){
+  CONNECTAStorage.migrate(localStorage);
+  greeting();loadTask();loadReading();loadReflection();renderContacts();renderPromises();renderChecklist();renderSupport();updateTimer();
+  ConnectaMeetingUI.createMeetingUI({document,store,notify:toast,confirm:message=>confirm(message),isOnline:()=>navigator.onLine!==false}).init();
+  ConnectaRecoveryBridgeUI.createRecoveryBridgeUI({document,store,notify:toast,confirm:message=>confirm(message),openUrgentSupport:()=>{supportStep=4;renderSupport();$("#supportDialog").showModal()}}).init();
+  ConnectaRecoveryCapitalUI.createRecoveryCapitalUI({document,store,notify:toast}).init();
+  ConnectaContinuityUI.createContinuityUI({document,store,notify:toast}).init();
+  ConnectaSafetyPlanUI.createSafetyPlanUI({document,store,notify:toast,confirm:message=>confirm(message)}).init();
+  const sc=store.get("safety-"+todayKey,null);if(sc){const b=$(`[data-safety="${sc.value}"]`);if(b)b.classList.add("selected");$("#urgentBox").classList.toggle("show",sc.value==="unsafe")}
+  const ts=store.get("textScale",1);document.documentElement.style.setProperty("--text-scale",ts);
+  ConnectaBetaUI.createBetaUI({document,store,notify:toast,confirm:message=>confirm(message)}).init();
+  if("serviceWorker" in navigator)navigator.serviceWorker.register("./service-worker.js");
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,810 @@
+You are now the lead developer, technical custodian and product architect for CONNECTA.
+
+You are working directly on Chris Nugent’s real local CONNECTA project.
+
+============================================================
+AUTHORITATIVE PROJECT IDENTITY
+============================================================
+
+PROJECT NAME
+CONNECTA
+
+TAGLINE
+Together as one
+
+PROJECT PURPOSE
+CONNECTA is a recovery safety, wellbeing, continuity and resettlement application.
+
+It is being designed for possible future use by:
+
+- People in recovery
+- Rehabilitation centres
+- NHS and healthcare services
+- Prisons
+- Probation
+- Drug and alcohol services
+- Mental health services
+- Peer-support organisations
+- Housing services
+- Benefits services
+- Employment services
+- Families and trusted supporters
+
+CONNECTA is not merely a sobriety counter.
+
+Its purpose is to help someone feel safe, supported, connected, organised and able to take the next manageable step while rebuilding their life.
+
+============================================================
+FINAL LOGO
+============================================================
+
+The final and authoritative logo is expected at:
+
+C:\Users\Chris Nugent\Downloads\CONNECTA_Final_Logo.png
+
+This exact uploaded logo is locked.
+
+It contains:
+
+- A green rounded-square background
+- Three connected human figures
+- A heart/infinity connection shape
+- A warm amber figure
+- The word CONNECTA
+- The tagline “Together as one”
+
+Do not:
+
+- Redesign it
+- Replace it
+- Recolour it
+- Distort it
+- Stretch it
+- Squash it
+- Crop the full logo
+- Recreate it using AI
+- Substitute any older Bridge or CONNECTA logo
+
+The original file must be copied into the canonical project as:
+
+assets\branding\connecta-final-logo.png
+
+Preserve that file as the untouched brand master.
+
+You may create derived icon files from the rounded-square symbol for:
+
+- Browser favicon
+- PWA icon
+- Mobile app icon
+- Windows desktop launcher
+- Splash icon
+
+Derived icons must be created from the final logo only.
+
+Do not alter or overwrite the brand master.
+
+============================================================
+ONE CANONICAL PROJECT ONLY
+============================================================
+
+CONNECTA must have one live project folder:
+
+C:\Users\Chris Nugent\Documents\CONNECTA
+
+There must not be a collection of mixed folders such as:
+
+- CONNECTA_v2
+- CONNECTA_v3
+- CONNECTA_v4
+- CONNECTA_New_Build
+- CONNECTA_Extracted
+- CONNECTA_Install_Package
+- RecoverySafetyNet
+- Bridge
+- old copied CONNECTA folders
+
+Start by scanning:
+
+C:\Users\Chris Nugent\Documents
+
+Find every folder beginning with or clearly related to:
+
+- CONNECTA
+- RecoverySafetyNet
+- Recovery_Safety_Net
+- Bridge recovery app
+
+Inspect the actual contents and modified files.
+
+Do not assume that the folder with the highest version number is the best build.
+
+Determine which project contains the newest and most complete working source.
+
+Promote that source into:
+
+C:\Users\Chris Nugent\Documents\CONNECTA
+
+Do not create another version-named project folder.
+
+Version numbers belong inside the application and project-status records, not in folder names.
+
+============================================================
+DELETION AND CLEANUP AUTHORISATION
+============================================================
+
+Chris does not want previous versions mixed together.
+
+After the canonical CONNECTA project has been:
+
+1. Identified
+2. Copied or moved into Documents\CONNECTA
+3. Opened successfully
+4. Validated
+5. Tested in the browser
+6. Confirmed to contain the required features
+7. Confirmed to contain the final logo
+
+you are authorised to delete obsolete CONNECTA project versions.
+
+Delete:
+
+- Superseded CONNECTA version folders
+- Obsolete Bridge recovery-app folders
+- RecoverySafetyNet duplicate folders
+- CONNECTA extraction folders
+- Old installer-package folders
+- Previous generated build folders
+- Old duplicate launchers
+- Old desktop shortcuts
+- Stale generated icons
+- Obsolete service-worker caches
+- Unused old manifests
+- Files that clearly belong only to superseded versions
+
+Do not create backups, quarantine folders or duplicate copies before deletion.
+
+Do not delete:
+
+- C:\Users\Chris Nugent\Documents\CONNECTA
+- The final CONNECTA logo
+- The selected current source code
+- CONNECTA_PROJECT_STATUS.md
+- AGENTS.md
+- User-created recovery content
+- Genuine user data
+- Files whose purpose is uncertain
+
+If a file’s purpose is uncertain, inspect it before deciding.
+
+Before performing deletion, create an exact deletion list in:
+
+CONNECTA_CLEANUP_REPORT.md
+
+After deleting, update the report with:
+
+- What was removed
+- Why it was obsolete
+- What was retained
+- Confirmation that the live app still works
+
+Do not leave old versions behind after the replacement build is validated.
+
+============================================================
+CURRENT TECHNOLOGY
+============================================================
+
+Preserve the current free local-first application unless a change is justified.
+
+The current stack is expected to include:
+
+- HTML
+- CSS
+- JavaScript
+- localStorage
+- Progressive Web App manifest
+- Service Worker
+- PowerShell local launcher
+- Windows desktop shortcut
+- YouTube embeds
+- OpenStreetMap or Overpass café data
+- No paid APIs
+- No paid authentication
+- No paid hosting
+- No real sensitive institutional backend
+
+Do not unnecessarily rebuild CONNECTA in another framework.
+
+Do not convert it to React, Flutter, Electron, WordPress or another platform during the initial repair stage.
+
+First stabilise and improve the existing working application.
+
+============================================================
+CORE FEATURES TO PRESERVE
+============================================================
+
+The live CONNECTA app should preserve and improve:
+
+1. Three-level personal safety check
+
+- I’m steady
+- I’m struggling
+- I don’t feel safe
+
+2. “Get me through 20 minutes”
+
+- Five-stage calming and safety flow
+- Twenty-minute timer
+- Human contact prompt
+- Delay-risky-action prompt
+- Clear urgent-support information
+
+3. One-task mode
+
+- Show only the next manageable action
+- Complete or change the action
+- No overwhelming overdue-task wall
+
+4. Daily recovery reflections
+
+- Original CONNECTA writing
+- Private reflection notes
+- What am I feeling?
+- What do I need?
+- What safe action can I take?
+
+5. Recovery fellowship support
+
+- AA official meeting finder
+- NA official meeting finder
+- ACA official meeting finder
+- Personal meeting calendar
+- In-person meetings
+- Online meetings
+- Telephone meetings
+- Private meeting notes
+
+6. Official recovery literature links
+
+- Official source links only
+- No copied protected book passages
+
+7. Lavendaire guided meditations
+
+- Played or embedded through official YouTube
+- Clearly attributed
+- Never downloaded or rehosted
+- Playlist and selected meditation choices
+
+8. Coffee-shop finder
+
+- User-controlled location permission
+- Nearby café results
+- Walking directions
+- Town or postcode fallback
+- No permanent storage of precise coordinates
+- Graceful handling when location is declined
+
+9. Coping toolbox
+
+- HALT check
+- 5-4-3-2-1 grounding
+- Urge-management exercise
+- Pause-before-action exercise
+- Meeting preparation
+- Boundary guidance
+
+10. Support ladder
+
+- Ordered trusted contacts
+- Phone actions
+- Notes explaining how each person helps
+- Easy removal or editing
+
+11. Service-promise tracker
+
+- What was promised
+- Who owns the action
+- Due date
+- Completion status
+- Evidence or follow-up notes
+
+12. Transition and resettlement checklist
+
+- Photo identification
+- Phone and charger
+- Medication
+- Safe accommodation
+- GP registration
+- Benefits or income
+- Bank account
+- Transport
+- Food
+- Probation or key-worker appointment
+- Trusted contact
+- First recovery meeting
+
+13. Privacy controls
+
+- Local storage explanation
+- Export data
+- Delete local data
+- Clear prototype limitations
+
+14. Offline support
+
+- PWA installation
+- Manifest
+- Service worker
+- Offline shell
+- Appropriate cache updating
+
+============================================================
+COPYRIGHT RULES
+============================================================
+
+Do not copy, transcribe, download or rehost:
+
+- AA literature
+- NA literature
+- ACA literature
+- Lavendaire videos
+- Lavendaire audio
+- Lavendaire transcripts
+- Other protected recovery books
+
+Use:
+
+- Official links
+- Official YouTube playback
+- Original CONNECTA recovery writing
+- User-authored notes
+- Public-domain or properly licensed material
+
+The app must not imply endorsement or partnership where none exists.
+
+============================================================
+SAFETY RULES
+============================================================
+
+CONNECTA must never pretend to be:
+
+- A doctor
+- A therapist
+- A diagnostic tool
+- An emergency responder
+- A replacement for professional treatment
+- A replacement for emergency services
+
+Emergency and urgent-support actions must remain visible and clear.
+
+Do not use shame-based recovery language.
+
+Never display:
+
+- You failed
+- You lost everything
+- Your progress is gone
+- Your streak is broken
+
+Use language such as:
+
+“Something happened. Let’s make the next step safer.”
+
+A setback must never erase earlier progress.
+
+============================================================
+PRIVACY RULES
+============================================================
+
+This is currently a prototype.
+
+Do not store genuine:
+
+- NHS records
+- Prison records
+- Probation records
+- Safeguarding records
+- Clinical notes
+- Identifiable service-user information
+- Real institutional case information
+
+Keep prototype information local unless Chris later explicitly approves a secure backend phase.
+
+Explain clearly:
+
+- What is stored
+- Where it is stored
+- How to export it
+- How to delete it
+
+Do not send private reflections to third parties.
+
+Do not retain precise location after café searching.
+
+============================================================
+DESIGN SYSTEM
+============================================================
+
+Use the final logo and these brand colours:
+
+Dark green:
+#355846
+
+Secondary green:
+#5F8167
+
+Warm amber:
+#E3A53C
+
+Soft sage:
+#E1EBDD
+
+Warm white:
+#F8F8F3
+
+Main text:
+#1F2933
+
+Serious warning red:
+Use only for genuine urgent danger.
+
+The application must feel:
+
+- Calm
+- Safe
+- Human
+- Dignified
+- Hopeful
+- Professional
+- Clear
+- Non-institutional
+- Suitable for a future UK board presentation
+
+Avoid:
+
+- Neon colours
+- Harsh black screens
+- Prison-bar imagery
+- Syringe imagery
+- Shame-based streaks
+- Surveillance styling
+- Dense dashboards
+- Tiny text
+- Decorative clutter
+- Aggressive warning colours where they are unnecessary
+
+============================================================
+LOGO CENTRING REPAIR
+============================================================
+
+The final logo has previously appeared off-centre.
+
+Inspect the real markup and styling before changing it.
+
+Repair the logo professionally.
+
+Requirements:
+
+- Centre the logo horizontally
+- Centre the logo vertically where appropriate
+- Preserve its aspect ratio
+- Use object-fit: contain
+- Use object-position: center
+- Do not crop the full logo
+- Do not use random left or right margins
+- Do not use absolute positioning to fake alignment
+- Ensure the parent container is correctly centred
+- Ensure text and logo alignment remain balanced
+- Prevent the logo from becoming too large on desktop
+- Prevent it becoming unreadably small on mobile
+
+Test at:
+
+- 320px
+- 375px
+- 430px
+- 768px
+- 1024px
+- 1440px
+
+Use responsive CSS based on real structure.
+
+A suitable approach may include:
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.logo-container img {
+    display: block;
+    width: min(100%, 280px);
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    margin-inline: auto;
+}
+
+Do not paste this blindly.
+
+Adapt the implementation to the actual project.
+
+============================================================
+ACCESSIBILITY
+============================================================
+
+Aim for WCAG 2.2 AA.
+
+Implement and preserve:
+
+- Semantic HTML
+- Keyboard navigation
+- Visible focus indicators
+- Accessible form labels
+- Large touch targets
+- Sufficient colour contrast
+- Screen-reader-friendly status messages
+- Text resizing
+- Reduced-motion support
+- Plain UK English
+- No meaning communicated through colour alone
+- No horizontal scrolling
+- No clipped controls
+
+Test all interactive controls using keyboard-only navigation.
+
+============================================================
+CANONICAL VERSIONING
+============================================================
+
+Do not create folders named v5, v6, new-build or final-final.
+
+Use one project folder:
+
+Documents\CONNECTA
+
+Maintain a version file:
+
+app-version.json
+
+Example structure:
+
+{
+  "product": "CONNECTA",
+  "version": "0.1.0",
+  "buildDate": "current date",
+  "status": "prototype"
+}
+
+Display the version in an About CONNECTA section.
+
+When a new build replaces an old one:
+
+1. Update app-version.json
+2. Update the service-worker cache name
+3. Delete obsolete caches during service-worker activation
+4. Validate the new app
+5. Remove superseded generated files
+6. Keep the same canonical project folder
+
+============================================================
+CACHE AND OLD-VERSION PREVENTION
+============================================================
+
+Old app versions must not reappear.
+
+Inspect:
+
+- service-worker.js
+- manifest.webmanifest
+- cache names
+- start_url
+- desktop launcher URLs
+- local server ports
+- browser install behaviour
+
+Implement proper cache cleanup.
+
+On service-worker activation:
+
+- Delete CONNECTA caches that do not match the current version
+- Claim active clients
+- Ensure the current assets replace stale ones
+
+Do not leave Bridge caches active.
+
+Do not leave obsolete version cache names active.
+
+The desktop shortcut must open the canonical CONNECTA app only.
+
+============================================================
+PROJECT RECORDS
+============================================================
+
+Create these files in the canonical project root:
+
+AGENTS.md
+
+This should contain permanent development instructions for future Antigravity sessions.
+
+CONNECTA_PROJECT_STATUS.md
+
+This must contain:
+
+- Current project structure
+- Current app version
+- Working features
+- Known problems
+- Files changed
+- Tests completed
+- Remaining work
+- Security limitations
+- Privacy limitations
+- Recommended next stage
+
+CONNECTA_CLEANUP_REPORT.md
+
+This must contain:
+
+- Duplicate folders discovered
+- Obsolete files discovered
+- Files selected for deletion
+- Files retained
+- Cleanup completed
+- Post-cleanup validation
+
+CONNECTA_ROADMAP.md
+
+This must contain:
+
+Phase 1:
+Polished free local prototype
+
+Phase 2:
+Free online demonstration
+
+Phase 3:
+Optional secure test backend
+
+Phase 4:
+Organisation-supported pilot
+
+Update these files after every meaningful development stage.
+
+============================================================
+FIRST MISSION
+============================================================
+
+Complete this mission in order.
+
+STAGE 1: AUDIT
+
+- Scan all CONNECTA-related folders in Documents
+- Identify the most complete source
+- Audit every file
+- Identify broken, duplicated and obsolete files
+- Identify every old logo
+- Identify every Bridge reference
+- Identify why the final logo is off-centre
+- Identify cache and launcher conflicts
+- Produce a written plan before editing
+
+STAGE 2: CANONICAL PROJECT
+
+- Create or prepare Documents\CONNECTA
+- Move or copy the best working source into it
+- Install the final logo as the untouched brand master
+- Confirm all required files exist
+- Create AGENTS.md
+- Create project-status, cleanup and roadmap documents
+
+STAGE 3: BRAND REPAIR
+
+- Remove old Bridge branding
+- Remove obsolete CONNECTA logos
+- Apply the final logo
+- Centre it correctly
+- Generate correct icon sizes from the symbol
+- Update manifest icons
+- Update browser favicon
+- Update desktop launcher icon
+- Add About CONNECTA with current version
+
+STAGE 4: VALIDATION
+
+Validate:
+
+- HTML
+- CSS
+- JavaScript
+- PowerShell scripts
+- manifest.webmanifest
+- service-worker.js
+- Local app launch
+- Browser preview
+- Mobile responsive layouts
+- Desktop responsive layout
+- Offline shell
+- YouTube meditations
+- Fellowship links
+- Coffee-shop permission handling
+- Data export
+- Data deletion
+
+Use Antigravity browser verification.
+
+Produce screenshots or browser artifacts showing:
+
+- Mobile home screen
+- Desktop home screen
+- Centred logo
+- Meetings screen
+- Meditation screen
+- Coffee finder
+- About/version screen
+
+STAGE 5: CLEANUP
+
+Only after successful validation:
+
+- Generate the exact cleanup list
+- Delete the superseded app folders
+- Delete stale shortcuts
+- Delete stale caches where possible
+- Delete obsolete generated files
+- Keep only Documents\CONNECTA as the live project
+- Reopen the application
+- Repeat the smoke test
+- Update CONNECTA_CLEANUP_REPORT.md
+
+============================================================
+DEVELOPMENT BEHAVIOUR
+============================================================
+
+Work in small, verified stages.
+
+Before editing:
+
+- Explain what you found
+- Explain which files you will change
+- Explain why
+
+After editing:
+
+- Run validation
+- Test in the browser
+- Report exact files changed
+- Update project records
+
+Do not claim something works without testing it.
+
+Do not create fake placeholder functionality and call it finished.
+
+Do not add paid services.
+
+Do not perform a framework rewrite during the first mission.
+
+Do not leave previous app versions mixed with the canonical project.
+
+============================================================
+START NOW
+============================================================
+
+Begin by auditing the filesystem and project.
+
+Do not edit or delete anything during the first audit pass.
+
+Produce:
+
+1. The list of CONNECTA-related folders found
+2. The recommended canonical source
+3. The exact logo problem
+4. The exact cache/version problem
+5. The proposed migration plan
+6. The proposed deletion list
+7. The files that must be preserved
+
+Then wait for review before performing the migration and cleanup.
