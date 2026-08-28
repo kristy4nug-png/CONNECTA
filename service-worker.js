@@ -1,7 +1,9 @@
-const CACHE="connecta-app-v0.4.4-20260804";
+const CACHE="atlas-app-v1.0.0-20260828";
 const ASSETS=[
   "./",
   "./index.html",
+  "./index.css",
+  "./api-client.js",
   "./meeting-domain.js",
   "./meeting-ui.js",
   "./recovery-bridge-domain.js",
@@ -15,9 +17,11 @@ const ASSETS=[
   "./connecta-storage.js",
   "./safety-plan-domain.js",
   "./safety-plan-ui.js",
+  "./calming-games.js",
+  "./assets/lib/matter.min.js",
   "./app-version.json",
   "./manifest.webmanifest",
-  "./assets/branding/connecta-final-logo.svg",
+  "./assets/branding/atlas-final-logo.png",
   "./icons/connecta-icon-32.png",
   "./icons/connecta-icon-192.png",
   "./icons/connecta-icon-512.png"

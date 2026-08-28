@@ -1,8 +1,8 @@
 # Issue tracker: GitHub
 
-CONNECTA issues, specifications and development tickets live as GitHub Issues.
+Atlas issues, specifications and development tickets live as GitHub Issues.
 
-The GitHub repository has not been created or connected yet. Once available, connect the canonical CONNECTA folder to that repository before publishing tickets.
+The GitHub repository has not been created or connected yet. Once available, connect the canonical Atlas folder to that repository before publishing tickets.
 
 Use the `gh` command-line tool for issue operations.
 

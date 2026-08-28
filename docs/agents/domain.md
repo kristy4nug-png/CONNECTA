@@ -1,6 +1,6 @@
 # Domain Docs
 
-CONNECTA uses a single-context domain model.
+Atlas uses a single-context domain model.
 
 Before working on the application:
 

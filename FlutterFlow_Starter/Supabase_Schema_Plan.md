@@ -1,4 +1,4 @@
-# CONNECTA future Supabase schema
+# Atlas future Supabase schema
 
 Use this only after the local prototype is tested. Real sensitive data requires professional
 security, governance and data-protection review.

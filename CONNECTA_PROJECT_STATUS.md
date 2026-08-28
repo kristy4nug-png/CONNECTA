@@ -1,21 +1,21 @@
-# CONNECTA Project Status
+# Atlas Project Status
 
 **App Version:** 0.3.0 (Recovery Bridge)
 **Last Updated:** 3 August 2026
-**Canonical Directory:** `C:\Users\Chris Nugent\Documents\CONNECTA`
+**Canonical Directory:** `C:\Users\Chris Nugent\Documents\Atlas`
 
 ---
 
 ## 1. Project Structure
 ```
-CONNECTA/
+Atlas/
 ├── assets/
 │   ├── branding/
 │   │   └── connecta-final-logo.png   (Untouched Brand Master)
 │   ├── connecta-logo-lockup.png
 │   └── connecta-app-icon-master.png
 ├── icons/
-│   ├── CONNECTA.ico
+│   ├── Atlas.ico
 │   ├── connecta-icon-192.png
 │   └── connecta-icon-512.png
 ├── index.html
@@ -25,8 +25,8 @@ CONNECTA/
 ├── recovery-bridge-ui.js               (Recovery Bridge interface controller)
 ├── manifest.webmanifest
 ├── service-worker.js
-├── Start-CONNECTA.ps1                (Local launcher on port 8765)
-├── Install-CONNECTA.ps1              (Desktop shortcut installer)
+├── Start-Atlas.ps1                (Local launcher on port 8765)
+├── Install-Atlas.ps1              (Desktop shortcut installer)
 ├── app-version.json
 ├── AGENTS.md
 ├── CONNECTA_PROJECT_STATUS.md
@@ -56,11 +56,11 @@ CONNECTA/
 ---
 
 ## 3. Improvements Made in Current Session
-- Consolidated all code builds into single canonical directory `Documents\CONNECTA`.
+- Consolidated all code builds into single canonical directory `Documents\Atlas`.
 - Installed `connecta-final-logo.png` into `assets\branding\`.
 - Repaired header logo centring using CSS flex container and `object-fit: contain`.
 - Removed versioned header badge ("NEW BUILD v4") and obsolete promo cards.
-- Sanitized `Start-CONNECTA.ps1` launcher (removed legacy "Bridge" branding).
+- Sanitized `Start-Atlas.ps1` launcher (removed legacy "Bridge" branding).
 - Fixed data export file naming.
 - Established project status, agents, cleanup, and roadmap markdown files.
 - Upgraded the Recovery Fellowship Finder without copying fellowship directories.

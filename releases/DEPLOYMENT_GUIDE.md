@@ -1,6 +1,6 @@
-CONNECTA — Web Hosting Deployment Guide
+Atlas — Web Hosting Deployment Guide
 
-This guide covers deploying the static CONNECTA build to common static hosts (GitHub Pages, Netlify, any static file host).
+This guide covers deploying the static Atlas build to common static hosts (GitHub Pages, Netlify, any static file host).
 
 Files included in the release ZIP:
 - index.html

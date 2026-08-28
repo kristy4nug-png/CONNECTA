@@ -261,7 +261,7 @@
     }
 
     function personalMeetingsFromExport(payload){
-      if(!payload || typeof payload !== "object") throw new Error("This is not a CONNECTA export file");
+      if(!payload || typeof payload !== "object") throw new Error("This is not a Atlas export file");
       const storage = payload.storage || payload;
       const decode = value => typeof value === "string" ? JSON.parse(value) : value;
       const personal = decode(storage.personalMeetings);
@@ -348,7 +348,7 @@
       });
       byId("importMeetings").addEventListener("click",async()=>{
         const file = byId("meetingImportFile").files?.[0];
-        if(!file){byId("meetingImportStatus").textContent="Choose a CONNECTA export file first.";return}
+        if(!file){byId("meetingImportStatus").textContent="Choose a Atlas export file first.";return}
         try{
           prepareImport(personalMeetingsFromExport(JSON.parse(await file.text())));
           byId("meetingImportStatus").textContent="Import checked. Review before applying.";

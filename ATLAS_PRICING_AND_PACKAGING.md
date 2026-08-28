@@ -1,4 +1,4 @@
-# CONNECTA pricing and packaging
+# Atlas pricing and packaging
 
 Status: working proposal only, 4 August 2026. These figures have not been approved or made live.
 
@@ -10,7 +10,7 @@ All safety, urgent help, core plans, check-ins, journal, contacts, appointments,
 
 | Offer | Proposed price | Boundary |
 | --- | --- | --- |
-| CONNECTA Plus | £4.99/month VAT included; £39.99/year VAT included | convenience/enhancement only: sync, encrypted backup, advanced insights, owned/licensed content, reports and bounded supporter sharing |
+| Atlas Plus | £4.99/month VAT included; £39.99/year VAT included | convenience/enhancement only: sync, encrypted backup, advanced insights, owned/licensed content, reports and bounded supporter sharing |
 | Pilot | £1,500 + VAT / 12 weeks | one site, 100 active users, 15 staff; possible annual credit |
 | Team | £299 + VAT/month | 100 active users, 15 staff, one site |
 | Organisation | £999 + VAT/month | 500 active users, 75 staff, five sites |

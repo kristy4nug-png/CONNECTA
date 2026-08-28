@@ -84,7 +84,7 @@
       renderForm();
       bind();
       renderHistory();
-      byId("capitalGuidance").textContent="Each area stands on its own. CONNECTA never combines these ratings.";
+      byId("capitalGuidance").textContent="Each area stands on its own. Atlas never combines these ratings.";
       return api;
     }
 

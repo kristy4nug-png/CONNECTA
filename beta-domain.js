@@ -90,7 +90,7 @@
       ? storage.length
       : Object.keys(storage && typeof storage === "object" ? storage : {}).length;
     return {
-      app:"CONNECTA",
+      app:"Atlas",
       version:clean(input.version),
       createdAt:iso(input.createdAt || new Date().toISOString(),"Diagnostic time"),
       userAgent:clean(input.userAgent),
@@ -130,7 +130,7 @@
           id:idFactory(),
           name:profile.trustedContact.name || "Trusted contact",
           phone:profile.trustedContact.phone,
-          note:"Trusted contact from CONNECTA setup"
+          note:"Trusted contact from Atlas setup"
         });
       }
     }

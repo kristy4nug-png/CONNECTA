@@ -180,8 +180,8 @@
 
     return {
       document:{
-        app:"CONNECTA",
-        title:"CONNECTA Worker Handover",
+        app:"Atlas",
+        title:"Atlas Worker Handover",
         generatedAt,
         sections
       },

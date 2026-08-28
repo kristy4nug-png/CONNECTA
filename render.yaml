@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: atlas-backend
+    env: node
+    buildCommand: "cd server && npm install && npm run db:push"
+    startCommand: "cd server && npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: "*" # Allow GitHub pages to connect
+      - key: DATABASE_URL
+        value: "file:./data/atlas.db" # Local SQLite file
+    disk:
+      name: atlas-data
+      mountPath: /opt/render/project/src/server/data
+      sizeGB: 1

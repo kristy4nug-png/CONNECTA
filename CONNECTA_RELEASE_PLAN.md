@@ -1,4 +1,4 @@
-# CONNECTA release plan
+# Atlas release plan
 
 Status at 4 August 2026: v0.4.1 Free Beta baseline; **not a release candidate**.
 

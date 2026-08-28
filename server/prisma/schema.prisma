@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String       @id @default(uuid())
+  email     String       @unique
+  password  String
+  createdAt DateTime     @default(now())
+  records   SyncRecord[]
+}
+
+model SyncRecord {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key       String   // e.g. "personalMeetingsV1"
+  value     String   // The stringified JSON value from localStorage
+  updatedAt DateTime @updatedAt
+  
+  @@unique([userId, key])
+}

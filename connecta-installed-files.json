@@ -1,5 +1,5 @@
 {
-  "product": "CONNECTA",
+  "product": "Atlas",
   "version": "0.4.3",
   "generatedAt": "2026-08-04",
   "files": [
@@ -72,19 +72,19 @@
       "sha256": "8182492E9073D941008D4B48FC6A74296E22F445EBA8B61E543530A4F07ECEE3"
     },
     {
-      "path": "Install-CONNECTA-Free-Beta-v0.4.3.ps1",
+      "path": "Install-Atlas-Free-Beta-v0.4.3.ps1",
       "sha256": "85DDFD2BEAC077B4FF2CB25041745A45DD0530B1CF43854DB8427DEE27571E67"
     },
     {
-      "path": "Start-CONNECTA.ps1",
+      "path": "Start-Atlas.ps1",
       "sha256": "1D82EFCA161EA51C46B284D0F1FBEE2AEF0293B3CF85D4A9D4BF2D58537240A2"
     },
     {
-      "path": "README-CONNECTA.md",
+      "path": "README-Atlas.md",
       "sha256": "5AD337D87DD4453C959A700FD47B62E2F1AA1105C97DCBC04441131D99257C4C"
     },
     {
-      "path": "Test-CONNECTA-v0.4.3.ps1",
+      "path": "Test-Atlas-v0.4.3.ps1",
       "sha256": "2FC6C6DFE98AA6D9716D83F373746DE9C3AA54229AD93EDD4AC1BB9A148DB023"
     },
     {
@@ -96,7 +96,7 @@
       "sha256": "DD7CEC110C161A2C261F3290DB9BC10CE975E83E49D42F8D268004A14D8E8580"
     },
     {
-      "path": "icons\\CONNECTA.ico",
+      "path": "icons\\Atlas.ico",
       "sha256": "EE041588D5D6F70C0431510A5F2AAB0B542F7BFF0523C91206D245AE233869A6"
     },
     {

@@ -31,7 +31,7 @@
       try{
         const marker=JSON.parse(existing);
         if(marker.schemaVersion===SCHEMA_VERSION) return {changed:false,marker};
-      }catch{ /* replace only CONNECTA's malformed marker */ }
+      }catch{ /* replace only Atlas's malformed marker */ }
     }
     const marker={schemaVersion:SCHEMA_VERSION,migratedAt:nowIso,legacyKeyCount:keys(storage).length};
     storage.setItem(SCHEMA_KEY,JSON.stringify(marker));
@@ -46,7 +46,7 @@
   }
   function validateImport(value){
     if(!value||value.format!=="connecta-local-export"||value.formatVersion!==1||!value.records||Array.isArray(value.records)){
-      throw new Error("This is not a valid CONNECTA backup");
+      throw new Error("This is not a valid Atlas backup");
     }
     const records={};
     for(const [key,record] of Object.entries(value.records)){

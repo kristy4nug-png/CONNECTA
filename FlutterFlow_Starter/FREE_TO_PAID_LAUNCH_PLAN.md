@@ -1,13 +1,13 @@
-# CONNECTA free launch path
+# Atlas free launch path
 
 ## What works now at no cost
 The packaged PWA runs locally and can be installed from the browser.
-It includes the CONNECTA brand, meetings, reflections, meditations, café finder,
+It includes the Atlas brand, meetings, reflections, meditations, café finder,
 coping tools, support ladder, service promises and transition planning.
 
 ## FlutterFlow free build
 1. Create a free FlutterFlow account.
-2. Create a blank responsive project called CONNECTA.
+2. Create a blank responsive project called Atlas.
 3. Upload:
    - `icons/connecta-icon-512.png`
    - `assets/connecta-logo-lockup.png`

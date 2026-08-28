@@ -33,7 +33,7 @@
     },
     red:{
       title:"Move toward support now",
-      nextAction:"Move toward immediate human support. If there is immediate danger, call 999 or use CONNECTA's urgent support options.",
+      nextAction:"Move toward immediate human support. If there is immediate danger, call 999 or use Atlas's urgent support options.",
       showUrgentSupport:true
     }
   };
@@ -145,7 +145,7 @@
       }));
     }
     return {
-      app:"CONNECTA",
+      app:"Atlas",
       document:"Recovery Passport",
       generatedAt:validIso(nowIso,"Passport time"),
       sections

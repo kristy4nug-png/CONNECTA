@@ -50,7 +50,7 @@
       store.set("textScale",result.profile.textScale);
       applyProfile(result.profile);
       byId("onboardingDialog").close();
-      notify("CONNECTA setup saved on this device");
+      notify("Atlas setup saved on this device");
     }
 
     function onboardingInput(){

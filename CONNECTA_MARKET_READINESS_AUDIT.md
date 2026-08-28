@@ -1,6 +1,6 @@
-# CONNECTA market-readiness audit
+# Atlas market-readiness audit
 
-Audit date: 4 August 2026. Scope: the local CONNECTA project at the canonical project path. This is an engineering audit, not legal, clinical-safety, penetration-test, accessibility-certification, or procurement approval.
+Audit date: 4 August 2026. Scope: the local Atlas project at the canonical project path. This is an engineering audit, not legal, clinical-safety, penetration-test, accessibility-certification, or procurement approval.
 
 ## Verified current state
 
@@ -67,7 +67,7 @@ The app is a static Vanilla JavaScript PWA served locally by PowerShell 7. It ha
 - [GOV.UK accessibility requirements](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps) states public-sector websites/apps must meet WCAG 2.2 AA and publish an accessibility statement. Applicability to a specific purchaser still requires advice.
 - [NHS England digital clinical safety assurance](https://www.england.nhs.uk/long-read/digital-clinical-safety-assurance/) describes DCB0129 for manufacturers and DCB0160 for deploying care organisations. [NHS England DTAC context](https://www.england.nhs.uk/long-read/digital-clinical-safety-strategy/) identifies DTAC as a baseline for NHS/social-care digital technologies.
 
-These sources establish review work, not CONNECTA compliance. PECR, consumer-law/refund/VAT presentation, ICO registration, MHRA classification, Cyber Essentials, Apple and Google requirements require a release-time, qualified review and evidence pack.
+These sources establish review work, not Atlas compliance. PECR, consumer-law/refund/VAT presentation, ICO registration, MHRA classification, Cyber Essentials, Apple and Google requirements require a release-time, qualified review and evidence pack.
 
 ## Recommended architecture
 

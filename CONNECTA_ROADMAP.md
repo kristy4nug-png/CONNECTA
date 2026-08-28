@@ -1,11 +1,11 @@
-# CONNECTA Project Roadmap
+# Atlas Project Roadmap
 
 ## Phase 1: Polished Free Local Prototype (Current)
-- Single canonical local folder (`Documents\CONNECTA`).
+- Single canonical local folder (`Documents\Atlas`).
 - Free, local-first HTML/CSS/JS web application.
 - Complete 14 core safety, recovery, fellowship, and resettlement features.
 - Centred brand master logo and PWA offline capability.
-- PowerShell local launcher (`Start-CONNECTA.ps1`).
+- PowerShell local launcher (`Start-Atlas.ps1`).
 - Complete version 0.2.0 Recovery Fellowship Finder and Personal Meeting management.
 - Complete version 0.3.0 Recovery Bridge with My First 72 Hours and a consent-controlled Recovery Passport.
 

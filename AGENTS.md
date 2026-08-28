@@ -3,18 +3,18 @@
 ## Permanent Project Rules
 
 1. **One Canonical Project Folder Only**
-   - The project MUST always live at: `C:\Users\Chris Nugent\Documents\CONNECTA`
-   - NEVER create versioned project folders like `CONNECTA_v5`, `CONNECTA_new`, etc.
+   - The project MUST always live at: `C:\Users\Chris Nugent\Documents\Atlas`
+   - NEVER create versioned project folders like `Atlas_v5`, `Atlas_new`, etc.
    - Version numbers belong in `app-version.json` and internal records only.
 
 2. **Final Logo Requirements**
-   - Brand master location: `assets\branding\connecta-final-logo.png`
+   - Brand master location: `assets\branding\atlas-final-logo.png`
    - Never crop, distort, recolour, replace, or redesign the logo lockup.
    - Header logo must always use responsive, centred CSS (`object-fit: contain`).
 
 3. **Technology Stack Constraints**
    - Core: Standard HTML5, CSS3, Vanilla JavaScript (Local-first, `localStorage`, PWA Service Worker).
-   - Local Launcher: PowerShell script (`Start-CONNECTA.ps1`) hosting on port `8765`.
+   - Local Launcher: PowerShell script (`Start-Atlas.ps1`) hosting on port `8765`.
    - Free services only (OpenStreetMap/Overpass API, official YouTube embeds for Lavendaire, official recovery links).
    - No paid APIs, no React/Flutter conversion in initial stabilization phase.
 
@@ -36,8 +36,8 @@ Issues and development tickets are tracked using GitHub Issues. See `docs/agents
 
 ### Triage labels
 
-CONNECTA uses the five standard Matt Pocock triage labels. See `docs/agents/triage-labels.md`.
+Atlas uses the five standard Matt Pocock triage labels. See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 
-CONNECTA uses a single-context domain-documentation layout. See `docs/agents/domain.md`.
+Atlas uses a single-context domain-documentation layout. See `docs/agents/domain.md`.

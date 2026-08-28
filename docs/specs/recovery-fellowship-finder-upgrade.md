@@ -2,14 +2,14 @@
 
 ## Outcome
 
-Upgrade CONNECTA's existing Recovery Fellowship Finder into one four-tab, local-first meeting area without creating a duplicate feature or copying fellowship meeting directories.
+Upgrade Atlas's existing Recovery Fellowship Finder into one four-tab, local-first meeting area without creating a duplicate feature or copying fellowship meeting directories.
 
 ## Find a Meeting
 
 - UK-first release.
 - Open the official AA Great Britain, UKNA and ACA meeting finders in the normal browser.
 - Display official fellowship contact information separately from urgent-safety support.
-- State that CONNECTA is independent and meeting details are maintained by the relevant fellowship.
+- State that Atlas is independent and meeting details are maintained by the relevant fellowship.
 - If offline, explain that the official finder needs internet access and offer Try Again and Open My Meetings.
 - Do not scrape or import meeting directories. Automatic Published Meeting syncing is deferred until an authorised data source exists.
 
@@ -33,7 +33,7 @@ Upgrade CONNECTA's existing Recovery Fellowship Finder into one four-tab, local-
 
 ## Data controls
 
-- Existing CONNECTA export includes Personal Meetings, archives, reminders and drafts through local storage.
+- Existing Atlas export includes Personal Meetings, archives, reminders and drafts through local storage.
 - Add validated import with merge-by-default behaviour.
 - Possible duplicate: same fellowship, meeting name, day/date and start time.
 - Duplicate choices: Keep Existing, Use Imported or Keep Both.
@@ -50,7 +50,7 @@ Use four tabs inside the existing Meetings view:
 3. Reminders
 4. Archived
 
-Preserve CONNECTA's existing green-and-amber visual system, responsive layout, safety wording, logo and application navigation.
+Preserve Atlas's existing green-and-amber visual system, responsive layout, safety wording, logo and application navigation.
 
 ## Approved test seams
 

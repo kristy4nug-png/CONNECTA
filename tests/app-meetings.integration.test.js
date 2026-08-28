@@ -31,7 +31,7 @@ class LocalOnlyLoader extends ResourceLoader{
   }
 }
 
-test("real CONNECTA page exposes the four-tab Personal Meeting flow", async t=>{
+test("real Atlas page exposes the four-tab Personal Meeting flow", async t=>{
   const appServer = await server();
   t.after(()=>appServer.close());
   const {port} = appServer.address();
@@ -75,7 +75,7 @@ test("real CONNECTA page exposes the four-tab Personal Meeting flow", async t=>{
   assert.deepEqual(errors,[]);
 });
 
-test("real CONNECTA page creates and reopens My First 72 Hours", async t=>{
+test("real Atlas page creates and reopens My First 72 Hours", async t=>{
   const appServer = await server();
   t.after(()=>appServer.close());
   const {port} = appServer.address();

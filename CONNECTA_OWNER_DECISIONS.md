@@ -1,4 +1,4 @@
-# CONNECTA owner decisions
+# Atlas owner decisions
 
 This log separates information that must come from Chris or qualified external reviewers from implementation work. No values are invented.
 

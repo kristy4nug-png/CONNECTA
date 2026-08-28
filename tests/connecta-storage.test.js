@@ -16,7 +16,7 @@ test("migration records the schema without changing legacy recovery records",()=
   assert.equal(Storage.migrate(storage).changed,false);
 });
 
-test("backup exports only CONNECTA records and restore preserves unrelated origin data",()=>{
+test("backup exports only Atlas records and restore preserves unrelated origin data",()=>{
   const source=memoryStorage({contacts:'[]','journal-2026-08-04':'"private"',unrelated:'keep'});
   Storage.migrate(source,"2026-08-04T10:00:00.000Z");
   const backup=Storage.exportData(source,"2026-08-04T11:00:00.000Z");
@@ -33,7 +33,7 @@ test("invalid backups are rejected before any local recovery record is changed",
   assert.equal(storage.getItem("contacts"),"[]");
 });
 
-test("scoped deletion leaves non-CONNECTA origin storage untouched",()=>{
+test("scoped deletion leaves non-Atlas origin storage untouched",()=>{
   const storage=memoryStorage({contacts:'[]','safety-2026-08-04':'{}',unrelated:'keep'});
   Storage.clear(storage);
   assert.deepEqual(storage.dump(),{unrelated:"keep"});

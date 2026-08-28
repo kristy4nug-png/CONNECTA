@@ -1,6 +1,6 @@
 ﻿{
-    "name":  "CONNECTA Recovery Safety Net",
-    "short_name":  "CONNECTA",
+    "name":  "Atlas Recovery Safety Net",
+    "short_name":  "Atlas",
     "description":  "A free, private-first recovery safety and continuity app.",
     "start_url":  "./",
     "display":  "standalone",

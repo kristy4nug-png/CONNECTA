@@ -140,7 +140,7 @@
         const complete = sections.tasks.filter(task=>task.completed).length;
         rows.push(["72-hour steps",`${complete} of ${sections.tasks.length} completed`]);
       }
-      return `<article class="passport-sheet"><h3>CONNECTA Recovery Passport</h3><p class="small">Created ${escapeHtml(new Date(passport.generatedAt).toLocaleString("en-GB"))}</p>${rows.map(([label,value])=>`<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`).join("")}<p class="small">Private notes are never included in this passport.</p></article>`;
+      return `<article class="passport-sheet"><h3>Atlas Recovery Passport</h3><p class="small">Created ${escapeHtml(new Date(passport.generatedAt).toLocaleString("en-GB"))}</p>${rows.map(([label,value])=>`<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`).join("")}<p class="small">Private notes are never included in this passport.</p></article>`;
     }
 
     function currentPassport(){

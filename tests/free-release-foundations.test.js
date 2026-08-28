@@ -40,7 +40,7 @@ test("fresh and upgrade storage paths retain records, reject invalid restore and
   const storage={get length(){return data.size},key:i=>[...data.keys()][i]||null,getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,String(v)),removeItem:k=>data.delete(k)};
   Storage.migrate(storage,"2026-08-04T12:00:00.000Z");
   const backup=Storage.exportData(storage);
-  assert.throws(()=>Storage.restore(storage,{format:"bad"}),/valid CONNECTA backup/);
+  assert.throws(()=>Storage.restore(storage,{format:"bad"}),/valid Atlas backup/);
   Storage.restore(storage,backup);
   assert.equal(storage.getItem("journal-2026-08-04"),'"private"');
   assert.equal(storage.getItem("other-app"),"keep");

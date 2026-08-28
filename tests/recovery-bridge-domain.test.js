@@ -64,7 +64,7 @@ test("a Recovery Passport requires consent and never includes private notes", ()
     keyAppointment:"Recovery worker, 11 August at 10:00",
     transportPlan:"Bus 7 from the gate",
     safeContact:{name:"Alex",phone:"07123 456789"},
-    privateNotes:"This must stay only inside CONNECTA"
+    privateNotes:"This must stay only inside Atlas"
   });
 
   assert.throws(
@@ -80,6 +80,6 @@ test("a Recovery Passport requires consent and never includes private notes", ()
   assert.equal(passport.sections.transition.type,"release");
   assert.equal(passport.sections.medicationPlan,"Collect prescription from the community pharmacy");
   assert.deepEqual(passport.sections.safeContact,{name:"Alex",phone:"07123 456789"});
-  assert.doesNotMatch(JSON.stringify(passport),/This must stay only inside CONNECTA|privateNotes/);
+  assert.doesNotMatch(JSON.stringify(passport),/This must stay only inside Atlas|privateNotes/);
   assert.equal("firstNightAddress" in passport.sections,false);
 });

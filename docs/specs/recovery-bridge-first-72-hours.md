@@ -2,13 +2,13 @@
 
 ## Purpose
 
-CONNECTA helps a person carry a practical recovery plan from prison, rehabilitation, hospital, supported accommodation, or another major transition into the community. It is a planning and signposting tool, not a clinical record or substitute for professional care.
+Atlas helps a person carry a practical recovery plan from prison, rehabilitation, hospital, supported accommodation, or another major transition into the community. It is a planning and signposting tool, not a clinical record or substitute for professional care.
 
 ## User promise
 
 - Turn one transition date into a calm, ordered plan covering preparation and the first 72 hours.
 - Keep the plan privately on the device and available offline.
-- Preserve progress when CONNECTA closes and reopens.
+- Preserve progress when Atlas closes and reopens.
 - Respond to green, amber, and red check-ins with dignified next actions.
 - Share only explicitly selected practical information through a Recovery Passport.
 
@@ -40,7 +40,7 @@ CONNECTA helps a person carry a practical recovery plan from prison, rehabilitat
 - Store the plan in browser local storage under a dedicated versioned key.
 - Do not create an account, backend, analytics event, or external report.
 - Do not store the Recovery Passport after preview/download unless the person saves the downloaded file.
-- Continue to display CONNECTA's independent-prototype and emergency-support boundaries.
+- Continue to display Atlas's independent-prototype and emergency-support boundaries.
 
 ## Approved test seams
 
