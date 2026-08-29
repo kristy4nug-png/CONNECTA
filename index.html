@@ -96,6 +96,16 @@
       </article>
 
       <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Daily Accountability</h2>
+        <p class="muted small">Log your daily reprieve and let someone know you're staying on track.</p>
+        <div class="action-row" style="margin-top: 16px;">
+          <button class="primary full" id="dailyReprieveBtn">I've done my work today</button>
+        </div>
+        <p id="dailyReprieveStatus" class="muted small" style="margin-top: 12px; display: none; font-weight: bold; color: var(--teal);"></p>
+      </article>
+
+      <article class="card">
         <div class="eyebrow">One-task mode</div>
         <h2>My next safe action</h2>
         <div class="one-task">
@@ -161,6 +171,11 @@
             <div class="finder-card"><span class="pill na">NA</span><strong>Narcotics Anonymous UK</strong><a data-official-finder href="https://meetings.ukna.org/" target="_blank" rel="noopener">Open official NA finder</a><p class="small">Helpline: <a href="tel:03009991212">0300 999 1212</a> (10:00–midnight)</p></div>
             <div class="finder-card"><span class="pill aca">ACA</span><strong>Adult Children</strong><a data-official-finder href="https://adultchildren.org/meeting-search/" target="_blank" rel="noopener">Open official ACA finder</a><p class="small">ACA WSO: <a data-official-finder href="https://adultchildren.org/contact-us/" target="_blank" rel="noopener">official contact form</a></p></div>
             <div class="finder-card"><span class="pill amc" style="background:rgba(30, 64, 175, 0.2);color:hsl(226, 70%, 30%);">AMC</span><strong>Andy's Man Club</strong><a data-official-finder href="https://andysmanclub.co.uk/find-your-nearest-group/" target="_blank" rel="noopener">Open AMC finder</a><p class="small">General info: <a href="mailto:info@andysmanclub.co.uk">info@andysmanclub.co.uk</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(185, 28, 28, 0.2);color:hsl(0, 70%, 30%);">CA</span><strong>Cocaine Anonymous</strong><a data-official-finder href="https://cocaineanonymous.org.uk/meetings/" target="_blank" rel="noopener">Open CA finder</a><p class="small">Helpline: <a href="tel:08006120225">0800 612 0225</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(217, 119, 6, 0.2);color:hsl(38, 90%, 30%);">OA</span><strong>Overeaters Anonymous</strong><a data-official-finder href="https://www.oagb.org.uk/find-a-meeting/" target="_blank" rel="noopener">Open OA finder</a><p class="small">Contact: <a href="mailto:general@oagb.org.uk">general@oagb.org.uk</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(147, 51, 234, 0.2);color:hsl(271, 70%, 30%);">CoDA</span><strong>Co-Dependents Anonymous</strong><a data-official-finder href="https://codauk.org/meetings/" target="_blank" rel="noopener">Open CoDA finder</a><p class="small">Contact: <a href="mailto:communications@codauk.org">communications@codauk.org</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(219, 39, 119, 0.2);color:hsl(330, 70%, 30%);">SLAA</span><strong>Sex and Love Addicts Anon.</strong><a data-official-finder href="https://slaauk.org/meetings/" target="_blank" rel="noopener">Open SLAA finder</a><p class="small">Contact: <a href="mailto:contact@slaauk.org">contact@slaauk.org</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(15, 118, 110, 0.2);color:hsl(175, 70%, 30%);">SA</span><strong>Sex Addicts Anonymous</strong><a data-official-finder href="https://sauk.org/meetings/" target="_blank" rel="noopener">Open SA finder</a><p class="small">Helpline: <a href="tel:07519962452">07519 962452</a></p></div>
           </div>
           <p class="source-note">Atlas is independent and is not affiliated with AA, NA or ACA. Meeting information is maintained by each fellowship.</p>
         </article>
@@ -345,6 +360,22 @@
         </form>
 
         <div id="privateContactsList" style="display:flex; flex-direction:column; gap:12px;"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>My Milestones</h2>
+        <p class="muted small">Your daily accountability reprieves are tracked here. Unlock badges and download pro certificates.</p>
+        
+        <p id="totalReprievesText" style="font-weight: 800; font-size: 1.1rem; color: var(--navy);"></p>
+
+        <div id="badgesContainer" style="display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap;">
+           <!-- Badges injected via JS -->
+        </div>
+
+        <div class="action-row" style="margin-top: 16px;">
+          <button class="primary" id="downloadCertificateBtn" disabled>Download Latest Certificate</button>
+        </div>
       </article>
 
       <article class="card safety-card">
@@ -805,7 +836,33 @@
 <script src="safety-plan-domain.js"></script>
 <script src="safety-plan-ui.js"></script>
 <script src="assets/lib/matter.min.js"></script>
+<div id="printCertificateTemplate" style="display:none;" aria-hidden="true">
+  <div style="border: 20px solid var(--navy); padding: 40px; text-align: center; font-family: 'Inter', sans-serif;">
+    <h1 style="font-size: 3rem; color: var(--navy); margin-bottom: 10px;">Atlas Recovery Milestone</h1>
+    <h2 style="font-size: 1.5rem; color: var(--teal); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px;">Certificate of Commitment</h2>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">This certificate honors the dedication and resilience of</p>
+    <div style="font-size: 2rem; font-weight: bold; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin: 0 auto 40px; width: 60%;" id="certNameLine">______________</div>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">For achieving a remarkable milestone of</p>
+    <div style="font-size: 2.5rem; font-weight: 900; color: var(--amber); margin-bottom: 40px;" id="certMilestoneText">30 Days</div>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 60px;">of active accountability and daily reprieves.</p>
+    
+    <div style="display: flex; justify-content: space-around; margin-top: 50px;">
+      <div style="text-align: center;">
+        <div style="border-bottom: 1px solid var(--ink); width: 200px; height: 30px;" id="certDateLine"></div>
+        <p style="margin-top: 10px; font-weight: bold;">Date Achieved</p>
+      </div>
+      <div style="text-align: center;">
+        <h2 style="font-size: 2rem; color: var(--navy); margin:0;">ATLAS</h2>
+        <p style="font-size: 0.8rem; margin:0; text-transform:uppercase;">Mental Health Recovery</p>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="calming-games.js"></script>
+<script src="milestones.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const byId = id => document.getElementById(id);
