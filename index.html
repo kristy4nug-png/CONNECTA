@@ -234,6 +234,44 @@
 
     <section class="view" data-view="tools">
       <article class="card">
+        <div class="eyebrow">Emergency Support</div>
+        <h2>Basic Needs Locator</h2>
+        <p class="muted small">Find nearby food banks, night shelters, and free meals using free community map data.</p>
+        
+        <div style="background: rgba(217, 119, 6, 0.1); border-left: 4px solid var(--amber); padding: 12px; border-radius: 4px; margin-bottom: 16px; font-size: 0.9rem;">
+          <strong>Safety Warning:</strong> Community map data may not be 100% up to date. Always call ahead or check online to confirm opening hours before travelling.
+        </div>
+
+        <div class="cafe-controls">
+          <select id="needsType" aria-label="Select Need">
+            <option value="food_bank">Food Banks</option>
+            <option value="shelter">Night Shelters</option>
+            <option value="soup_kitchen">Free Meals / Soup Kitchens</option>
+          </select>
+          <select id="needsRadius" aria-label="Search distance">
+            <option value="2500">Within 2.5 km</option>
+            <option value="5000">Within 5.0 km</option>
+            <option value="10000">Within 10 km</option>
+            <option value="25000">Within 25 km</option>
+          </select>
+        </div>
+        <div class="action-row" style="margin-top:12px;">
+          <button class="primary" id="findNeeds">Use my location</button>
+        </div>
+        
+        <details style="margin-top: 16px;">
+          <summary>Search by town or postcode instead</summary>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input id="needsPlace" placeholder="e.g. Manchester or M1 1AA" aria-label="Town or postcode">
+            <button class="secondary" id="searchNeedsPlace">Search</button>
+          </div>
+        </details>
+        
+        <p class="status-line" id="needsStatus" role="status" style="margin-top: 12px; font-weight: bold;"></p>
+        <div id="needsResults" style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;"></div>
+      </article>
+
+      <article class="card">
         <div class="eyebrow">Grounding & Distraction</div>
         <h2>Calming Games</h2>
         <p class="muted small">Absorbing visual puzzles designed to safely occupy your working memory and interrupt cravings.</p>
@@ -863,6 +901,7 @@
 </div>
 <script src="calming-games.js"></script>
 <script src="milestones.js"></script>
+<script src="basic-needs.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const byId = id => document.getElementById(id);
