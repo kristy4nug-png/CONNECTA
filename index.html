@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#16324F">
-  <meta name="description" content="A free, private-first recovery safety and continuity beta.">
+  <meta name="description" content="Atlas is a free, private-first recovery safety app. Crisis support, meeting finder, safety plan, basic needs locator and peer accountability tools.">
   <script>
     try{
       if(localStorage.getItem("connectaPrivacyLockV1") && sessionStorage.getItem("connectaPrivacyUnlocked")!=="yes"){
@@ -164,6 +164,7 @@
         <p class="muted small">Official finders open in your browser. Personal Meetings stay privately on this device.</p>
         <div class="meeting-tabs" role="tablist" aria-label="Meeting sections">
           <button class="meeting-tab active" data-meeting-tab="find" role="tab" aria-selected="true">Find a Meeting</button>
+          <button class="meeting-tab" data-meeting-tab="families" role="tab" aria-selected="false">For Families</button>
           <button class="meeting-tab" data-meeting-tab="mine" role="tab" aria-selected="false">My Meetings</button>
           <button class="meeting-tab" data-meeting-tab="reminders" role="tab" aria-selected="false">Reminders</button>
           <button class="meeting-tab" data-meeting-tab="archived" role="tab" aria-selected="false">Archived</button>
@@ -192,6 +193,25 @@
             <div class="finder-card"><span class="pill" style="background:rgba(15, 118, 110, 0.2);color:hsl(175, 70%, 30%);">SA</span><strong>Sex Addicts Anonymous</strong><a data-official-finder href="https://sauk.org/meetings/" target="_blank" rel="noopener">Open SA finder</a><p class="small">Helpline: <a href="tel:07519962452">07519 962452</a></p></div>
           </div>
           <p class="source-note">Atlas is independent and is not affiliated with AA, NA or ACA. Meeting information is maintained by each fellowship.</p>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="families" role="tabpanel" hidden>
+        <article class="card">
+          <div class="eyebrow">Support for those who love someone</div>
+          <h2>For Families & Friends</h2>
+          <p class="muted small">Addiction affects everyone around it. These organisations offer free, confidential support to family members, partners, and friends of people with addiction — you deserve support too.</p>
+          <div class="finder-grid">
+            <div class="finder-card"><span class="pill" style="background:rgba(30,64,175,0.15);color:hsl(226,70%,30%);">Al&#8209;Anon</span><strong>Al-Anon Family Groups UK</strong><a data-official-finder href="https://al-anonuk.org.uk/" target="_blank" rel="noopener">Find a meeting or helpline</a><p class="small">Free helpline: <a href="tel:08000086811">0800 008 6811</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(30,64,175,0.1);color:hsl(226,70%,30%);">Alateen</span><strong>Alateen (via Al-Anon)</strong><a data-official-finder href="https://al-anonuk.org.uk/alateen/" target="_blank" rel="noopener">Support for young people</a><p class="small">For 12–17 year olds affected by someone's drinking.</p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(109,40,217,0.15);color:hsl(271,70%,30%);">FA</span><strong>Families Anonymous</strong><a data-official-finder href="https://famanon.org.uk/" target="_blank" rel="noopener">Find a FA meeting</a><p class="small">Helpline: <a href="tel:08707667677">0870 766 7677</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(5,150,105,0.15);color:hsl(160,70%,25%);">NACOA</span><strong>NACOA — Children of Alcoholics</strong><a data-official-finder href="https://nacoa.org.uk/" target="_blank" rel="noopener">Visit NACOA</a><p class="small">Free helpline: <a href="tel:08003585456">0800 358 3456</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(217,119,6,0.15);color:hsl(38,90%,30%);">FRANK</span><strong>Talk to FRANK</strong><a data-official-finder href="https://www.talktofrank.com/" target="_blank" rel="noopener">Drug info &amp; family advice</a><p class="small">Free helpline: <a href="tel:03001236600">0300 123 6600</a> (24/7)</p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(219,39,119,0.15);color:hsl(330,70%,30%);">Mind</span><strong>Mind Mental Health</strong><a data-official-finder href="https://www.mind.org.uk/" target="_blank" rel="noopener">Mental health for families</a><p class="small">Infoline: <a href="tel:03001233393">0300 123 3393</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(15,118,110,0.15);color:hsl(175,70%,25%);">Carers</span><strong>Carers UK</strong><a data-official-finder href="https://www.carersuk.org/" target="_blank" rel="noopener">Support for carers</a><p class="small">Helpline: <a href="tel:08088087777">0808 808 7777</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(185,28,28,0.15);color:hsl(0,70%,30%);">Adfam</span><strong>Adfam</strong><a data-official-finder href="https://adfam.org.uk/" target="_blank" rel="noopener">Families &amp; drugs/alcohol</a><p class="small">Support &amp; local service finder for families.</p></div>
+          </div>
+          <p class="source-note">Atlas is independent and is not affiliated with any of these organisations. Helpline details may change — check official websites for the latest.</p>
         </article>
       </div>
 
@@ -391,11 +411,10 @@
       </article>
 
       <article class="card">
-        <div class="eyebrow">Support ladder</div>
-        <h2>Who can I contact?</h2>
-        <p class="muted small">Add people in the order you would normally try them. Do not add anyone who makes you feel unsafe.</p>
-        <div id="contactList"></div>
-        <button class="primary" id="addContact">Add support contact</button>
+        <div class="eyebrow">Your recovery contacts</div>
+        <h2>Emergency Call Buttons</h2>
+        <p class="muted small">Your saved recovery contacts appear here as quick-call buttons. Add them from the <strong>My Plan</strong> tab.</p>
+        <div id="toolsEmergencyContacts" style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;"></div>
       </article>
     </section>
 
@@ -572,10 +591,14 @@
         <div class="eyebrow">Cloud Backup (Atlas Plus)</div>
         <h2>Atlas Cloud Sync</h2>
         <div class="privacy-note">
-          <p>Sign in to securely back up your recovery plan to the cloud and sync it across all your devices.</p>
+          <p>Cloud backup and cross-device sync is coming to Atlas Plus. Your data is already saved privately and securely on this device.</p>
         </div>
-        <div class="action-row" style="margin-top:12px" id="authSection">
-          <button class="primary" id="openAuthModal">Sign in or Register</button>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:16px; background:rgba(217,119,6,0.1); border:1px solid var(--amber); border-radius:12px; padding:16px;">
+          <span style="font-size:2rem;">🔜</span>
+          <div>
+            <strong style="color:var(--navy);">Coming Soon</strong>
+            <p class="muted small" style="margin:4px 0 0;">Cloud sync will be available when Atlas Plus launches. Your local data will migrate automatically.</p>
+          </div>
         </div>
       </article>
     </section>
@@ -1321,16 +1344,8 @@ $("#searchCafePlace").onclick=()=>{
   window.open(url,"_blank","noopener");
 };
 
-function renderContacts(){
-  const list=$("#contactList"),a=store.get("contacts",[]);list.innerHTML="";
-  if(!a.length)list.innerHTML='<div class="empty">No contacts added. Add a sponsor, fellow, trusted friend, worker or service.</div>';
-  a.forEach((c,i)=>{
-    const d=document.createElement("details");d.innerHTML=`<summary>${i+1}. ${escapeHtml(c.name)}</summary><p>${escapeHtml(c.note||"Support contact")}</p><div class="action-row">${c.phone?`<a class="secondary" href="tel:${encodeURIComponent(c.phone)}">Call</a>`:""}<button class="ghost" data-del-contact="${c.id}">Remove</button></div>`;list.appendChild(d);
-  });
-}
-$("#addContact").onclick=()=>$("#contactDialog").showModal();
-$("#contactForm").onsubmit=e=>{e.preventDefault();let a=store.get("contacts",[]);a.push({id:crypto.randomUUID(),name:$("#contactName").value,phone:$("#contactPhone").value,note:$("#contactNote").value});store.set("contacts",a);e.target.reset();$("#contactDialog").close();renderContacts();toast("Support contact saved")};
-$("#contactList").onclick=e=>{const b=e.target.closest("[data-del-contact]");if(!b)return;store.set("contacts",store.get("contacts",[]).filter(c=>c.id!==b.dataset.delContact));renderContacts()};
+// Contact system is now managed by custom-contacts.js
+
 
 function renderPromises(){
   const list=$("#promiseList"),a=store.get("promises",[]);list.innerHTML="";
@@ -1402,7 +1417,7 @@ function formatDate(s){if(!s)return "";return new Date(s+"T12:00:00").toLocaleDa
 
 function init(){
   CONNECTAStorage.migrate(localStorage);
-  greeting();loadTask();loadReading();loadReflection();renderContacts();renderPromises();renderChecklist();renderSupport();updateTimer();
+  greeting();loadTask();loadReading();loadReflection();renderPromises();renderChecklist();renderSupport();updateTimer();
   ConnectaMeetingUI.createMeetingUI({document,store,notify:toast,confirm:message=>confirm(message),isOnline:()=>navigator.onLine!==false}).init();
   ConnectaRecoveryBridgeUI.createRecoveryBridgeUI({document,store,notify:toast,confirm:message=>confirm(message),openUrgentSupport:()=>{supportStep=4;renderSupport();$("#supportDialog").showModal()}}).init();
   ConnectaRecoveryCapitalUI.createRecoveryCapitalUI({document,store,notify:toast}).init();

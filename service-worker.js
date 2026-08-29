@@ -1,4 +1,4 @@
-const CACHE="atlas-app-v1.1.0-20260829";
+const CACHE="atlas-app-v1.2.0-20260829";
 const ASSETS=[
   "./",
   "./index.html",

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactPhone = document.getElementById("contactPhone");
   const privateContactsList = document.getElementById("privateContactsList");
   const safetyPlanEmergencyContacts = document.getElementById("safetyPlanEmergencyContacts");
+  const toolsEmergencyContacts = document.getElementById("toolsEmergencyContacts");
 
   if (!addContactForm || !privateContactsList) return;
 
@@ -106,6 +107,36 @@ document.addEventListener("DOMContentLoaded", () => {
           grid.appendChild(btn);
         });
         safetyPlanEmergencyContacts.appendChild(grid);
+      }
+    }
+
+    // 3. Render Tools tab quick-call buttons
+    if (toolsEmergencyContacts) {
+      toolsEmergencyContacts.innerHTML = "";
+      if (contacts.length === 0) {
+        toolsEmergencyContacts.innerHTML = '<div class="empty">No contacts saved yet. Add them on the My Plan tab.</div>';
+      } else {
+        contacts.forEach(c => {
+          const btn = document.createElement("a");
+          btn.href = `tel:${encodeURIComponent(c.phone)}`;
+          btn.style.display = "flex";
+          btn.style.alignItems = "center";
+          btn.style.justifyContent = "space-between";
+          btn.style.background = "linear-gradient(135deg, var(--teal), var(--teal2))";
+          btn.style.color = "white";
+          btn.style.padding = "14px 18px";
+          btn.style.borderRadius = "10px";
+          btn.style.textDecoration = "none";
+          btn.style.boxShadow = "var(--shadow-sm)";
+          btn.innerHTML = `
+            <div>
+              <div style="font-weight: 700; font-size: 1.05rem;">📞 ${escapeHtml(c.name)}</div>
+              <div style="font-size: 0.8rem; opacity: 0.85;">${escapeHtml(c.role)}</div>
+            </div>
+            <span style="font-size: 1.5rem;">→</span>
+          `;
+          toolsEmergencyContacts.appendChild(btn);
+        });
       }
     }
 
