@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     great: { val: 5, color: "var(--teal)", icon: "🌟", height: "100%" },
     good: { val: 4, color: "var(--teal)", icon: "🙂", height: "80%", opacity: 0.8 },
     okay: { val: 3, color: "var(--amber)", icon: "😐", height: "60%" },
-    bad: { val: 2, color: "var(--ruby)", icon: "🌧️", height: "40%", opacity: 0.8 },
-    triggered: { val: 1, color: "var(--ruby)", icon: "⚡", height: "20%" }
+    bad: { val: 2, color: "var(--danger)", icon: "🌧️", height: "40%", opacity: 0.8 },
+    triggered: { val: 1, color: "var(--danger)", icon: "⚡", height: "20%" }
   };
 
   const getTodayStr = () => new Date().toISOString().split('T')[0];

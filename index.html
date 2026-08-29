@@ -405,10 +405,20 @@
         <h2>Recovery Contacts</h2>
         <p class="muted small">Numbers are blurred for privacy. Tap 'Call' to dial directly. These contacts are synced securely to your cloud account.</p>
         
-        <form id="addContactForm" style="display:grid; grid-template-columns: 1fr 1fr auto; gap:8px; margin: 16px 0;">
-          <input type="text" id="contactName" placeholder="Name (e.g. Sponsor)" required>
-          <input type="tel" id="contactPhone" placeholder="Phone Number" required>
-          <button type="submit" class="primary" style="padding: 0 16px;">Add</button>
+        <form id="addContactForm" style="display:flex; flex-direction:column; gap:8px; margin: 16px 0;">
+          <input type="text" id="contactName" placeholder="Name (e.g. John)" required>
+          <select id="contactRole" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--line); font-size: 1rem; width: 100%;">
+            <option value="" disabled selected>Select Role...</option>
+            <option value="Sponsor">Sponsor</option>
+            <option value="Therapist">Therapist</option>
+            <option value="Safe Friend">Safe Friend</option>
+            <option value="Family">Family</option>
+            <option value="Other">Other</option>
+          </select>
+          <div style="display:grid; grid-template-columns: 1fr auto; gap:8px;">
+            <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+            <button type="submit" class="primary" style="padding: 0 16px;">Add</button>
+          </div>
         </form>
 
         <div id="privateContactsList" style="display:flex; flex-direction:column; gap:12px;"></div>
@@ -461,6 +471,9 @@
 
       <article class="card safety-card">
         <div class="eyebrow">Private safety planning</div><h2>My Safety Plan</h2>
+        
+        <!-- Emergency Contacts Feed from Phonebook -->
+        <div id="safetyPlanEmergencyContacts" style="margin-bottom: 16px;"></div>
         <p class="muted small">Record warning signs, helpful actions and support you choose. Atlas does not monitor this plan or replace emergency or professional care.</p>
         <div id="safetyPlanSummary"></div><button class="primary" id="openSafetyPlan">Create or edit My Safety Plan</button>
       </article>
@@ -947,6 +960,7 @@
 <script src="basic-needs.js"></script>
 <script src="journal.js"></script>
 <script src="mood.js"></script>
+<script src="custom-contacts.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const byId = id => document.getElementById(id);
