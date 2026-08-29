@@ -1,4 +1,4 @@
-const CACHE="atlas-app-v1.0.5-20260829";
+const CACHE="atlas-app-v1.0.8-20260829";
 const ASSETS=[
   "./",
   "./index.html",
@@ -20,6 +20,8 @@ const ASSETS=[
   "./calming-games.js",
   "./milestones.js",
   "./basic-needs.js",
+  "./journal.js",
+  "./mood.js",
   "./assets/lib/matter.min.js",
   "./app-version.json",
   "./manifest.webmanifest",

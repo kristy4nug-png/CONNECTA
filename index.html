@@ -97,6 +97,20 @@
 
       <article class="card">
         <div class="eyebrow">Atlas Plus</div>
+        <h2>Daily Check-in</h2>
+        <p class="muted small">How are you feeling right now?</p>
+        <div id="moodOptions" style="display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;">
+          <button class="ghost mood-btn" data-mood="great" style="font-size: 2rem; padding: 4px;" title="Great">🌟</button>
+          <button class="ghost mood-btn" data-mood="good" style="font-size: 2rem; padding: 4px;" title="Good">🙂</button>
+          <button class="ghost mood-btn" data-mood="okay" style="font-size: 2rem; padding: 4px;" title="Okay">😐</button>
+          <button class="ghost mood-btn" data-mood="bad" style="font-size: 2rem; padding: 4px;" title="Struggling">🌧️</button>
+          <button class="ghost mood-btn" data-mood="triggered" style="font-size: 2rem; padding: 4px;" title="Triggered">⚡</button>
+        </div>
+        <p id="moodStatus" class="muted small" style="margin-top: 12px; display: none; font-weight: bold; color: var(--navy);"></p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
         <h2>Daily Accountability</h2>
         <p class="muted small">Log your daily reprieve and let someone know you're staying on track.</p>
         <div class="action-row" style="margin-top: 16px;">
@@ -407,12 +421,41 @@
         
         <p id="totalReprievesText" style="font-weight: 800; font-size: 1.1rem; color: var(--navy);"></p>
 
-        <div id="badgesContainer" style="display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap;">
+        <div id="badgesContainer" style="display: flex; gap: 16px; margin: 16px 0; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
            <!-- Badges injected via JS -->
         </div>
 
         <div class="action-row" style="margin-top: 16px;">
           <button class="primary" id="downloadCertificateBtn" disabled>Download Latest Certificate</button>
+        </div>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Private Recovery Journal</h2>
+        <p class="muted small">A completely private, offline space for daily reflection and step-work. Your entries never leave this device.</p>
+        
+        <form id="journalForm" style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+          <textarea id="journalInput" rows="4" placeholder="What's on your mind today?" required aria-label="Journal entry"></textarea>
+          <div class="action-row">
+            <button type="submit" class="primary">Save Entry</button>
+          </div>
+        </form>
+
+        <div id="journalEntries" style="margin-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <!-- Entries injected via JS -->
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Mood Tracker</h2>
+        <p class="muted small">Your mood history over the last 7 days.</p>
+        
+        <div id="moodChartContainer" style="display: flex; align-items: flex-end; gap: 12px; height: 150px; margin-top: 24px; padding-bottom: 8px; border-bottom: 2px solid var(--line); overflow-x: auto;">
+          <!-- Chart bars injected via JS -->
+        </div>
+        <div id="moodChartLabels" style="display: flex; gap: 12px; margin-top: 8px; overflow-x: auto;">
+          <!-- Labels injected via JS -->
         </div>
       </article>
 
@@ -902,6 +945,8 @@
 <script src="calming-games.js"></script>
 <script src="milestones.js"></script>
 <script src="basic-needs.js"></script>
+<script src="journal.js"></script>
+<script src="mood.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const byId = id => document.getElementById(id);
