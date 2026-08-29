@@ -1437,6 +1437,7 @@ function init(){
   const authSection = byId("authSection");
   
   function updateAuthUI() {
+    if (!authSection) return; // Cloud Sync is "Coming Soon" — no auth UI in DOM
     if (window.ApiClient && window.ApiClient.isLoggedIn()) {
       authSection.innerHTML = `
         <p class="status-line">✅ Logged in to Atlas Cloud.</p>
