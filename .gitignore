@@ -11,6 +11,8 @@ connecta-*-safety-plan-*.json
 .env
 .env.*
 !.env.example
+server/prisma/*.db
+server/prisma/*.db-*
 
 # Test-user, diagnostic and operating-system files
 test-user-data/

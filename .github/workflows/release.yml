@@ -2,7 +2,7 @@ name: Release and Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
 
 permissions:
   contents: write
@@ -25,38 +25,19 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Optimize SVG
-        run: npx svgo assets/branding/connecta-final-logo.svg -o assets/branding/connecta-final-logo.svg
-
-      - name: Render PNG icons from SVG
-        run: |
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-16.png 16:16
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-32.png 32:32
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-48.png 48:48
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-72.png 72:72
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-96.png 96:96
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-128.png 128:128
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-192.png 192:192
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-256.png 256:256
-          npx --yes svgexport assets/branding/connecta-final-logo.svg icons/connecta-icon-512.png 512:512
-
-      - name: Optimize generated PNGs (lossy)
-        run: |
-          npx --yes imagemin-cli "icons/*.png" --plugin=pngquant
-
       - name: Build release ZIP
         run: |
           mkdir -p releases
-          powershell -Command "Compress-Archive -Path index.html,*.js,manifest.webmanifest,service-worker.js,app-version.json,assets,icons -DestinationPath .\\releases\\connecta-web-$(node -p \"require('./package.json').version\")-$(Get-Date -Format yyyyMMdd).zip -Force"
+          zip -r "releases/atlas-web-$(node -p \"require('./package.json').version\")-$(date -u +%Y%m%d).zip" index.html privacy.html manifest.webmanifest service-worker.js app-version.json assets icons *.js
 
       - name: Prepare gh-pages folder
         run: |
           rm -rf releases/gh-pages || true
           mkdir -p releases/gh-pages
-          cp -r index.html *.js manifest.webmanifest service-worker.js app-version.json assets icons releases/gh-pages
+          cp -r index.html privacy.html *.js manifest.webmanifest service-worker.js app-version.json assets icons releases/gh-pages
 
       - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./releases/gh-pages

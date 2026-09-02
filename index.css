@@ -385,6 +385,15 @@ dialog::backdrop {
   dialog{width:calc(100% - 24px);}
 }
 
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
+}
+
 @media print {
   .app-shell, header, nav.bottom-nav, .disclaimer, dialog, .privacy-lock-screen {
     display: none !important;

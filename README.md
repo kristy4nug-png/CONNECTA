@@ -1,5 +1,5 @@
-# Bridge | Recovery Safety Net
-## First Build v2: Cafés and Lavendaire
+# Atlas | Recovery Safety Net
+## Local-first recovery planning and continuity
 
 This is a free, offline-capable Progressive Web App prototype.
 
@@ -19,31 +19,44 @@ This is a free, offline-capable Progressive Web App prototype.
 - Service promise tracker
 - Transition checklist
 - Local export and clear-data controls
+- Optional, user-triggered Supabase account and cloud backup
 - Installable PWA manifest and offline service worker
+
+### Supabase setup
+
+1. Run [`supabase-atlas-sync.sql`](supabase-atlas-sync.sql) in the Supabase SQL Editor.
+2. The project URL and public publishable key are configured at the top of `api-client.js`.
+3. Never put a Supabase service-role or secret key in this browser application.
+
+Atlas remains local-first. It uploads the seven configured storage records only after a signed-in user explicitly chooses **Upload this device**.
+
+### Paid plans and store billing
+
+The current web build does not enable paid entitlements or in-app billing. Do not charge users for Atlas Plus until the Android package integrates Google Play Billing, verifies purchases on a secure backend, and the store policy/data-safety review is complete. GitHub is used for source code, release files and documentation; it is not the default checkout for a Play-distributed digital subscription.
 
 ### Important content rule
 The app does not reproduce copyrighted AA, NA or ACA book text. It uses original reflections and opens official publisher pages for official daily readings.
 
 ### Run it using PowerShell
-1. Extract the ZIP.
-2. Right-click inside the extracted folder and choose **Open in Terminal**, or open PowerShell in the folder.
+1. Clone the repository or extract the release ZIP.
+2. Open PowerShell in the project folder.
 3. Run:
 
 ```powershell
-pwsh.exe -NoProfile -ExecutionPolicy Bypass -File ".\Start-RecoverySafetyNet.ps1"
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File ".\Start-CONNECTA.ps1"
 ```
 
-4. The app opens at `http://localhost:8080/`.
+4. The app opens at `http://127.0.0.1:8765/`.
 5. In a supported browser, use the **Install** button or browser install menu to add it like an app.
 
 To use another port:
 
 ```powershell
-pwsh.exe -NoProfile -ExecutionPolicy Bypass -File ".\Start-RecoverySafetyNet.ps1" -Port 8090
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File ".\Start-CONNECTA.ps1" -Port 8090
 ```
 
 ### Prototype safety boundary
-This version stores data in the current browser only. Do not use it for real clinical, prison, safeguarding or identifiable service-user records. A future pilot needs proper authentication, encryption, governance, safeguarding procedures, security testing and data-protection review.
+This version stores data in the current browser by default and can optionally copy supported records to Supabase. Do not use it for real clinical, prison, safeguarding or identifiable service-user records. A future pilot still needs governance, safeguarding procedures, security testing and data-protection review.
 
 ### Future build priorities
 1. Live meeting data integrations with permission

@@ -5,6 +5,7 @@ const {JSDOM}=require("jsdom");
 const Storage=require("../connecta-storage.js");
 
 const index=fs.readFileSync(require.resolve("../index.html"),"utf8");
+const css=fs.readFileSync(require.resolve("../index.css"),"utf8");
 const worker=fs.readFileSync(require.resolve("../service-worker.js"),"utf8");
 
 test("first-run onboarding explains privacy, support and accessibility",()=>{
@@ -29,8 +30,8 @@ test("primary navigation remains five labelled native buttons for keyboard opera
 test("Safety Plan, onboarding and offline PWA assets are present in the release shell",()=>{
   assert.match(index,/id="safetyPlanDialog"/);
   assert.match(index,/aria-live="polite"/);
-  assert.match(index,/@media\(prefers-reduced-motion:reduce\)/);
-  assert.match(index,/@media\(max-width:560px\)/);
+  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+  assert.match(css,/@media\(max-width:560px\)/);
   assert.match(worker,/safety-plan-domain\.js/);
   assert.match(worker,/safety-plan-ui\.js/);
 });

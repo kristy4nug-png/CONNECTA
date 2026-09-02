@@ -13,9 +13,9 @@
     }catch{}
   </script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="assets/branding/connecta-final-logo.svg">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/connecta-icon-32.png">
-  <link rel="mask-icon" href="assets/branding/connecta-final-logo.svg" color="#16324F">
+  <link rel="mask-icon" href="icons/icon.svg" color="#16324F">
   <title>Atlas | Recovery Safety Net</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -422,7 +422,7 @@
       <article class="card">
         <div class="eyebrow">Private Phonebook</div>
         <h2>Recovery Contacts</h2>
-        <p class="muted small">Numbers are blurred for privacy. Tap 'Call' to dial directly. These contacts are synced securely to your cloud account.</p>
+        <p class="muted small">Numbers are blurred for privacy. Tap 'Call' to dial directly. Contacts stay on this device unless you explicitly upload a cloud backup.</p>
         
         <form id="addContactForm" style="display:flex; flex-direction:column; gap:8px; margin: 16px 0;">
           <input type="text" id="contactName" placeholder="Name (e.g. John)" required>
@@ -461,7 +461,7 @@
       <article class="card">
         <div class="eyebrow">Atlas Plus</div>
         <h2>Private Recovery Journal</h2>
-        <p class="muted small">A completely private, offline space for daily reflection and step-work. Your entries never leave this device.</p>
+        <p class="muted small">A private, offline-first space for daily reflection and step-work. Entries stay on this device unless you explicitly upload a cloud backup.</p>
         
         <form id="journalForm" style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
           <textarea id="journalInput" rows="4" placeholder="What's on your mind today?" required aria-label="Journal entry"></textarea>
@@ -575,7 +575,7 @@
         <div id="checklist"></div>
       </article>
 
-          <p>Atlas keeps entered information in your browser’s local storage. It does not create a cloud account or send your recovery notes to a server.</p>
+          <p>Atlas keeps entered information in your browser’s local storage. Cloud backup is optional and only transfers supported data after you sign in and choose to upload it.</p>
           <p class="small"><strong>Do not use this beta as a clinical, prison, probation, legal or safeguarding record.</strong></p>
         </div>
         <div class="action-row" style="margin-top:12px">
@@ -588,18 +588,15 @@
       </article>
 
       <article class="card">
-        <div class="eyebrow">Cloud Backup (Atlas Plus)</div>
+        <div class="eyebrow">Optional cloud backup</div>
         <h2>Atlas Cloud Sync</h2>
         <div class="privacy-note">
-          <p>Cloud backup and cross-device sync is coming to Atlas Plus. Your data is already saved privately and securely on this device.</p>
+          <p>Your data remains available locally. Atlas never uploads it automatically: you choose when to upload this device or restore a cloud copy.</p>
         </div>
-        <div style="display:flex; align-items:center; gap:12px; margin-top:16px; background:rgba(217,119,6,0.1); border:1px solid var(--amber); border-radius:12px; padding:16px;">
-          <span style="font-size:2rem;">🔜</span>
-          <div>
-            <strong style="color:var(--navy);">Coming Soon</strong>
-            <p class="muted small" style="margin:4px 0 0;">Cloud sync will be available when Atlas Plus launches. Your local data will migrate automatically.</p>
-          </div>
+        <div id="authSection" style="margin-top:16px;">
+          <p class="status-line">Checking cloud account…</p>
         </div>
+        <p class="muted small" style="margin-top:12px;">A cloud backup can include recovery contacts, journal entries, mood history, milestones, safety-plan content, reflections and profile data. Supabase account controls and row-level security restrict access to your account; cloud copies are not end-to-end encrypted.</p>
       </article>
     </section>
   </main>
@@ -756,7 +753,7 @@
 <dialog id="onboardingDialog">
   <div class="modal-head"><strong>Welcome to Atlas Free</strong></div>
   <form class="modal-body" id="onboardingForm">
-    <p>Atlas is built on lived experience, not medical training. These tools are personal suggestions that have helped others in recovery. This app is not a substitute for professional clinical advice, therapy, or emergency medical services.</p>
+    <p>Atlas is built on lived experience, not medical training. Atlas does not diagnose, prescribe, monitor, or replace professional clinical advice, therapy, or emergency medical services. These tools are personal suggestions that have helped others in recovery.</p>
     <div class="privacy-note small"><strong>Your information:</strong> records stay on this device by default and nothing is shared automatically. In My plan, you can export a backup, restore a valid backup, or delete Atlas records from this device. Settings lets you change text size and Privacy Lock. If you or someone else is in danger, call 999 or go to A&amp;E; for urgent mental-health support call 111 and select the mental-health option.</div>
     <label for="setupDisplayName">What should Atlas call you? (optional)</label>
     <input id="setupDisplayName" maxlength="60" autocomplete="nickname">
@@ -826,9 +823,9 @@
   <div class="modal-head"><strong>Atlas Free information</strong><button class="close" data-close="betaInfoDialog" aria-label="Close">×</button></div>
   <div class="modal-body">
     <section><span class="beta-badge">Free</span><h2>About</h2><p>Atlas is a free, independent, private-first recovery planning and continuity tool for Windows. It is not treatment, diagnosis, a clinical decision system, a professional record or emergency care.</p></section>
-    <section><h2>Privacy</h2><p>Your entries are kept in this browser’s local storage on this device. Atlas has no cloud account and does not automatically send recovery information. Clearing browser site data may permanently remove it. A downloaded export may contain sensitive information; protect it carefully.</p></section>
+    <section><h2>Privacy</h2><p>Your entries are kept in this browser’s local storage on this device. Optional cloud backup requires an account and an explicit upload; Atlas does not upload recovery information automatically. Clearing browser site data may permanently remove local copies. Cloud backups and downloaded exports may contain sensitive information; protect them carefully.</p></section>
     <section><h2>Using Atlas</h2><p>Atlas is provided for voluntary personal planning. Check appointments, meeting details, travel, services and medical information with the responsible official source. Do not rely on Atlas where delay or error could cause harm. You remain in control of what you enter and share.</p></section>
-    <section><h2>Support</h2><p>If there is immediate danger in the UK, call <a href="tel:999">999</a>. Samaritans can be reached free on <a href="tel:116123">116 123</a>. For urgent medical help that is not an emergency, use <a href="tel:111">NHS 111</a>. Atlas cannot monitor messages or call for help.</p></section>
+    <section><h2>Support</h2><p>If there is immediate danger in the UK, call <a href="tel:999">999</a>. Samaritans can be reached free on <a href="tel:116123">116 123</a>. For urgent medical help that is not an emergency, use <a href="tel:111">NHS 111</a>. Atlas cannot monitor messages or call for help.</p><p><a href="privacy.html" target="_blank" rel="noopener">Read the full Privacy Policy</a></p></section>
     <p class="privacy-note small">This information is built into the app and remains available offline.</p>
   </div>
 </dialog>
@@ -917,11 +914,11 @@
 <dialog id="authDialog">
   <div class="modal-head"><strong>Atlas Cloud Account</strong><button class="close" data-close="authDialog" aria-label="Close">×</button></div>
   <form class="modal-body" id="authForm">
-    <p class="muted small">Sync your recovery plan across your devices securely.</p>
+    <p class="muted small">Cloud backup is optional. Nothing is uploaded until you sign in and choose “Upload this device”.</p>
     <label for="authEmail">Email</label>
-    <input id="authEmail" type="email" required placeholder="you@example.com">
+    <input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com">
     <label for="authPassword">Password</label>
-    <input id="authPassword" type="password" required>
+    <input id="authPassword" type="password" minlength="6" required autocomplete="current-password">
     
     <div class="action-row" style="margin-top:16px">
       <button class="primary" type="submit" id="authLoginBtn">Login</button>
@@ -990,18 +987,8 @@ const byId = id => document.getElementById(id);
 const $$ = s => [...document.querySelectorAll(s)];
 const store = {
   get(k, fallback){ try{return JSON.parse(localStorage.getItem(k)) ?? fallback}catch{return fallback}},
-  set(k,v){
-    localStorage.setItem(k,JSON.stringify(v));
-    if (window.ApiClient && window.ApiClient.isLoggedIn()) {
-      window.ApiClient.syncPush([{ key: k, value: JSON.stringify(v) }]);
-    }
-  },
-  remove(k){
-    localStorage.removeItem(k);
-    if (window.ApiClient && window.ApiClient.isLoggedIn()) {
-      window.ApiClient.syncPush([{ key: k, value: "" }]);
-    }
-  }
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))},
+  remove(k){localStorage.removeItem(k)}
 };
 const todayKey = new Date().toISOString().slice(0,10);
 
@@ -1428,74 +1415,138 @@ function init(){
   ConnectaBetaUI.createBetaUI({document,store,notify:toast,confirm:message=>confirm(message)}).init();
   if("serviceWorker" in navigator)navigator.serviceWorker.register("./service-worker.js");
 
-  // --- Auth UI Logic ---
+  // --- Optional Supabase cloud backup ---
   const authDialog = byId("authDialog");
   const authForm = byId("authForm");
   const authEmail = byId("authEmail");
   const authPassword = byId("authPassword");
   const authError = byId("authError");
   const authSection = byId("authSection");
-  
-  function updateAuthUI() {
-    if (!authSection) return; // Cloud Sync is "Coming Soon" — no auth UI in DOM
-    if (window.ApiClient && window.ApiClient.isLoggedIn()) {
+  const cloudClient = window.SupabaseClient;
+
+  function setAuthMessage(message, isError = true) {
+    authError.textContent = message;
+    authError.classList.toggle("error", isError);
+  }
+
+  function showAuthDialog() {
+    setAuthMessage("");
+    authEmail.value = "";
+    authPassword.value = "";
+    authDialog.showModal();
+  }
+
+  async function updateAuthUI() {
+    if (!authSection) return;
+
+    if (!cloudClient) {
+      authSection.innerHTML = `<p class="status-line error">Cloud sync could not start because its client is unavailable.</p>`;
+      return;
+    }
+
+    if (!cloudClient.isConfigured()) {
+      authSection.innerHTML = `<p class="status-line error">Cloud sync needs a Supabase project URL and public anon key in <code>api-client.js</code>.</p>`;
+      return;
+    }
+
+    authSection.innerHTML = `<p class="status-line">Checking cloud account…</p>`;
+
+    try {
+      if (!(await cloudClient.isLoggedIn())) {
+        authSection.innerHTML = `<button class="primary" id="openAuthModal" type="button">Sign in or create account</button>`;
+        byId("openAuthModal").addEventListener("click", showAuthDialog);
+        return;
+      }
+
+      const user = await cloudClient.getUser();
+      const email = user && user.email ? escapeHtml(user.email) : "your account";
       authSection.innerHTML = `
-        <p class="status-line">✅ Logged in to Atlas Cloud.</p>
-        <button class="secondary" id="syncNowBtn">Force Sync</button>
-        <button class="ghost" id="logoutBtn">Log out</button>
+        <p class="status-line">Signed in as <strong>${email}</strong>.</p>
+        <div class="action-row">
+          <button class="primary" id="pushSyncBtn" type="button">Upload this device</button>
+          <button class="secondary" id="pullSyncBtn" type="button">Restore from cloud</button>
+          <button class="ghost" id="logoutBtn" type="button">Sign out</button>
+        </div>
+        <p class="muted small">Upload replaces the seven supported cloud records with this device’s copies. Restore overwrites those local records and reloads Atlas.</p>
       `;
-      byId("syncNowBtn").addEventListener("click", async () => {
-        const btn = byId("syncNowBtn");
-        btn.textContent = "Syncing...";
-        const data = await window.ApiClient.syncPull();
-        if(data && data.length > 0) {
-          data.forEach(record => localStorage.setItem(record.key, record.value));
-          alert(`Synced ${data.length} records to this device.`);
-          location.reload();
-        } else {
-          btn.textContent = "Up to date";
-          setTimeout(() => btn.textContent = "Force Sync", 2000);
+
+      byId("pushSyncBtn").addEventListener("click", async () => {
+        if (!confirm("Upload supported Atlas data from this device to your Supabase account?")) return;
+        const button = byId("pushSyncBtn");
+        button.disabled = true;
+        button.textContent = "Uploading…";
+        try {
+          const result = await cloudClient.syncPush();
+          toast(`Cloud backup updated (${result.count} records).`);
+        } catch (error) {
+          toast(`Cloud upload failed: ${error.message}`);
+        } finally {
+          button.disabled = false;
+          button.textContent = "Upload this device";
         }
       });
-      byId("logoutBtn").addEventListener("click", () => {
-        window.ApiClient.logout();
-        updateAuthUI();
+
+      byId("pullSyncBtn").addEventListener("click", async () => {
+        if (!confirm("Restore supported Atlas data from the cloud? This replaces those records on this device.")) return;
+        const button = byId("pullSyncBtn");
+        button.disabled = true;
+        button.textContent = "Restoring…";
+        try {
+          await cloudClient.syncPull();
+        } catch (error) {
+          button.disabled = false;
+          button.textContent = "Restore from cloud";
+          toast(`Cloud restore failed: ${error.message}`);
+        }
       });
-    } else {
-      authSection.innerHTML = `<button class="primary" id="openAuthModal">Sign in or Register</button>`;
-      byId("openAuthModal").addEventListener("click", () => {
-        authError.textContent = "";
-        authEmail.value = "";
-        authPassword.value = "";
-        authDialog.showModal();
+
+      byId("logoutBtn").addEventListener("click", async () => {
+        const button = byId("logoutBtn");
+        button.disabled = true;
+        try {
+          await cloudClient.signOut();
+          await updateAuthUI();
+        } catch (error) {
+          button.disabled = false;
+          toast(`Sign out failed: ${error.message}`);
+        }
       });
+    } catch (error) {
+      authSection.innerHTML = `<p class="status-line error"></p><button class="secondary" id="retryCloudBtn" type="button">Retry</button>`;
+      authSection.querySelector("p").textContent = `Cloud account check failed: ${error.message}`;
+      byId("retryCloudBtn").addEventListener("click", updateAuthUI);
     }
   }
 
-  if (window.ApiClient) {
-    updateAuthUI();
+  if (cloudClient) {
+    void updateAuthUI();
 
-    byId("authLoginBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (!authEmail.value || !authPassword.value) return;
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!authForm.reportValidity()) return;
+      setAuthMessage("");
       try {
-        await window.ApiClient.login(authEmail.value, authPassword.value);
+        await cloudClient.signIn(authEmail.value, authPassword.value);
         authDialog.close();
-        updateAuthUI();
-      } catch(err) {
-        authError.textContent = err.message;
+        await updateAuthUI();
+      } catch (error) {
+        setAuthMessage(error.message);
       }
     });
 
-    byId("authRegisterBtn").addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (!authEmail.value || !authPassword.value) return;
+    byId("authRegisterBtn").addEventListener("click", async () => {
+      if (!authForm.reportValidity()) return;
+      setAuthMessage("");
       try {
-        await window.ApiClient.register(authEmail.value, authPassword.value);
-        authDialog.close();
-        updateAuthUI();
-      } catch(err) {
-        authError.textContent = err.message;
+        const result = await cloudClient.signUp(authEmail.value, authPassword.value);
+        if (result.session) {
+          authDialog.close();
+          await updateAuthUI();
+        } else {
+          setAuthMessage("Account created. Check your email to confirm it, then sign in.", false);
+        }
+      } catch (error) {
+        setAuthMessage(error.message);
       }
     });
   }

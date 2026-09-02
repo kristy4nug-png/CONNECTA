@@ -8,7 +8,11 @@ require('dotenv').config();
 const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 4000;
-const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-local-key';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  throw new Error('JWT_SECRET must be provided through the environment and be at least 32 characters long.');
+}
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));

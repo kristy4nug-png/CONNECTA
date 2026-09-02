@@ -1,7 +1,9 @@
 # Atlas Project Status
 
-**App Version:** 0.3.0 (Recovery Bridge)
-**Last Updated:** 3 August 2026
+> Current release-preparation note (2 September 2026): the active checkout is still `Documents\CONNECTA`, while the project rules require `Documents\Atlas`. The local web/PWA test suite is green, but Android packaging, paid entitlements, signing and store/compliance gates are not complete.
+
+**App Version:** 1.3.0 (release preparation)
+**Last Updated:** 2 September 2026
 **Canonical Directory:** `C:\Users\Chris Nugent\Documents\Atlas`
 
 ---

@@ -31,7 +31,7 @@ class LocalOnlyLoader extends ResourceLoader{
   }
 }
 
-test("real Atlas page exposes the four-tab Personal Meeting flow", async t=>{
+test("real Atlas page exposes the five-tab Personal Meeting flow", async t=>{
   const appServer = await server();
   t.after(()=>appServer.close());
   const {port} = appServer.address();
@@ -61,7 +61,7 @@ test("real Atlas page exposes the four-tab Personal Meeting flow", async t=>{
   await new Promise(resolve=>setTimeout(resolve,50));
 
   const document = dom.window.document;
-  assert.equal(document.querySelectorAll("[data-meeting-tab]").length,4);
+  assert.equal(document.querySelectorAll("[data-meeting-tab]").length,5);
   assert.match(document.querySelector("#meetingList").textContent,/Legacy Page Meeting/);
   assert.equal(JSON.parse(dom.window.localStorage.getItem("personalMeetings"))[0].notes,"Preserve me");
 

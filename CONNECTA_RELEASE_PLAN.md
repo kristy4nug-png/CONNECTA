@@ -1,6 +1,8 @@
 # Atlas release plan
 
-Status at 4 August 2026: v0.4.1 Free Beta baseline; **not a release candidate**.
+Current snapshot (2 September 2026): web/PWA tests pass 37/37; Android packaging, Play Billing, signing, store declarations and external assurance are still pending. **Not a release candidate yet.**
+
+Historical baseline at 4 August 2026: v0.4.1 Free Beta; **not a release candidate**.
 
 ## Milestones and gates
 
@@ -20,4 +22,3 @@ Create a `CONNECTA_STORAGE` schema module and tests. It will detect legacy stand
 ## Required release evidence
 
 Record exact test command, environment, pass/fail/skip totals, asset hashes, migration fixtures, manual accessibility checklist, browser/device matrix and reviewer/date. Keep all external review reports separate from claims in product copy.
-
