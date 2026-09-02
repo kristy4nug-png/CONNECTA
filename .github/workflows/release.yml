@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Install dev dependencies
         run: npm ci
@@ -28,7 +28,9 @@ jobs:
       - name: Build release ZIP
         run: |
           mkdir -p releases
-          zip -r "releases/atlas-web-$(node -p \"require('./package.json').version\")-$(date -u +%Y%m%d).zip" index.html privacy.html manifest.webmanifest service-worker.js app-version.json assets icons *.js
+          VERSION=$(node -p "require('./package.json').version")
+          DATE=$(date -u +%Y%m%d)
+          zip -r "releases/atlas-web-${VERSION}-${DATE}.zip" index.html privacy.html manifest.webmanifest service-worker.js app-version.json assets icons *.js
 
       - name: Prepare gh-pages folder
         run: |

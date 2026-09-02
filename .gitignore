@@ -13,6 +13,7 @@ connecta-*-safety-plan-*.json
 !.env.example
 server/prisma/*.db
 server/prisma/*.db-*
+releases/gh-pages/
 
 # Test-user, diagnostic and operating-system files
 test-user-data/
