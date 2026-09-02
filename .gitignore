@@ -20,6 +20,10 @@ releases/gh-pages/
 *.jks
 android/.gradle/
 android/local.properties
+android/*.apk
+android/*.aab
+android/*.idsig
+android/build/
 android/app/build/
 
 # Test-user, diagnostic and operating-system files

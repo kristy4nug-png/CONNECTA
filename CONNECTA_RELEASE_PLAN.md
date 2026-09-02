@@ -1,6 +1,6 @@
 # Atlas release plan
 
-Current snapshot (2 September 2026): web/PWA tests pass 37/37; Android packaging, Play Billing, signing, store declarations and external assurance are still pending. **Not a release candidate yet.**
+Current snapshot (2 September 2026): web/PWA tests pass 37/37; a free Android TWA test APK/AAB builds and verifies with a local test key. Play Billing, production signing, store declarations and external assurance are still pending. **Not a release candidate yet.**
 
 Historical baseline at 4 August 2026: v0.4.1 Free Beta; **not a release candidate**.
 

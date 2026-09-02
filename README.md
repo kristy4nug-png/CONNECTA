@@ -21,6 +21,7 @@ This is a free, offline-capable Progressive Web App prototype.
 - Local export and clear-data controls
 - Optional, user-triggered Supabase account and cloud backup
 - Installable PWA manifest and offline service worker
+- Free Android Trusted Web Activity test wrapper
 
 ### Supabase setup
 
@@ -29,6 +30,10 @@ This is a free, offline-capable Progressive Web App prototype.
 3. Never put a Supabase service-role or secret key in this browser application.
 
 Atlas remains local-first. It uploads the seven configured storage records only after a signed-in user explicitly chooses **Upload this device**.
+
+### Free Android test build
+
+The repository includes a Trusted Web Activity wrapper for testing Atlas on Android without a Play Console account. See [`docs/ANDROID_TEST_BUILD.md`](docs/ANDROID_TEST_BUILD.md) for the package configuration and rebuild command. Test APK downloads are published as clearly labelled pre-releases in [GitHub Releases](https://github.com/kristy4nug-png/CONNECTA/releases).
 
 ### Paid plans and store billing
 

@@ -1,6 +1,6 @@
 # Atlas Project Status
 
-> Current release-preparation note (2 September 2026): the active checkout is still `Documents\CONNECTA`, while the project rules require `Documents\Atlas`. The local web/PWA test suite is green, but Android packaging, paid entitlements, signing and store/compliance gates are not complete.
+> Current release-preparation note (2 September 2026): the active checkout is still `Documents\CONNECTA`, while the project rules require `Documents\Atlas`; the attempted move is held by the local Ollama process. The local web/PWA suite is green and a free Android TWA test APK/AAB now builds, but paid entitlements, production signing and store/compliance gates are not complete.
 
 **App Version:** 1.3.0 (release preparation)
 **Last Updated:** 2 September 2026
