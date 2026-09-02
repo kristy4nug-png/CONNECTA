@@ -15,6 +15,13 @@ server/prisma/*.db
 server/prisma/*.db-*
 releases/gh-pages/
 
+# Android signing and local build state
+*.keystore
+*.jks
+android/.gradle/
+android/local.properties
+android/app/build/
+
 # Test-user, diagnostic and operating-system files
 test-user-data/
 diagnostics/
