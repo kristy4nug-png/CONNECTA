@@ -1,0 +1,1557 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#16324F">
+  <meta name="description" content="Atlas is a free, private-first recovery safety app. Crisis support, meeting finder, safety plan, basic needs locator and peer accountability tools.">
+  <script>
+    try{
+      if(localStorage.getItem("connectaPrivacyLockV1") && sessionStorage.getItem("connectaPrivacyUnlocked")!=="yes"){
+        document.documentElement.classList.add("connecta-start-locked");
+      }
+    }catch{}
+  </script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/connecta-icon-32.png">
+  <link rel="mask-icon" href="icons/icon.svg" color="#16324F">
+  <title>Atlas | Recovery Safety Net</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <link rel="apple-touch-icon" href="icons/connecta-icon-192.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="app-shell" id="appContent">
+  <header>
+  <!-- Atlas FINAL TOP LOGO START -->
+  <div class="connecta-final-top-logo" aria-hidden="false">
+    <img
+      src="assets/branding/atlas-final-logo.png"
+      loading="eager"
+      alt="Atlas — Together as one"
+      width="420"
+      height="140"
+      role="img">
+  </div>
+  <!-- Atlas FINAL TOP LOGO END -->
+    <div class="header-top">
+      <button class="icon-btn" id="textSizeBtn" aria-label="Increase text size">A+</button>
+      <button class="icon-btn" id="openBetaInfo">Beta info</button>
+      <button class="icon-btn" id="openBetaSettings">Settings</button>
+      <button class="icon-btn" id="lockNow">Lock now</button>
+      <button class="icon-btn" id="installBtn" hidden>Install</button>
+    </div>
+    <div class="welcome" style="text-align:center">
+      <h2 id="greeting">Welcome back</h2>
+      <p>Only the next safe step matters.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="view active" data-view="today">
+
+      <article class="card safety-card">
+        <div class="eyebrow">Private check-in</div>
+        <h2>How safe do you feel right now?</h2>
+        <div class="choice-grid" id="safetyChoices">
+          <button class="choice" data-safety="steady"><span>●</span>I’m steady</button>
+          <button class="choice" data-safety="struggling"><span>◐</span>I’m struggling</button>
+          <button class="choice" data-safety="unsafe"><span>!</span>I don’t feel safe</button>
+        </div>
+        <div class="urgent-box" id="urgentBox">
+          <strong>You do not have to handle this alone.</strong>
+          <p>If there is immediate danger, call emergency services now. You can also call Samaritans free on <a href="tel:116123">116 123</a>.</p>
+          <div class="action-row">
+            <a class="danger-btn" href="tel:999">Call 999</a>
+            <a class="secondary" href="tel:116123">Call Samaritans</a>
+          </div>
+        </div>
+        <button class="primary full" style="margin-top:14px" id="open20">Get me through 20 minutes</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Raw Truth</div>
+        <h2>No apologies</h2>
+        <div class="reading" style="margin: 16px 0; font-size: 1.3rem; font-weight: 800; color: var(--navy); font-style: italic; letter-spacing: -0.5px;" id="rawAffirmationText">
+          "I am exactly who I am supposed to be. Fuck what anyone else thinks."
+        </div>
+        <button class="ghost" id="nextAffirmationBtn">Give me another one</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Personal Moral Compass</div>
+        <h2>My Core Values</h2>
+        <p class="muted small">Define the non-negotiable principles you are living by today. These act as your True North.</p>
+        
+        <form id="addMoralForm" style="display:flex; gap:8px; margin: 16px 0;">
+          <input type="text" id="moralInput" placeholder="I will..." required style="flex:1;">
+          <button type="submit" class="primary" style="padding: 0 16px;">Add</button>
+        </form>
+
+        <ul id="moralCompassList" style="list-style-type: none; margin: 0; padding: 0; font-weight: 500; color: var(--navy); display: flex; flex-direction: column; gap: 8px;"></ul>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Daily Check-in</h2>
+        <p class="muted small">How are you feeling right now?</p>
+        <div id="moodOptions" style="display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;">
+          <button class="ghost mood-btn" data-mood="great" style="font-size: 2rem; padding: 4px;" title="Great">🌟</button>
+          <button class="ghost mood-btn" data-mood="good" style="font-size: 2rem; padding: 4px;" title="Good">🙂</button>
+          <button class="ghost mood-btn" data-mood="okay" style="font-size: 2rem; padding: 4px;" title="Okay">😐</button>
+          <button class="ghost mood-btn" data-mood="bad" style="font-size: 2rem; padding: 4px;" title="Struggling">🌧️</button>
+          <button class="ghost mood-btn" data-mood="triggered" style="font-size: 2rem; padding: 4px;" title="Triggered">⚡</button>
+        </div>
+        <p id="moodStatus" class="muted small" style="margin-top: 12px; display: none; font-weight: bold; color: var(--navy);"></p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Daily Accountability</h2>
+        <p class="muted small">Log your daily reprieve and let someone know you're staying on track.</p>
+        <div class="action-row" style="margin-top: 16px;">
+          <button class="primary full" id="dailyReprieveBtn">I've done my work today</button>
+        </div>
+        <p id="dailyReprieveStatus" class="muted small" style="margin-top: 12px; display: none; font-weight: bold; color: var(--teal);"></p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">One-task mode</div>
+        <h2>My next safe action</h2>
+        <div class="one-task">
+          <input id="oneTaskInput" aria-label="My next safe action" maxlength="120" placeholder="Example: message my sponsor">
+          <button class="secondary" id="saveTask">Save</button>
+        </div>
+        <div id="savedTaskWrap" hidden>
+          <p id="savedTask" style="font-weight:800"></p>
+          <div class="action-row">
+            <button class="primary" id="completeTask">Mark complete</button>
+            <button class="ghost" id="editTask">Change</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Today’s original reflection</div>
+        <h2 id="readingTitle">A quieter next step</h2>
+        <div class="reading" id="readingText"></div>
+        <div class="reflection-prompt"><strong>Consider:</strong> <span id="readingPrompt"></span></div>
+        <label for="journal">My private note</label>
+        <textarea id="journal" placeholder="This stays in this browser on this device."></textarea>
+        <button class="ghost" id="saveJournal">Save note</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Today’s official literature</div>
+        <h2>Open the original source</h2>
+        <p class="muted small">Atlas does not copy AA, NA or ACA daily-reading text. These buttons open the official publishers’ pages.</p>
+        <div class="official-grid">
+          <div class="official-card"><span class="pill aa">AA</span><strong>Daily Reflections</strong><a href="https://www.aa.org/daily-reflections" target="_blank" rel="noopener">Open official reading</a></div>
+          <div class="official-card"><span class="pill na">NA</span><strong>Just for Today</strong><a href="https://na.org/daily-meditations/jft/" target="_blank" rel="noopener">Open official reading</a></div>
+          <div class="official-card"><span class="pill aca">ACA</span><strong>Meditation of the Day</strong><a href="https://adultchildren.org/aca-daily-affirmation/" target="_blank" rel="noopener">Open official reading</a></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" data-view="meetings">
+      <article class="card">
+        <div class="eyebrow">Recovery Fellowship Finder</div>
+        <h2>Meetings and reminders</h2>
+        <p class="muted small">Official finders open in your browser. Personal Meetings stay privately on this device.</p>
+        <div class="meeting-tabs" role="tablist" aria-label="Meeting sections">
+          <button class="meeting-tab active" data-meeting-tab="find" role="tab" aria-selected="true">Find a Meeting</button>
+          <button class="meeting-tab" data-meeting-tab="families" role="tab" aria-selected="false">For Families</button>
+          <button class="meeting-tab" data-meeting-tab="mine" role="tab" aria-selected="false">My Meetings</button>
+          <button class="meeting-tab" data-meeting-tab="reminders" role="tab" aria-selected="false">Reminders</button>
+          <button class="meeting-tab" data-meeting-tab="archived" role="tab" aria-selected="false">Archived</button>
+        </div>
+      </article>
+
+      <div class="meeting-panel" data-meeting-panel="find" role="tabpanel">
+        <div class="meeting-offline" id="meetingOffline" hidden>
+          <strong>You are offline</strong>
+          <p>The official meeting finder needs an internet connection. Your saved Personal Meetings remain available.</p>
+          <div class="action-row"><button class="secondary" id="retryMeetingConnection">Try Again</button><button class="ghost" id="openMyMeetings">Open My Meetings</button></div>
+        </div>
+        <article class="card">
+          <div class="eyebrow">Official UK sources</div>
+          <h2>Find a meeting</h2>
+          <p class="muted small">Meeting details can change. Confirm the official listing before travelling. Links open in your normal browser.</p>
+          <div class="finder-grid">
+            <div class="finder-card"><span class="pill aa">AA</span><strong>Alcoholics Anonymous GB</strong><a data-official-finder href="https://www.alcoholics-anonymous.org.uk/find-a-meeting/" target="_blank" rel="noopener">Open official AA finder</a><p class="small">Free helpline: <a href="tel:08009177650">0800 917 7650</a></p></div>
+            <div class="finder-card"><span class="pill na">NA</span><strong>Narcotics Anonymous UK</strong><a data-official-finder href="https://meetings.ukna.org/" target="_blank" rel="noopener">Open official NA finder</a><p class="small">Helpline: <a href="tel:03009991212">0300 999 1212</a> (10:00–midnight)</p></div>
+            <div class="finder-card"><span class="pill aca">ACA</span><strong>Adult Children</strong><a data-official-finder href="https://adultchildren.org/meeting-search/" target="_blank" rel="noopener">Open official ACA finder</a><p class="small">ACA WSO: <a data-official-finder href="https://adultchildren.org/contact-us/" target="_blank" rel="noopener">official contact form</a></p></div>
+            <div class="finder-card"><span class="pill amc" style="background:rgba(30, 64, 175, 0.2);color:hsl(226, 70%, 30%);">AMC</span><strong>Andy's Man Club</strong><a data-official-finder href="https://andysmanclub.co.uk/find-your-nearest-group/" target="_blank" rel="noopener">Open AMC finder</a><p class="small">General info: <a href="mailto:info@andysmanclub.co.uk">info@andysmanclub.co.uk</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(185, 28, 28, 0.2);color:hsl(0, 70%, 30%);">CA</span><strong>Cocaine Anonymous</strong><a data-official-finder href="https://cocaineanonymous.org.uk/meetings/" target="_blank" rel="noopener">Open CA finder</a><p class="small">Helpline: <a href="tel:08006120225">0800 612 0225</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(217, 119, 6, 0.2);color:hsl(38, 90%, 30%);">OA</span><strong>Overeaters Anonymous</strong><a data-official-finder href="https://www.oagb.org.uk/find-a-meeting/" target="_blank" rel="noopener">Open OA finder</a><p class="small">Contact: <a href="mailto:general@oagb.org.uk">general@oagb.org.uk</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(147, 51, 234, 0.2);color:hsl(271, 70%, 30%);">CoDA</span><strong>Co-Dependents Anonymous</strong><a data-official-finder href="https://codauk.org/meetings/" target="_blank" rel="noopener">Open CoDA finder</a><p class="small">Contact: <a href="mailto:communications@codauk.org">communications@codauk.org</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(219, 39, 119, 0.2);color:hsl(330, 70%, 30%);">SLAA</span><strong>Sex and Love Addicts Anon.</strong><a data-official-finder href="https://slaauk.org/meetings/" target="_blank" rel="noopener">Open SLAA finder</a><p class="small">Contact: <a href="mailto:contact@slaauk.org">contact@slaauk.org</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(15, 118, 110, 0.2);color:hsl(175, 70%, 30%);">SA</span><strong>Sex Addicts Anonymous</strong><a data-official-finder href="https://sauk.org/meetings/" target="_blank" rel="noopener">Open SA finder</a><p class="small">Helpline: <a href="tel:07519962452">07519 962452</a></p></div>
+          </div>
+          <p class="source-note">Atlas is independent and is not affiliated with AA, NA or ACA. Meeting information is maintained by each fellowship.</p>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="families" role="tabpanel" hidden>
+        <article class="card">
+          <div class="eyebrow">Support for those who love someone</div>
+          <h2>For Families & Friends</h2>
+          <p class="muted small">Addiction affects everyone around it. These organisations offer free, confidential support to family members, partners, and friends of people with addiction — you deserve support too.</p>
+          <div class="finder-grid">
+            <div class="finder-card"><span class="pill" style="background:rgba(30,64,175,0.15);color:hsl(226,70%,30%);">Al&#8209;Anon</span><strong>Al-Anon Family Groups UK</strong><a data-official-finder href="https://al-anonuk.org.uk/" target="_blank" rel="noopener">Find a meeting or helpline</a><p class="small">Free helpline: <a href="tel:08000086811">0800 008 6811</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(30,64,175,0.1);color:hsl(226,70%,30%);">Alateen</span><strong>Alateen (via Al-Anon)</strong><a data-official-finder href="https://al-anonuk.org.uk/alateen/" target="_blank" rel="noopener">Support for young people</a><p class="small">For 12–17 year olds affected by someone's drinking.</p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(109,40,217,0.15);color:hsl(271,70%,30%);">FA</span><strong>Families Anonymous</strong><a data-official-finder href="https://famanon.org.uk/" target="_blank" rel="noopener">Find a FA meeting</a><p class="small">Helpline: <a href="tel:08707667677">0870 766 7677</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(5,150,105,0.15);color:hsl(160,70%,25%);">NACOA</span><strong>NACOA — Children of Alcoholics</strong><a data-official-finder href="https://nacoa.org.uk/" target="_blank" rel="noopener">Visit NACOA</a><p class="small">Free helpline: <a href="tel:08003585456">0800 358 3456</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(217,119,6,0.15);color:hsl(38,90%,30%);">FRANK</span><strong>Talk to FRANK</strong><a data-official-finder href="https://www.talktofrank.com/" target="_blank" rel="noopener">Drug info &amp; family advice</a><p class="small">Free helpline: <a href="tel:03001236600">0300 123 6600</a> (24/7)</p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(219,39,119,0.15);color:hsl(330,70%,30%);">Mind</span><strong>Mind Mental Health</strong><a data-official-finder href="https://www.mind.org.uk/" target="_blank" rel="noopener">Mental health for families</a><p class="small">Infoline: <a href="tel:03001233393">0300 123 3393</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(15,118,110,0.15);color:hsl(175,70%,25%);">Carers</span><strong>Carers UK</strong><a data-official-finder href="https://www.carersuk.org/" target="_blank" rel="noopener">Support for carers</a><p class="small">Helpline: <a href="tel:08088087777">0808 808 7777</a></p></div>
+            <div class="finder-card"><span class="pill" style="background:rgba(185,28,28,0.15);color:hsl(0,70%,30%);">Adfam</span><strong>Adfam</strong><a data-official-finder href="https://adfam.org.uk/" target="_blank" rel="noopener">Families &amp; drugs/alcohol</a><p class="small">Support &amp; local service finder for families.</p></div>
+          </div>
+          <p class="source-note">Atlas is independent and is not affiliated with any of these organisations. Helpline details may change — check official websites for the latest.</p>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="mine" role="tabpanel" hidden>
+        <article class="card">
+          <div class="eyebrow">Next seven days</div>
+          <h2>My meeting calendar</h2>
+          <div class="week-strip" id="weekStrip"></div>
+          <div class="action-row"><button class="primary" id="openMeetingForm">Add Personal Meeting</button><button class="ghost" id="continueMeetingDraft" hidden>Continue unfinished meeting</button></div>
+        </article>
+        <article class="card"><h2>My Meetings</h2><div id="meetingList" class="meeting-list"></div>
+          <div class="meeting-data"><h3>Import meeting information</h3><p class="muted small">Choose a Atlas export. Existing records are kept unless you choose otherwise during duplicate review.</p><input id="meetingImportFile" aria-label="Import meeting information" type="file" accept="application/json,.json"><button class="ghost" id="importMeetings" style="margin-top:9px">Review import</button><p class="status-line" id="meetingImportStatus" role="status"></p></div>
+        </article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="reminders" role="tabpanel" hidden>
+        <article class="card"><div class="eyebrow">Private and local</div><h2>Upcoming reminders</h2><p class="muted small">Reminders appear while Atlas is open. There are no background or server notifications.</p><div id="reminderList" class="meeting-list"></div></article>
+      </div>
+
+      <div class="meeting-panel" data-meeting-panel="archived" role="tabpanel" hidden>
+        <article class="card"><div class="eyebrow">View only</div><h2>Archived Meetings</h2><p class="muted small">Archived meetings cannot be restored. Permanent deletion requires confirmation.</p><div id="archivedMeetingList" class="meeting-list"></div></article>
+      </div>
+    </section>
+
+    <section class="view" data-view="read">
+      <article class="card">
+        <div class="eyebrow">Daily recovery</div>
+        <h2>Read, reflect, act</h2>
+        <p>The app’s readings are original prompts based on broad recovery themes such as honesty, connection, boundaries, acceptance and taking the next right action.</p>
+        <div class="progress-bar"><i id="readingProgress"></i></div>
+        <p class="status-line" id="readingStatus"></p>
+        <button class="primary" id="markRead">Mark today’s reflection read</button>
+      </article>
+
+      <article class="card">
+        <h2>Three-part reflection</h2>
+        <label for="feelField">What am I feeling?</label>
+        <textarea id="feelField"></textarea>
+        <label for="needField">What do I need?</label>
+        <textarea id="needField"></textarea>
+        <label for="actionField">What safe action can I take?</label>
+        <textarea id="actionField"></textarea>
+        <button class="secondary" id="saveReflection">Save reflection</button>
+      </article>
+
+      <article class="card">
+        <h2>Reading boundaries</h2>
+        <div class="privacy-note">
+          <strong>Permission-safe by design</strong>
+          <p class="small">No protected book chapters or daily meditations are stored here. The Free Beta uses original writing and official links. Licensed text can be added later only with written permission.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="view" data-view="tools">
+      <article class="card">
+        <div class="eyebrow">Emergency Support</div>
+        <h2>Basic Needs Locator</h2>
+        <p class="muted small">Find nearby food banks, night shelters, and free meals using free community map data.</p>
+        
+        <div style="background: rgba(217, 119, 6, 0.1); border-left: 4px solid var(--amber); padding: 12px; border-radius: 4px; margin-bottom: 16px; font-size: 0.9rem;">
+          <strong>Safety Warning:</strong> Community map data may not be 100% up to date. Always call ahead or check online to confirm opening hours before travelling.
+        </div>
+
+        <div class="cafe-controls">
+          <select id="needsType" aria-label="Select Need">
+            <option value="food_bank">Food Banks</option>
+            <option value="shelter">Night Shelters</option>
+            <option value="soup_kitchen">Free Meals / Soup Kitchens</option>
+          </select>
+          <select id="needsRadius" aria-label="Search distance">
+            <option value="2500">Within 2.5 km</option>
+            <option value="5000">Within 5.0 km</option>
+            <option value="10000">Within 10 km</option>
+            <option value="25000">Within 25 km</option>
+          </select>
+        </div>
+        <div class="action-row" style="margin-top:12px;">
+          <button class="primary" id="findNeeds">Use my location</button>
+        </div>
+        
+        <details style="margin-top: 16px;">
+          <summary>Search by town or postcode instead</summary>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input id="needsPlace" placeholder="e.g. Manchester or M1 1AA" aria-label="Town or postcode">
+            <button class="secondary" id="searchNeedsPlace">Search</button>
+          </div>
+        </details>
+        
+        <p class="status-line" id="needsStatus" role="status" style="margin-top: 12px; font-weight: bold;"></p>
+        <div id="needsResults" style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Grounding & Distraction</div>
+        <h2>Calming Games</h2>
+        <p class="muted small">Absorbing visual puzzles designed to safely occupy your working memory and interrupt cravings.</p>
+        <div class="action-row" style="margin-top:12px; flex-wrap:wrap; gap:8px;">
+          <button class="primary" onclick="if(window.CalmingGames) window.CalmingGames.start('untangle')">Untangle</button>
+          <button class="primary" onclick="if(window.CalmingGames) window.CalmingGames.start('cairn')">Cairn</button>
+          <button class="primary" onclick="if(window.CalmingGames) window.CalmingGames.start('flow')">Flow Pathways</button>
+          <button class="primary" onclick="if(window.CalmingGames) window.CalmingGames.start('cascade')">Cascade</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Quiet room</div>
+        <h2>Lavendaire guided meditations</h2>
+        <p class="muted small">These are played by YouTube from Lavendaire’s official channel. Atlas does not download, copy or rehost the videos or audio.</p>
+        <div class="video-shell">
+          <iframe
+            id="meditationPlayer"
+            src="https://www.youtube-nocookie.com/embed/videoseries?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+            title="Lavendaire guided meditation player"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <p><strong id="meditationNow">Lavendaire guided-meditation playlist</strong></p>
+        <div class="meditation-grid" id="meditationChoices">
+          <button class="meditation-choice active"
+                  data-meditation-src="videoseries?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+                  data-meditation-url="https://www.youtube.com/playlist?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+                  data-meditation-title="Full guided-meditation playlist">
+            <strong>Full playlist</strong><span class="muted small">Choose from Lavendaire’s meditation collection.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="86m4RC_ADEY"
+                  data-meditation-url="https://www.youtube.com/watch?v=86m4RC_ADEY"
+                  data-meditation-title="Positive energy, relaxation and peace">
+            <strong>Peace and positive energy</strong><span class="muted small">Approximately 20 minutes.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="H_uc-uQ3Nkc"
+                  data-meditation-url="https://www.youtube.com/watch?v=H_uc-uQ3Nkc"
+                  data-meditation-title="Release stress and anxiety">
+            <strong>Release stress</strong><span class="muted small">A 10-minute body relaxation.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="rvaqPPjtxng"
+                  data-meditation-url="https://www.youtube.com/watch?v=rvaqPPjtxng"
+                  data-meditation-title="Sleep and deep relaxation">
+            <strong>Sleep and deep relaxation</strong><span class="muted small">Approximately 20 minutes.</span>
+          </button>
+          <button class="meditation-choice"
+                  data-meditation-src="8bBPJ1EEUCc"
+                  data-meditation-url="https://www.youtube.com/watch?v=8bBPJ1EEUCc"
+                  data-meditation-title="Morning meditation for abundance">
+            <strong>Five-minute morning</strong><span class="muted small">Positive energy and visualisation.</span>
+          </button>
+        </div>
+        <a class="secondary" id="openMeditationYoutube"
+           href="https://www.youtube.com/playlist?list=PL37ErCJmMWd1YhEkajroa00eTuuMYnmdy"
+           target="_blank" rel="noopener">Open this on YouTube</a>
+        <p class="source-note">Independent link to Lavendaire. Availability, adverts, recommendations and playback are controlled by YouTube and the creator.</p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Safe public places</div>
+        <h2>Find a nearby coffee shop</h2>
+        <p>A café can provide light, people, warmth, a drink and a neutral place to pause. Check opening information before travelling.</p>
+        <div class="cafe-controls">
+          <div>
+            <label for="cafeRadius">Search distance</label>
+            <select id="cafeRadius">
+              <option value="1000">Within 1 km</option>
+              <option value="2500" selected>Within 2.5 km</option>
+              <option value="5000">Within 5 km</option>
+              <option value="10000">Within 10 km</option>
+            </select>
+          </div>
+          <button class="primary" id="findCafes">Use my location</button>
+        </div>
+        <p id="cafeStatus" class="status-line" aria-live="polite">Your location is used only for this search and is not saved by Atlas.</p>
+        <div id="cafeResults" class="cafe-list"></div>
+        <details style="margin-top:12px">
+          <summary>Search by town or postcode instead</summary>
+          <label for="cafePlace">Town or postcode</label>
+          <input id="cafePlace" placeholder="Example: DT5 1DQ">
+          <button class="secondary" id="searchCafePlace" style="margin-top:9px">Search on Google Maps</button>
+        </details>
+        <p class="source-note">Nearby results use community map data from OpenStreetMap through the free Overpass service. Results are not guaranteed live business information.</p>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Coping toolbox</div>
+        <h2>Choose what fits this moment</h2>
+        <div class="tool-grid">
+          <button class="tool-card" data-tool="halt"><strong>HALT check</strong><span class="muted small">Hungry, angry, lonely or tired?</span></button>
+          <button class="tool-card" data-tool="ground"><strong>5-4-3-2-1 grounding</strong><span class="muted small">Return attention to the room.</span></button>
+          <button class="tool-card" data-tool="urge"><strong>Ride the urge</strong><span class="muted small">Observe it without obeying it.</span></button>
+          <button class="tool-card" data-tool="pause"><strong>Pause before action</strong><span class="muted small">Delay a risky decision.</span></button>
+          <button class="tool-card" data-tool="meeting"><strong>Prepare for a meeting</strong><span class="muted small">Reduce fear before attending.</span></button>
+          <button class="tool-card" data-tool="boundary"><strong>Set a boundary</strong><span class="muted small">Protect recovery without a fight.</span></button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Your recovery contacts</div>
+        <h2>Emergency Call Buttons</h2>
+        <p class="muted small">Your saved recovery contacts appear here as quick-call buttons. Add them from the <strong>My Plan</strong> tab.</p>
+        <div id="toolsEmergencyContacts" style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;"></div>
+      </article>
+    </section>
+
+    <section class="view" data-view="plan">
+      <article class="card">
+        <div class="eyebrow">Private Phonebook</div>
+        <h2>Recovery Contacts</h2>
+        <p class="muted small">Numbers are blurred for privacy. Tap 'Call' to dial directly. Contacts stay on this device unless you explicitly upload a cloud backup.</p>
+        
+        <form id="addContactForm" style="display:flex; flex-direction:column; gap:8px; margin: 16px 0;">
+          <input type="text" id="contactName" placeholder="Name (e.g. John)" required>
+          <select id="contactRole" required style="padding: 12px; border-radius: 8px; border: 1px solid var(--line); font-size: 1rem; width: 100%;">
+            <option value="" disabled selected>Select Role...</option>
+            <option value="Sponsor">Sponsor</option>
+            <option value="Therapist">Therapist</option>
+            <option value="Safe Friend">Safe Friend</option>
+            <option value="Family">Family</option>
+            <option value="Other">Other</option>
+          </select>
+          <div style="display:grid; grid-template-columns: 1fr auto; gap:8px;">
+            <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+            <button type="submit" class="primary" style="padding: 0 16px;">Add</button>
+          </div>
+        </form>
+
+        <div id="privateContactsList" style="display:flex; flex-direction:column; gap:12px;"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>My Milestones</h2>
+        <p class="muted small">Your daily accountability reprieves are tracked here. Unlock badges and download pro certificates.</p>
+        
+        <p id="totalReprievesText" style="font-weight: 800; font-size: 1.1rem; color: var(--navy);"></p>
+
+        <div id="badgesContainer" style="display: flex; gap: 16px; margin: 16px 0; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+           <!-- Badges injected via JS -->
+        </div>
+
+        <div class="action-row" style="margin-top: 16px;">
+          <button class="primary" id="downloadCertificateBtn" disabled>Download Latest Certificate</button>
+        </div>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Private Recovery Journal</h2>
+        <p class="muted small">A private, offline-first space for daily reflection and step-work. Entries stay on this device unless you explicitly upload a cloud backup.</p>
+        
+        <form id="journalForm" style="margin-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+          <textarea id="journalInput" rows="4" placeholder="What's on your mind today?" required aria-label="Journal entry"></textarea>
+          <div class="action-row">
+            <button type="submit" class="primary">Save Entry</button>
+          </div>
+        </form>
+
+        <div id="journalEntries" style="margin-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <!-- Entries injected via JS -->
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Atlas Plus</div>
+        <h2>Mood Tracker</h2>
+        <p class="muted small">Your mood history over the last 7 days.</p>
+        
+        <div id="moodChartContainer" style="display: flex; align-items: flex-end; gap: 12px; height: 150px; margin-top: 24px; padding-bottom: 8px; border-bottom: 2px solid var(--line); overflow-x: auto;">
+          <!-- Chart bars injected via JS -->
+        </div>
+        <div id="moodChartLabels" style="display: flex; gap: 12px; margin-top: 8px; overflow-x: auto;">
+          <!-- Labels injected via JS -->
+        </div>
+      </article>
+
+      <article class="card safety-card">
+        <div class="eyebrow">Private safety planning</div><h2>My Safety Plan</h2>
+        
+        <!-- Emergency Contacts Feed from Phonebook -->
+        <div id="safetyPlanEmergencyContacts" style="margin-bottom: 16px;"></div>
+        <p class="muted small">Record warning signs, helpful actions and support you choose. Atlas does not monitor this plan or replace emergency or professional care.</p>
+        <div id="safetyPlanSummary"></div><button class="primary" id="openSafetyPlan">Create or edit My Safety Plan</button>
+      </article>
+      <article class="card bridge-hero">
+        <div class="eyebrow">Recovery Bridge</div>
+        <h2>My First 72 Hours</h2>
+        <p class="muted small">Turn a release, discharge or major move into calm practical steps. Everything stays privately on this device.</p>
+
+        <div id="bridgeEmpty" class="empty">
+          <p>No 72-hour plan has been created yet.</p>
+          <button class="primary" id="openBridgePlan">Create My First 72 Hours</button>
+        </div>
+
+        <div id="bridgeActive" hidden>
+          <div class="bridge-status">
+            <span class="bridge-countdown" id="bridgeCountdown"></span>
+            <span class="bridge-progress" id="bridgeProgress"></span>
+          </div>
+
+          <h3>How does the plan feel right now?</h3>
+          <div class="bridge-checkins" aria-label="Recovery Bridge check-in">
+            <button class="bridge-checkin green" data-bridge-checkin="green">Green · steady</button>
+            <button class="bridge-checkin amber" data-bridge-checkin="amber">Amber · struggling</button>
+            <button class="bridge-checkin red" data-bridge-checkin="red">Red · need support</button>
+          </div>
+          <div class="bridge-guidance" id="bridgeGuidance" role="status"></div>
+
+          <h3>Practical information</h3>
+          <div class="bridge-practical" id="bridgePracticalSummary"></div>
+          <div class="action-row">
+            <button class="secondary" id="editBridgePlan">Edit plan</button>
+            <button class="primary" id="openRecoveryPassport">Recovery Passport</button>
+            <button class="ghost" id="deleteBridgePlan">Delete plan</button>
+          </div>
+
+          <h3 style="margin-top:20px">My 72-hour steps</h3>
+          <div id="bridgeTaskList"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Keep the thread</div>
+        <h2>Personal Appointments</h2>
+        <p class="muted small">Save worker, health, probation, treatment, recovery, housing and other appointments. Private notes stay inside Atlas and never enter a Worker Handover.</p>
+        <button class="primary" id="openAppointmentForm">Add Personal Appointment</button>
+        <div id="appointmentList" class="appointment-list"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Strengths and next steps</div>
+        <h2>Recovery Capital Map</h2>
+        <p class="muted small">Review seven areas separately from 1 (needs attention) to 5 (strong today). Atlas never creates a combined rating.</p>
+        <form id="capitalForm">
+          <div id="capitalAreas"></div>
+          <p id="capitalGuidance" class="privacy-note" role="status"></p>
+          <button class="primary full" type="submit">Save Recovery Capital review</button>
+        </form>
+        <h3 style="margin-top:20px">Review history</h3>
+        <div id="capitalHistory"></div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Consent-controlled sharing</div>
+        <h2>Worker Handover</h2>
+        <p>Select only the practical sections you want. Fresh consent is required for every preview, download or print. Nothing is sent or stored automatically.</p>
+        <button class="secondary" id="openWorkerHandover">Create Worker Handover</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Continuity</div>
+        <h2>Promises made to me</h2>
+        <p class="muted small">Record what a service, worker or organisation agreed to do, who owns it and when it is due.</p>
+        <div id="promiseList"></div>
+        <button class="primary" id="addPromise">Add a promise</button>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Transition checklist</div>
+        <h2>My practical safety net</h2>
+        <div id="checklist"></div>
+      </article>
+
+          <p>Atlas keeps entered information in your browser’s local storage. Cloud backup is optional and only transfers supported data after you sign in and choose to upload it.</p>
+          <p class="small"><strong>Do not use this beta as a clinical, prison, probation, legal or safeguarding record.</strong></p>
+        </div>
+        <div class="action-row" style="margin-top:12px">
+          <button class="secondary" id="exportData">Export my data</button>
+          <label class="visually-hidden" for="restoreDataFile">Choose a Atlas backup to restore</label><input id="restoreDataFile" type="file" accept="application/json,.json">
+          <button class="ghost" id="restoreData">Restore a backup</button>
+          <button class="danger-btn" id="clearMeetingData">Delete all meeting information</button>
+          <button class="danger-btn" id="clearData">Clear this device</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Optional cloud backup</div>
+        <h2>Atlas Cloud Sync</h2>
+        <div class="privacy-note">
+          <p>Your data remains available locally. Atlas never uploads it automatically: you choose when to upload this device or restore a cloud copy.</p>
+        </div>
+        <div id="authSection" style="margin-top:16px;">
+          <p class="status-line">Checking cloud account…</p>
+        </div>
+        <p class="muted small" style="margin-top:12px;">A cloud backup can include recovery contacts, journal entries, mood history, milestones, safety-plan content, reflections and profile data. Supabase account controls and row-level security restrict access to your account; cloud copies are not end-to-end encrypted.</p>
+      </article>
+    </section>
+  </main>
+
+  <p class="disclaimer"><span class="beta-badge">Free</span> Peer support and lived-experience planning tool. These are personal suggestions, not a replacement for AA, NA, ACA, the NHS, emergency services or professional clinical treatment.</p>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" data-go="today"><span>⌂</span>Today</button>
+    <button class="nav-btn" data-go="meetings"><span>▦</span>Meetings</button>
+    <button class="nav-btn" data-go="read"><span>☰</span>Reflect</button>
+    <button class="nav-btn" data-go="tools"><span>✦</span>Tools</button>
+    <button class="nav-btn" data-go="plan"><span>✓</span>My plan</button>
+  </nav>
+</div>
+
+<dialog id="supportDialog">
+  <div class="modal-head"><strong>Get me through 20 minutes</strong><button class="close" data-close="supportDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <div class="timer" id="timer">20:00</div>
+    <div class="step-dots" id="stepDots"></div>
+    <div class="support-step active">
+      <h2>1. Make the next few minutes safer</h2>
+      <p>Move away from substances, weapons, traffic, unsafe people or anything you might use to harm yourself. Go somewhere more public or closer to a safe person when possible.</p>
+    </div>
+    <div class="support-step">
+      <h2>2. Slow the body down</h2>
+      <p>Place both feet on the floor. Breathe in gently, then make the out-breath a little longer. Repeat without forcing it.</p>
+    </div>
+    <div class="support-step">
+      <h2>3. Contact one human being</h2>
+      <p>Send a plain message: “I am struggling and need someone to stay in contact with me for twenty minutes.”</p>
+    </div>
+    <div class="support-step">
+      <h2>4. Delay the decision</h2>
+      <p>You do not need to solve your life tonight. Agree not to use, leave, confront anyone or make a permanent decision until the timer ends.</p>
+    </div>
+    <div class="support-step">
+      <h2>5. Choose what happens next</h2>
+      <p>Go to a meeting, call support, eat something, take prescribed medication, rest somewhere safe, or seek urgent professional help.</p>
+      <div class="action-row"><a class="danger-btn" href="tel:999">Call 999</a><a class="secondary" href="tel:116123">Samaritans 116 123</a></div>
+    </div>
+    <div class="action-row" style="margin-top:14px">
+      <button class="ghost" id="prevSupport">Back</button>
+      <button class="primary" id="nextSupport">Next</button>
+      <button class="secondary" id="timerToggle">Start timer</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="meetingDialog">
+  <div class="modal-head"><strong>Personal Meeting</strong><button class="close" data-close="meetingDialog" aria-label="Close and keep draft">×</button></div>
+  <form class="modal-body" id="meetingForm">
+    <input id="meetingId" type="hidden">
+    <label for="fellowship">Fellowship</label>
+    <select id="fellowship" required><option>AA</option><option>NA</option><option>ACA</option></select>
+    <label for="meetingName">Meeting name</label>
+    <input id="meetingName" required maxlength="80">
+    <div class="form-pair">
+      <div><label for="meetingRecurrence">Repeats</label><select id="meetingRecurrence"><option value="weekly">Weekly</option><option value="oneOff">One-off</option></select></div>
+      <div id="meetingDayWrap"><label for="meetingDay">Day</label><select id="meetingDay"><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option><option value="0">Sunday</option></select></div>
+      <div id="meetingDateWrap" hidden><label for="meetingDate">Date</label><input id="meetingDate" type="date"></div>
+    </div>
+    <label for="meetingTime">Time</label>
+    <input id="meetingTime" type="time">
+    <label for="meetingFormat">Format</label>
+    <select id="meetingFormat"><option value="inPerson">In person</option><option value="online">Online</option></select>
+    <label for="meetingPlace">Venue address</label>
+    <input id="meetingPlace" maxlength="180">
+    <label for="meetingPostcode">Postcode</label>
+    <input id="meetingPostcode" maxlength="10">
+    <label for="meetingOnlineLink">Online link</label>
+    <input id="meetingOnlineLink" type="text" inputmode="url" maxlength="300" placeholder="https://…">
+    <label for="meetingNotes">Private notes</label>
+    <textarea id="meetingNotes" maxlength="500"></textarea>
+    <label for="meetingAccessibility">Accessibility information</label>
+    <textarea id="meetingAccessibility" maxlength="500" placeholder="Please verify details with the venue."></textarea>
+    <div class="form-pair">
+      <div><label for="meetingOpenness">Attendance</label><select id="meetingOpenness"><option value="unknown">Unknown — check with meeting</option><option value="open">Open — visitors may attend</option><option value="closed">Closed — fellowship members</option></select></div>
+      <div><label for="meetingReminder">In-app reminder</label><select id="meetingReminder"><option value="off">No reminder</option><option value="oneHour" selected>One hour before</option><option value="morningOf">Morning of meeting</option><option value="oneDay">One day before</option></select></div>
+    </div>
+    <p class="muted small">Only Fellowship and Meeting Name are required. This stays on your device.</p>
+    <button class="primary full" type="submit">Save Personal Meeting</button>
+  </form>
+</dialog>
+
+<dialog id="meetingDetailsDialog">
+  <div class="modal-head"><strong>Meeting details</strong><button class="close" data-close="meetingDetailsDialog" aria-label="Close">×</button></div>
+  <div class="modal-body"><div id="meetingDetailsBody"></div><div class="action-row" style="margin-top:16px"><button class="secondary" id="editMeeting">Edit</button><button class="ghost" id="archiveMeeting">Archive</button></div></div>
+</dialog>
+
+<dialog id="meetingImportDialog">
+  <div class="modal-head"><strong>Review meeting import</strong><button class="close" data-close="meetingImportDialog" aria-label="Cancel import">×</button></div>
+  <div class="modal-body"><p>No existing meeting information changes until you apply this import.</p><div id="meetingImportConflicts"></div><button class="primary full" id="applyMeetingImport">Apply import</button></div>
+</dialog>
+
+<dialog id="toolDialog">
+  <div class="modal-head"><strong id="toolTitle">Coping tool</strong><button class="close" data-close="toolDialog" aria-label="Close">×</button></div>
+  <div class="modal-body" id="toolBody"></div>
+</dialog>
+
+<dialog id="bridgePlanDialog">
+  <div class="modal-head"><strong>My First 72 Hours</strong><button class="close" data-close="bridgePlanDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="bridgePlanForm">
+    <p class="muted small">Only the transition date and time are required. Add the practical details you know now and edit them later.</p>
+    <label for="bridgeTransitionType">What is the transition?</label>
+    <select id="bridgeTransitionType">
+      <option value="release">Release from prison</option>
+      <option value="discharge">Discharge from treatment or hospital</option>
+      <option value="move">Move to community or supported accommodation</option>
+      <option value="other">Another major transition</option>
+    </select>
+    <div class="form-pair">
+      <div><label for="bridgeTransitionDate">Date *</label><input id="bridgeTransitionDate" type="date" required></div>
+      <div><label for="bridgeTransitionTime">Time *</label><input id="bridgeTransitionTime" type="time" required></div>
+    </div>
+    <label for="bridgeFirstNight">Where will I sleep on the first night?</label><input id="bridgeFirstNight" maxlength="180" placeholder="Address or safe accommodation plan">
+    <label for="bridgeMedication">Medication or pharmacy plan</label><textarea id="bridgeMedication" maxlength="400" placeholder="What needs collecting, where and when? Do not change medication without professional advice."></textarea>
+    <label for="bridgeAppointment">Key appointment</label><input id="bridgeAppointment" maxlength="220" placeholder="Worker, service, date, time and place">
+    <label for="bridgeTransport">Transport plan</label><input id="bridgeTransport" maxlength="220" placeholder="Route, ticket, pickup or travel support">
+    <div class="form-pair">
+      <div><label for="bridgeContactName">Safe contact</label><input id="bridgeContactName" maxlength="100" placeholder="Name or service"></div>
+      <div><label for="bridgeContactPhone">Phone</label><input id="bridgeContactPhone" type="tel" maxlength="40"></div>
+    </div>
+    <label for="bridgePrivateNotes">Private notes</label><textarea id="bridgePrivateNotes" maxlength="800" placeholder="These stay inside Atlas and are never included in a Recovery Passport."></textarea>
+    <button class="primary full" type="submit">Save My First 72 Hours</button>
+  </form>
+</dialog>
+
+<dialog id="recoveryPassportDialog">
+  <div class="modal-head"><strong>Recovery Passport</strong><button class="close" data-close="recoveryPassportDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <p>Select only the practical information you want to print or share. Private notes are never available here.</p>
+    <form id="recoveryPassportForm">
+      <div class="passport-options">
+        <label class="passport-option"><input type="checkbox" data-passport-section="transition">Transition date and type</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="firstNight">First-night plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="medication">Medication plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="appointment">Key appointment</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="transport">Transport plan</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="safeContact">Safe contact</label>
+        <label class="passport-option"><input type="checkbox" data-passport-section="tasks">72-hour task progress</label>
+      </div>
+      <label class="passport-option"><input id="passportConsent" type="checkbox">I consent to create this one Recovery Passport using the sections selected above.</label>
+      <button class="primary full" id="previewRecoveryPassport" type="submit" style="margin-top:10px">Create private preview</button>
+    </form>
+    <div id="recoveryPassportPreview"></div>
+    <div class="action-row">
+      <button class="secondary" id="downloadRecoveryPassport" type="button">Download selected information</button>
+      <button class="ghost" id="printRecoveryPassport" type="button">Print selected information</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="onboardingDialog">
+  <div class="modal-head"><strong>Welcome to Atlas Free</strong></div>
+  <form class="modal-body" id="onboardingForm">
+    <p>Atlas is built on lived experience, not medical training. Atlas does not diagnose, prescribe, monitor, or replace professional clinical advice, therapy, or emergency medical services. These tools are personal suggestions that have helped others in recovery.</p>
+    <div class="privacy-note small"><strong>Your information:</strong> records stay on this device by default and nothing is shared automatically. In My plan, you can export a backup, restore a valid backup, or delete Atlas records from this device. Settings lets you change text size and Privacy Lock. If you or someone else is in danger, call 999 or go to A&amp;E; for urgent mental-health support call 111 and select the mental-health option.</div>
+    <label for="setupDisplayName">What should Atlas call you? (optional)</label>
+    <input id="setupDisplayName" maxlength="60" autocomplete="nickname">
+    <label for="setupTextSize">Text size</label>
+    <select id="setupTextSize"><option value="normal">Normal</option><option value="large">Large</option><option value="extraLarge">Extra large</option></select>
+    <fieldset class="capital-area">
+      <legend>Recovery pathways (optional)</legend>
+      <div class="passport-options">
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="AA">AA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="NA">NA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="ACA">ACA</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="SMART">SMART Recovery</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Treatment">Treatment</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Faith">Faith or spiritual</label>
+        <label class="passport-option"><input type="checkbox" data-setup-pathway="Other">Other</label>
+      </div>
+    </fieldset>
+    <h3>One trusted contact (optional)</h3>
+    <div class="form-pair">
+      <div><label for="setupContactName">Name or role</label><input id="setupContactName" maxlength="80"></div>
+      <div><label for="setupContactPhone">Phone</label><input id="setupContactPhone" type="tel" maxlength="40"></div>
+    </div>
+    <div class="action-row" style="margin-top:16px">
+      <button class="primary" type="submit">Save setup</button>
+      <button class="ghost" id="skipOnboarding" type="button">Skip for now</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="safetyPlanDialog">
+  <div class="modal-head"><strong>My Safety Plan</strong><button class="close" data-close="safetyPlanDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="safetyPlanForm">
+    <p class="small">Keep this plan practical and personal. Nothing is sent automatically.</p>
+    <label for="safetyPlanWarningSigns">Personal warning signs</label><textarea id="safetyPlanWarningSigns" maxlength="1000" placeholder="What tells me I may need extra support?"></textarea>
+    <label for="safetyPlanHelpfulActions">Helpful actions</label><textarea id="safetyPlanHelpfulActions" maxlength="1000" placeholder="Small actions that can help me pause or reconnect"></textarea>
+    <label for="safetyPlanSafePeople">Safe people</label><textarea id="safetyPlanSafePeople" maxlength="1000" placeholder="People or services I choose to contact"></textarea>
+    <label for="safetyPlanSafePlaces">Safe places</label><textarea id="safetyPlanSafePlaces" maxlength="1000" placeholder="Places where I can be safer or less alone"></textarea>
+    <label for="safetyPlanProfessionalSupport">Professional support contacts</label><textarea id="safetyPlanProfessionalSupport" maxlength="1000" placeholder="GP, treatment, worker or other professional contacts"></textarea>
+    <label for="safetyPlanReasonsToKeepGoing">Reasons to keep going</label><textarea id="safetyPlanReasonsToKeepGoing" maxlength="1000" placeholder="People, hopes, values or plans that matter to me"></textarea>
+    <section class="urgent-box show"><strong>Urgent help is separate from this plan.</strong><p>If you or someone else is in danger, call <a href="tel:999">999</a> or go to A&amp;E. For urgent mental-health support that is not an emergency, call <a href="tel:111">111</a> and select the mental-health option. Samaritans: <a href="tel:116123">116 123</a>, free day or night.</p></section>
+    <div class="action-row" style="margin-top:14px"><button class="primary" type="submit">Save Safety Plan</button><button class="danger-btn" id="deleteSafetyPlan" type="button">Delete Safety Plan</button></div>
+    <label class="passport-option" style="margin-top:14px"><input id="safetyPlanExportConsent" type="checkbox">I choose to create a downloadable copy to share myself.</label><button class="secondary" id="exportSafetyPlan" type="button">Download selected Safety Plan</button>
+  </form>
+</dialog>
+
+<dialog id="betaSettingsDialog">
+  <div class="modal-head"><strong>Privacy and diagnostics</strong><button class="close" data-close="betaSettingsDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <h2>Privacy Lock</h2>
+    <p>Privacy Lock discourages casual access to Atlas. It is not full device, browser-profile or disk encryption. Use a protected Windows account for stronger protection.</p>
+    <form id="privacyLockForm">
+      <div class="form-pair">
+        <div><label for="privacyPin">New PIN (4–8 digits)</label><input id="privacyPin" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="new-password" required></div>
+        <div><label for="privacyPinConfirm">Confirm PIN</label><input id="privacyPinConfirm" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="new-password" required></div>
+      </div>
+      <button class="primary" type="submit">Set or change Privacy Lock</button>
+      <button class="ghost" id="removePrivacyLock" type="button">Turn off Privacy Lock</button>
+    </form>
+    <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+    <h2>Diagnostic Report</h2>
+    <p class="small">Downloads only app version, date, browser/platform, online state, feature availability and the number of local entries. It never includes keys, values, notes, contacts, appointments, PIN material or recovery content. Nothing is sent automatically.</p>
+    <button class="secondary" id="downloadDiagnostics" type="button">Download Diagnostic Report</button>
+  </div>
+</dialog>
+
+<dialog id="betaInfoDialog">
+  <div class="modal-head"><strong>Atlas Free information</strong><button class="close" data-close="betaInfoDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <section><span class="beta-badge">Free</span><h2>About</h2><p>Atlas is a free, independent, private-first recovery planning and continuity tool for Windows. It is not treatment, diagnosis, a clinical decision system, a professional record or emergency care.</p></section>
+    <section><h2>Privacy</h2><p>Your entries are kept in this browser’s local storage on this device. Optional cloud backup requires an account and an explicit upload; Atlas does not upload recovery information automatically. Clearing browser site data may permanently remove local copies. Cloud backups and downloaded exports may contain sensitive information; protect them carefully.</p></section>
+    <section><h2>Using Atlas</h2><p>Atlas is provided for voluntary personal planning. Check appointments, meeting details, travel, services and medical information with the responsible official source. Do not rely on Atlas where delay or error could cause harm. You remain in control of what you enter and share.</p></section>
+    <section><h2>Support</h2><p>If there is immediate danger in the UK, call <a href="tel:999">999</a>. Samaritans can be reached free on <a href="tel:116123">116 123</a>. For urgent medical help that is not an emergency, use <a href="tel:111">NHS 111</a>. Atlas cannot monitor messages or call for help.</p><p><a href="privacy.html" target="_blank" rel="noopener">Read the full Privacy Policy</a></p></section>
+    <p class="privacy-note small">This information is built into the app and remains available offline.</p>
+  </div>
+</dialog>
+
+<dialog id="appointmentDialog">
+  <div class="modal-head"><strong>Personal Appointment</strong><button class="close" data-close="appointmentDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="appointmentForm">
+    <input id="appointmentId" type="hidden">
+    <label for="appointmentType">Type</label>
+    <select id="appointmentType"><option value="worker">Worker</option><option value="health">GP or health</option><option value="probation">Probation</option><option value="treatment">Treatment</option><option value="recoveryMeeting">Recovery meeting</option><option value="housingBenefits">Housing or benefits</option><option value="other">Other</option></select>
+    <label for="appointmentTitle">Appointment name *</label><input id="appointmentTitle" required maxlength="120">
+    <div class="form-pair">
+      <div><label for="appointmentDate">Date *</label><input id="appointmentDate" type="date" required></div>
+      <div><label for="appointmentTime">Time</label><input id="appointmentTime" type="time"></div>
+    </div>
+    <label for="appointmentPerson">Person or service</label><input id="appointmentPerson" maxlength="140">
+    <label for="appointmentLocation">Location or link</label><input id="appointmentLocation" maxlength="260">
+    <label for="appointmentReminder">In-app reminder</label><select id="appointmentReminder"><option value="off">No reminder</option><option value="oneHour">One hour before</option><option value="morningOf">Morning of</option><option value="oneDay">One day before</option><option value="oneWeek">One week before</option></select>
+    <label for="appointmentPrivateNotes">Private notes</label><textarea id="appointmentPrivateNotes" maxlength="800" placeholder="These never appear in a Worker Handover."></textarea>
+    <button class="primary full" type="submit">Save Personal Appointment</button>
+  </form>
+</dialog>
+
+<dialog id="workerHandoverDialog">
+  <div class="modal-head"><strong>Worker Handover</strong><button class="close" data-close="workerHandoverDialog" aria-label="Close">×</button></div>
+  <div class="modal-body">
+    <p>Select only the sections you intend to share. Private notes, PIN information, journals, check-ins and full app storage are never available here.</p>
+    <div class="passport-options" id="handoverSections">
+      <label class="passport-option"><input type="checkbox" data-handover-section="profile" checked>Beta profile</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="bridge" checked>Recovery Bridge practical plan</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="appointments" checked>Upcoming appointments</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="capital">Latest Recovery Capital review</label>
+      <label class="passport-option"><input type="checkbox" data-handover-section="trustedContact">Trusted contact</label>
+    </div>
+    <div class="privacy-note small">Each button asks for fresh consent. Preview information is held only in this open page. Downloads and printouts leave Atlas and should be protected.</div>
+    <div class="action-row" style="margin-top:12px">
+      <button class="primary" id="previewWorkerHandover" type="button">Consent and preview</button>
+      <button class="secondary" id="downloadWorkerHandover" type="button">Consent and download</button>
+      <button class="ghost" id="printWorkerHandover" type="button">Consent and print</button>
+    </div>
+    <div id="workerHandoverPreview"></div>
+  </div>
+</dialog>
+
+<dialog id="contactDialog">
+  <div class="modal-head"><strong>Add support contact</strong><button class="close" data-close="contactDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="contactForm">
+    <label for="contactName">Name or role</label><input id="contactName" required maxlength="80">
+    <label for="contactPhone">Phone</label><input id="contactPhone" type="tel" maxlength="40">
+    <label for="contactNote">How this person helps</label><input id="contactNote" maxlength="120">
+    <button class="primary full" type="submit">Save contact</button>
+  </form>
+</dialog>
+
+<dialog id="promiseDialog">
+  <div class="modal-head"><strong>Add a service promise</strong><button class="close" data-close="promiseDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="promiseForm">
+    <label for="promiseText">What was promised?</label><input id="promiseText" required maxlength="140">
+    <label for="promiseOwner">Who owns the action?</label><input id="promiseOwner" required maxlength="100">
+    <label for="promiseDue">Due date</label><input id="promiseDue" type="date" required>
+    <button class="primary full" type="submit">Save promise</button>
+  </form>
+</dialog>
+
+<div class="privacy-lock-screen" id="privacyLockScreen" hidden role="dialog" aria-modal="true" aria-labelledby="privacyLockTitle">
+  <div class="privacy-lock-card">
+    <span class="beta-badge">Private local session</span>
+    <h1 id="privacyLockTitle">Atlas is locked</h1>
+    <p>Enter your Privacy Lock PIN to open recovery content on this device.</p>
+    <form id="unlockForm">
+      <label for="unlockPin">PIN</label>
+      <input id="unlockPin" type="password" inputmode="numeric" pattern="[0-9]{4,8}" minlength="4" maxlength="8" autocomplete="current-password" required>
+      <button class="primary full" type="submit" style="margin-top:12px">Unlock Atlas</button>
+    </form>
+    <p id="unlockMessage" role="status"></p>
+    <p class="small">Privacy Lock discourages casual access. It is not device or disk encryption.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="meeting-domain.js"></script>
+<script src="meeting-ui.js"></script>
+<script src="recovery-bridge-domain.js"></script>
+<script src="recovery-bridge-ui.js"></script>
+<dialog id="authDialog">
+  <div class="modal-head"><strong>Atlas Cloud Account</strong><button class="close" data-close="authDialog" aria-label="Close">×</button></div>
+  <form class="modal-body" id="authForm">
+    <p class="muted small">Cloud backup is optional. Nothing is uploaded until you sign in and choose “Upload this device”.</p>
+    <label for="authEmail">Email</label>
+    <input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com">
+    <label for="authPassword">Password</label>
+    <input id="authPassword" type="password" minlength="6" required autocomplete="current-password">
+    
+    <div class="action-row" style="margin-top:16px">
+      <button class="primary" type="submit" id="authLoginBtn">Login</button>
+      <button class="secondary" type="button" id="authRegisterBtn">Create Account</button>
+    </div>
+    <p id="authError" class="status-line error" role="alert"></p>
+  </form>
+</dialog>
+
+<dialog id="gameDialog" style="width:100%; max-width:600px; height:100%; max-height:800px; padding:0; overflow:hidden; border:none; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+  <div style="position:absolute; top:12px; right:12px; z-index:100;">
+    <button class="secondary" onclick="if(window.CalmingGames) window.CalmingGames.close()" aria-label="Close Game" style="padding:6px 12px; font-size:0.9rem;">Exit</button>
+  </div>
+  <div id="gameUI" style="position:absolute; top:12px; left:12px; z-index:100; color:#1a1a1a; font-weight:600; background:rgba(255,255,255,0.9); padding:6px 12px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">Level 1</div>
+  <div id="gameInstructions" style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:100; color:#fff; font-weight:600; background:rgba(15,23,42,0.85); padding:10px 20px; border-radius:999px; box-shadow:0 8px 24px rgba(0,0,0,0.2); font-size:0.95rem; text-align:center; pointer-events:none; white-space:nowrap; backdrop-filter:blur(8px);"></div>
+  <div id="gameContainer" style="width:100%; height:100%; background:#f8fafc; display:flex; align-items:center; justify-content:center; touch-action:none;">
+    <!-- Canvas or Grid injected here -->
+  </div>
+</dialog>
+
+<script src="beta-domain.js"></script>
+<script src="beta-ui.js"></script>
+<script src="recovery-capital-domain.js"></script>
+<script src="recovery-capital-ui.js"></script>
+<script src="continuity-domain.js"></script>
+<script src="continuity-ui.js"></script>
+<script src="api-client.js"></script>
+<script src="connecta-storage.js"></script>
+<script src="safety-plan-domain.js"></script>
+<script src="safety-plan-ui.js"></script>
+<script src="assets/lib/matter.min.js"></script>
+<div id="printCertificateTemplate" style="display:none;" aria-hidden="true">
+  <div style="border: 20px solid var(--navy); padding: 40px; text-align: center; font-family: 'Inter', sans-serif;">
+    <h1 style="font-size: 3rem; color: var(--navy); margin-bottom: 10px;">Atlas Recovery Milestone</h1>
+    <h2 style="font-size: 1.5rem; color: var(--teal); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px;">Certificate of Commitment</h2>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">This certificate honors the dedication and resilience of</p>
+    <div style="font-size: 2rem; font-weight: bold; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin: 0 auto 40px; width: 60%;" id="certNameLine">______________</div>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">For achieving a remarkable milestone of</p>
+    <div style="font-size: 2.5rem; font-weight: 900; color: var(--amber); margin-bottom: 40px;" id="certMilestoneText">30 Days</div>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 60px;">of active accountability and daily reprieves.</p>
+    
+    <div style="display: flex; justify-content: space-around; margin-top: 50px;">
+      <div style="text-align: center;">
+        <div style="border-bottom: 1px solid var(--ink); width: 200px; height: 30px;" id="certDateLine"></div>
+        <p style="margin-top: 10px; font-weight: bold;">Date Achieved</p>
+      </div>
+      <div style="text-align: center;">
+        <h2 style="font-size: 2rem; color: var(--navy); margin:0;">ATLAS</h2>
+        <p style="font-size: 0.8rem; margin:0; text-transform:uppercase;">Mental Health Recovery</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="calming-games.js"></script>
+<script src="milestones.js"></script>
+<script src="basic-needs.js"></script>
+<script src="journal.js"></script>
+<script src="mood.js"></script>
+<script src="custom-contacts.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const byId = id => document.getElementById(id);
+const $$ = s => [...document.querySelectorAll(s)];
+const store = {
+  get(k, fallback){ try{return JSON.parse(localStorage.getItem(k)) ?? fallback}catch{return fallback}},
+  set(k,v){localStorage.setItem(k,JSON.stringify(v))},
+  remove(k){localStorage.removeItem(k)}
+};
+const todayKey = new Date().toISOString().slice(0,10);
+
+const RAW_AFFIRMATIONS = [
+  "I am exactly who I am supposed to be. Fuck what anyone else thinks.",
+  "I refuse to shrink myself just to make others comfortable.",
+  "My recovery is my own damn business. I don't owe anyone an explanation.",
+  "I am allowed to take up space. I am allowed to be loud, messy, and real.",
+  "My past does not dictate my future. I am writing a new fucking story today.",
+  "I will protect my peace with everything I have. Period.",
+  "I am worthy of love and respect, exactly as I am right this second.",
+  "I survived 100% of my bad days. I can handle whatever is next."
+];
+
+function setRandomAffirmation() {
+  const el = byId('rawAffirmationText');
+  if(!el) return;
+  const current = el.textContent.replace(/"/g, '').trim();
+  let next = RAW_AFFIRMATIONS[Math.floor(Math.random() * RAW_AFFIRMATIONS.length)];
+  while(next === current && RAW_AFFIRMATIONS.length > 1) {
+    next = RAW_AFFIRMATIONS[Math.floor(Math.random() * RAW_AFFIRMATIONS.length)];
+  }
+  el.textContent = `"${next}"`;
+}
+
+if(byId('nextAffirmationBtn')) {
+  byId('nextAffirmationBtn').addEventListener('click', setRandomAffirmation);
+  setRandomAffirmation();
+}
+
+// --- MORAL COMPASS LOGIC ---
+const MORALS_KEY = "atlasMoralsV1";
+
+function renderMorals() {
+  const list = byId('moralCompassList');
+  if(!list) return;
+  const morals = store.get(MORALS_KEY, []);
+  list.innerHTML = '';
+  
+  if(morals.length === 0) {
+    list.innerHTML = '<p class="muted small" style="margin-left:-20px;">No core values defined yet.</p>';
+    return;
+  }
+
+  morals.forEach((moral, index) => {
+    const li = document.createElement('li');
+    li.style.cssText = "display:flex; justify-content:space-between; align-items:flex-start; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05);";
+    
+    const textSpan = document.createElement('span');
+    textSpan.innerHTML = `<strong>•</strong> ${moral}`;
+    textSpan.style.flex = "1";
+    textSpan.style.marginRight = "12px";
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = "ghost";
+    deleteBtn.textContent = "✕";
+    deleteBtn.style.cssText = "padding:2px 6px; font-size:0.8rem; color:var(--error);";
+    deleteBtn.onclick = () => {
+      if(!confirm("Remove this value from your compass?")) return;
+      morals.splice(index, 1);
+      store.set(MORALS_KEY, morals);
+      renderMorals();
+    };
+
+    li.appendChild(textSpan);
+    li.appendChild(deleteBtn);
+    list.appendChild(li);
+  });
+}
+
+if(byId('addMoralForm')) {
+  byId('addMoralForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = byId('moralInput').value.trim();
+    if(!val) return;
+    
+    const morals = store.get(MORALS_KEY, []);
+    morals.push(val);
+    store.set(MORALS_KEY, morals);
+    
+    byId('moralInput').value = '';
+    renderMorals();
+  });
+  renderMorals();
+}
+
+let deferredInstall;
+let timerRemaining=1200, timerHandle=null, supportStep=0;
+
+const reflections = [
+  {t:"A quieter next step",b:"Recovery does not always arrive as a dramatic decision. Sometimes it is a glass of water, a returned call, a meeting attended quietly, or ten minutes spent away from danger. Small safe actions are not small when they interrupt an old pattern.",q:"What is the smallest action that would make the next hour safer?"},
+  {t:"Progress survives difficult days",b:"A difficult day does not delete the work that came before it. The honest response is not to punish yourself. It is to notice what happened, reduce danger, reconnect and learn what extra support is needed.",q:"What support would make it easier to reconnect instead of hide?"},
+  {t:"Borrowed strength",b:"There are times when our own reasons feel faint. Recovery allows us to borrow steadiness from a meeting, a worker, a friend, a routine or a promise we made while thinking clearly.",q:"Whose steadiness can you borrow today?"},
+  {t:"The body speaks first",b:"Hunger, exhaustion, pain and fear can disguise themselves as hopelessness or craving. Before judging your whole life, check what your body has been trying to say.",q:"What basic physical need needs attention?"},
+  {t:"Honesty without punishment",b:"Honesty is useful when it opens a door. It becomes harmful when it is used as another weapon against ourselves. We can name what happened plainly and still speak to ourselves with dignity.",q:"What truth can you admit without insulting yourself?"},
+  {t:"A boundary is information",b:"A boundary is not a threat or a performance. It is clear information about what you will do to protect your safety and recovery. You do not need everyone to agree before it becomes real.",q:"Which boundary would reduce confusion today?"},
+  {t:"Connection before confidence",b:"You do not need to feel confident before entering a meeting or asking for help. Confidence often comes after the action, quietly following you through the door.",q:"What could you do before you feel fully ready?"},
+  {t:"One promise at a time",b:"Trust can be rebuilt through promises small enough to keep. Choose one action you can complete rather than ten actions designed to impress.",q:"Which promise to yourself is realistic today?"},
+  {t:"The pause belongs to you",b:"An urge can sound like an instruction, but it is still an experience passing through the body. A pause creates room between the feeling and the action. That room belongs to you.",q:"How could you create ten minutes of distance?"},
+  {t:"Your story is not paperwork",b:"Forms and assessments may describe parts of your life, but they cannot contain the whole person. You are allowed to have strengths, preferences, humour, skills and hopes alongside support needs.",q:"What part of you deserves more room today?"},
+  {t:"Prepare on the easier day",b:"A steady day is not empty time. It is the day to charge the phone, save numbers, plan transport, collect medication and decide who to contact when thinking becomes harder.",q:"What can your steadier self prepare?"},
+  {t:"Repair starts with return",b:"After conflict, avoidance or a setback, the first repair may simply be returning. Returning to the conversation, the meeting, the plan or the truth is an act of courage.",q:"Where would returning help more than explaining?"},
+  {t:"Enough for today",b:"Recovery can become another place where perfection hides. Today does not require a transformed life. It asks only for enough safety, enough honesty and enough connection to reach tomorrow.",q:"What would ‘enough’ look like today?"},
+  {t:"You can change the route",b:"A plan is there to support life, not trap it. When a route repeatedly fails, the answer may be more support, fewer steps, different timing or a different person beside you.",q:"Which part of your plan needs redesign rather than blame?"}
+];
+
+const tools = {
+  halt:{title:"HALT check",html:"<p>Ask four simple questions:</p><ol><li>Am I hungry?</li><li>Am I angry or frightened?</li><li>Am I lonely or disconnected?</li><li>Am I tired?</li></ol><p>Meet the most basic need first. Eat, rest, move away from conflict or contact someone safe before making a bigger decision.</p>"},
+  ground:{title:"5-4-3-2-1 grounding",html:"<p>Name, slowly:</p><ol><li>5 things you can see</li><li>4 things you can feel</li><li>3 things you can hear</li><li>2 things you can smell</li><li>1 thing you can taste, or one slow breath</li></ol><p>This is not a test. The aim is to bring attention back to the present room.</p>"},
+  urge:{title:"Ride the urge",html:"<p>Notice where the urge sits in your body. Give it a number from 0 to 10. Describe the sensation without arguing with it. Set a ten-minute timer and watch for any change, even a small one.</p><p>An urge can rise and fall without becoming an action.</p>"},
+  pause:{title:"Pause before action",html:"<ol><li>Do not send, buy, travel, use or confront yet.</li><li>Move to a safer place.</li><li>Tell one person what you are considering.</li><li>Wait twenty minutes.</li><li>Choose again when the intensity changes.</li></ol>"},
+  meeting:{title:"Prepare for a meeting",html:"<ol><li>Check the official listing.</li><li>Plan transport or test the online link.</li><li>Arrive ten minutes early if possible.</li><li>You may listen without speaking.</li><li>Stay near the exit if that feels safer.</li><li>Save one contact before leaving.</li></ol>"},
+  boundary:{title:"Set a boundary",html:"<p>Try this structure:</p><p><strong>“When this happens, I feel unsafe or pulled away from recovery. I will now do this instead.”</strong></p><p>Example: “I will not discuss money while we are shouting. I will leave and return to the conversation tomorrow.”</p>"}
+};
+
+function toast(msg){
+  const t=$("#toast");t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+function greeting(){
+  const h=new Date().getHours();
+  $("#greeting").textContent=h<12?"Good morning":h<18?"Good afternoon":"Good evening";
+}
+function showView(name){
+  $$(".view").forEach(v=>v.classList.toggle("active",v.dataset.view===name));
+  $$(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.go===name));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$$(".nav-btn").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.go)));
+
+$("#safetyChoices").addEventListener("click",e=>{
+  const b=e.target.closest("[data-safety]"); if(!b)return;
+  $$(".choice").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");
+  store.set("safety-"+todayKey,{value:b.dataset.safety,time:new Date().toISOString()});
+  $("#urgentBox").classList.toggle("show",b.dataset.safety==="unsafe");
+  toast("Check-in saved on this device");
+});
+
+function loadTask(){
+  const t=store.get("oneTask",null);
+  if(t){
+    $("#savedTaskWrap").hidden=false;$("#oneTaskInput").parentElement.hidden=true;
+    $("#savedTask").textContent=t.text;$("#savedTask").classList.toggle("task-done",!!t.done);
+    $("#completeTask").textContent=t.done?"Completed ✓":"Mark complete";
+  }else{
+    $("#savedTaskWrap").hidden=true;$("#oneTaskInput").parentElement.hidden=false;
+  }
+}
+$("#saveTask").onclick=()=>{const v=$("#oneTaskInput").value.trim();if(!v)return;store.set("oneTask",{text:v,done:false});loadTask();toast("Next action saved")};
+$("#completeTask").onclick=()=>{const t=store.get("oneTask",null);if(!t)return;t.done=!t.done;store.set("oneTask",t);loadTask();toast(t.done?"Action completed":"Action reopened")};
+$("#editTask").onclick=()=>{const t=store.get("oneTask",null);$("#oneTaskInput").value=t?.text||"";localStorage.removeItem("oneTask");loadTask()};
+
+function loadReading(){
+  const day=Math.floor(Date.now()/86400000);
+  const r=reflections[day%reflections.length];
+  $("#readingTitle").textContent=r.t;$("#readingText").textContent=r.b;$("#readingPrompt").textContent=r.q;
+  $("#journal").value=store.get("journal-"+todayKey,"");
+  const reads=store.get("readDays",[]);
+  $("#readingProgress").style.width=Math.min(100,(reads.length%8)/7*100)+"%";
+  $("#readingStatus").textContent=reads.includes(todayKey)?"Today’s reflection marked complete.":"Read at your own pace. There are no lost streaks.";
+}
+$("#saveJournal").onclick=()=>{store.set("journal-"+todayKey,$("#journal").value);toast("Private note saved")};
+$("#markRead").onclick=()=>{let a=store.get("readDays",[]);if(!a.includes(todayKey))a.push(todayKey);store.set("readDays",a);loadReading();toast("Reflection marked complete")};
+$("#saveReflection").onclick=()=>{store.set("reflection-"+todayKey,{feel:$("#feelField").value,need:$("#needField").value,action:$("#actionField").value});toast("Reflection saved")};
+function loadReflection(){
+  const r=store.get("reflection-"+todayKey,{});
+  $("#feelField").value=r.feel||"";$("#needField").value=r.need||"";$("#actionField").value=r.action||"";
+}
+
+$$("[data-tool]").forEach(b=>b.onclick=()=>{
+  const t=tools[b.dataset.tool];$("#toolTitle").textContent=t.title;$("#toolBody").innerHTML=t.html;$("#toolDialog").showModal();
+});
+
+$$("[data-meditation-src]").forEach(button=>button.addEventListener("click",()=>{
+  const source=button.dataset.meditationSrc;
+  const player=$("#meditationPlayer");
+  const isPlaylist=source.startsWith("videoseries?");
+  player.src=isPlaylist
+    ? `https://www.youtube-nocookie.com/embed/${source}`
+    : `https://www.youtube-nocookie.com/embed/${source}?rel=0`;
+  $("#meditationNow").textContent=button.dataset.meditationTitle;
+  $("#openMeditationYoutube").href=button.dataset.meditationUrl;
+  $$(".meditation-choice").forEach(item=>item.classList.toggle("active",item===button));
+  player.scrollIntoView({behavior:"smooth",block:"center"});
+}));
+
+function degreesToRadians(value){return value*Math.PI/180}
+function distanceKm(lat1,lon1,lat2,lon2){
+  const earth=6371;
+  const dLat=degreesToRadians(lat2-lat1);
+  const dLon=degreesToRadians(lon2-lon1);
+  const a=Math.sin(dLat/2)**2+
+    Math.cos(degreesToRadians(lat1))*Math.cos(degreesToRadians(lat2))*Math.sin(dLon/2)**2;
+  return earth*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function cafeAddress(tags={}){
+  const parts=[
+    [tags["addr:housenumber"],tags["addr:street"]].filter(Boolean).join(" "),
+    tags["addr:place"],
+    tags["addr:city"]||tags["addr:town"]||tags["addr:village"],
+    tags["addr:postcode"]
+  ].filter(Boolean);
+  return [...new Set(parts)].join(", ");
+}
+function renderCafes(items,userLat,userLon){
+  const box=$("#cafeResults");
+  box.innerHTML="";
+  if(!items.length){
+    box.innerHTML='<div class="empty">No mapped cafés were found in that distance. Try a larger radius or search by town/postcode.</div>';
+    return;
+  }
+  items.slice(0,12).forEach(cafe=>{
+    const article=document.createElement("article");
+    article.className="cafe";
+
+    const title=document.createElement("h4");
+    title.textContent=cafe.name;
+    article.appendChild(title);
+
+    const meta=document.createElement("div");
+    meta.className="cafe-meta";
+    const distance=document.createElement("span");
+    distance.className="distance";
+    distance.textContent=cafe.distance<1
+      ? `${Math.round(cafe.distance*1000)} metres away`
+      : `${cafe.distance.toFixed(1)} km away`;
+    meta.appendChild(distance);
+
+    if(cafe.opening){
+      const hours=document.createElement("span");
+      hours.className="pill";
+      hours.textContent=cafe.opening;
+      meta.appendChild(hours);
+    }
+    article.appendChild(meta);
+
+    if(cafe.address){
+      const address=document.createElement("p");
+      address.className="small";
+      address.textContent=cafe.address;
+      article.appendChild(address);
+    }
+
+    const actions=document.createElement("div");
+    actions.className="action-row";
+
+    const directions=document.createElement("a");
+    directions.className="secondary";
+    directions.target="_blank";
+    directions.rel="noopener";
+    directions.href=`https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLon}&destination=${cafe.lat},${cafe.lon}&travelmode=walking`;
+    directions.textContent="Walking directions";
+    actions.appendChild(directions);
+
+    const map=document.createElement("a");
+    map.className="ghost";
+    map.target="_blank";
+    map.rel="noopener";
+    map.href=`https://www.openstreetmap.org/?mlat=${cafe.lat}&mlon=${cafe.lon}#map=18/${cafe.lat}/${cafe.lon}`;
+    map.textContent="Open map";
+    actions.appendChild(map);
+
+    article.appendChild(actions);
+    box.appendChild(article);
+  });
+}
+async function queryNearbyCafes(lat,lon,radius){
+  const query=`[out:json][timeout:25];
+  (
+    node["amenity"="cafe"](around:${radius},${lat},${lon});
+    way["amenity"="cafe"](around:${radius},${lat},${lon});
+    relation["amenity"="cafe"](around:${radius},${lat},${lon});
+  );
+  out center tags;`;
+  const endpoints=[
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+  ];
+  let lastError;
+  for(const endpoint of endpoints){
+    try{
+      const response=await fetch(`${endpoint}?data=${encodeURIComponent(query)}`);
+      if(!response.ok)throw new Error(`Map service returned ${response.status}`);
+      return await response.json();
+    }catch(error){lastError=error}
+  }
+  throw lastError||new Error("Coffee-shop map service is unavailable");
+}
+$("#findCafes").onclick=()=>{
+  if(!navigator.geolocation){
+    $("#cafeStatus").textContent="This browser cannot provide a location. Use the town or postcode search below.";
+    return;
+  }
+  $("#findCafes").disabled=true;
+  $("#cafeStatus").textContent="Requesting your location…";
+  $("#cafeResults").innerHTML="";
+  navigator.geolocation.getCurrentPosition(async position=>{
+    const lat=position.coords.latitude;
+    const lon=position.coords.longitude;
+    const radius=Number($("#cafeRadius").value);
+    $("#cafeStatus").textContent="Searching nearby community map listings…";
+    try{
+      const data=await queryNearbyCafes(lat,lon,radius);
+      const cafes=(data.elements||[]).map(item=>{
+        const cafeLat=item.lat??item.center?.lat;
+        const cafeLon=item.lon??item.center?.lon;
+        if(!Number.isFinite(cafeLat)||!Number.isFinite(cafeLon))return null;
+        const tags=item.tags||{};
+        return{
+          name:tags.name||tags.brand||"Unnamed café",
+          lat:cafeLat,
+          lon:cafeLon,
+          distance:distanceKm(lat,lon,cafeLat,cafeLon),
+          address:cafeAddress(tags),
+          opening:tags.opening_hours||""
+        };
+      }).filter(Boolean).sort((a,b)=>a.distance-b.distance);
+      renderCafes(cafes,lat,lon);
+      $("#cafeStatus").textContent=`Found ${cafes.length} mapped café${cafes.length===1?"":"s"} within ${radius/1000} km. Location was not saved.`;
+    }catch(error){
+      $("#cafeStatus").textContent="The live map search could not connect. Use the town or postcode search below.";
+      $("#cafeResults").innerHTML='<div class="empty">Coffee finder is temporarily unavailable. No location was saved.</div>';
+    }finally{
+      $("#findCafes").disabled=false;
+    }
+  },error=>{
+    const messages={
+      1:"Location permission was declined. Use the town or postcode search below.",
+      2:"Your location could not be determined. Try again or search by postcode.",
+      3:"The location request timed out. Try again or search by postcode."
+    };
+    $("#cafeStatus").textContent=messages[error.code]||"Location could not be used.";
+    $("#findCafes").disabled=false;
+  },{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
+};
+$("#searchCafePlace").onclick=()=>{
+  const place=$("#cafePlace").value.trim();
+  if(!place){toast("Enter a town or postcode first");return}
+  const url=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`coffee shops near ${place}`)}`;
+  window.open(url,"_blank","noopener");
+};
+
+// Contact system is now managed by custom-contacts.js
+
+
+function renderPromises(){
+  const list=$("#promiseList"),a=store.get("promises",[]);list.innerHTML="";
+  if(!a.length)list.innerHTML='<div class="empty">No service promises recorded.</div>';
+  a.forEach(p=>{
+    const d=document.createElement("div");d.className="promise card "+(p.complete?"complete":"");
+    d.innerHTML=`<strong>${escapeHtml(p.text)}</strong><p class="small">Owner: ${escapeHtml(p.owner)} · Due: ${formatDate(p.due)}</p><div class="action-row"><button class="primary" data-complete-promise="${p.id}">${p.complete?"Completed ✓":"Mark completed"}</button><button class="ghost" data-del-promise="${p.id}">Remove</button></div>`;list.appendChild(d);
+  });
+}
+$("#addPromise").onclick=()=>$("#promiseDialog").showModal();
+$("#promiseForm").onsubmit=e=>{e.preventDefault();let a=store.get("promises",[]);a.push({id:crypto.randomUUID(),text:$("#promiseText").value,owner:$("#promiseOwner").value,due:$("#promiseDue").value,complete:false});store.set("promises",a);e.target.reset();$("#promiseDialog").close();renderPromises();toast("Promise recorded")};
+$("#promiseList").onclick=e=>{
+  const c=e.target.closest("[data-complete-promise]"),d=e.target.closest("[data-del-promise]");let a=store.get("promises",[]);
+  if(c){const p=a.find(x=>x.id===c.dataset.completePromise);p.complete=!p.complete;store.set("promises",a);renderPromises()}
+  if(d){store.set("promises",a.filter(x=>x.id!==d.dataset.delPromise));renderPromises()}
+};
+
+const checkItems=["Photo identification","Phone and charger","Medication and prescription plan","Safe accommodation","GP registration","Benefits or income","Bank account","Transport to first appointment","Food for the first day","Probation or key-worker appointment","Trusted support contact","First recovery meeting"];
+function renderChecklist(){
+  const saved=store.get("checklist",{});
+  $("#checklist").innerHTML=checkItems.map((x,i)=>`<label style="font-weight:500"><input type="checkbox" data-check="${i}" style="width:auto;margin-right:8px" ${saved[i]?"checked":""}>${x}</label>`).join("");
+}
+$("#checklist").addEventListener("change",e=>{if(!e.target.dataset.check)return;const s=store.get("checklist",{});s[e.target.dataset.check]=e.target.checked;store.set("checklist",s)});
+
+$("#open20").onclick=()=>{supportStep=0;renderSupport();$("#supportDialog").showModal()};
+function renderSupport(){
+  $$(".support-step").forEach((x,i)=>x.classList.toggle("active",i===supportStep));
+  const dots=$("#stepDots");dots.innerHTML="";
+  $$(".support-step").forEach((_,i)=>{const d=document.createElement("i");d.classList.toggle("active",i===supportStep);dots.appendChild(d)});
+  $("#prevSupport").disabled=supportStep===0;$("#nextSupport").textContent=supportStep===4?"Start again":"Next";
+}
+$("#nextSupport").onclick=()=>{supportStep=supportStep===4?0:supportStep+1;renderSupport()};
+$("#prevSupport").onclick=()=>{supportStep=Math.max(0,supportStep-1);renderSupport()};
+function updateTimer(){const m=Math.floor(timerRemaining/60),s=timerRemaining%60;$("#timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+$("#timerToggle").onclick=()=>{
+  if(timerHandle){clearInterval(timerHandle);timerHandle=null;$("#timerToggle").textContent="Resume timer"}
+  else{timerHandle=setInterval(()=>{timerRemaining--;updateTimer();if(timerRemaining<=0){clearInterval(timerHandle);timerHandle=null;toast("Twenty minutes completed. Choose the next safe action.");timerRemaining=1200}},1000);$("#timerToggle").textContent="Pause timer"}
+};
+
+$$("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());
+
+$("#textSizeBtn").onclick=()=>{
+  const current=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--text-scale"))||1;
+  const next=current>=1.2?1:current+.1;document.documentElement.style.setProperty("--text-scale",next);store.set("textScale",next);toast(next===1?"Text size reset":"Text enlarged");
+  const profile=store.get("connectaBetaProfileV1",null);if(profile){profile.textScale=next;store.set("connectaBetaProfileV1",profile)}
+};
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").hidden=false});
+$("#installBtn").onclick=async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").hidden=true};
+
+$("#exportData").onclick=()=>{
+  const data=CONNECTAStorage.exportData(localStorage);
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`connecta-recovery-export-${todayKey}.json`;a.click();URL.revokeObjectURL(a.href);
+};
+$("#restoreData").onclick=async()=>{
+  const file=$("#restoreDataFile").files[0];
+  if(!file){toast("Choose a Atlas backup first");return}
+  try{
+    const backup=JSON.parse(await file.text());
+    CONNECTAStorage.validateImport(backup);
+    if(!confirm("Replace Atlas information on this device with this backup? Other websites’ data will not be changed."))return;
+    CONNECTAStorage.restore(localStorage,backup);location.reload();
+  }catch(error){toast(error.message||"This backup could not be restored")}
+};
+$("#clearData").onclick=()=>{if(confirm("Delete all Atlas information saved in this browser on this device? Other websites’ data will not be changed.")){CONNECTAStorage.clear(localStorage);location.reload()}};
+
+function escapeHtml(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function linkify(s=""){const safe=escapeHtml(s);if(/^https?:\/\//i.test(s))return `<a href="${safe}" target="_blank" rel="noopener">Open meeting link</a>`;return safe}
+function formatDate(s){if(!s)return "";return new Date(s+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
+
+function init(){
+  CONNECTAStorage.migrate(localStorage);
+  greeting();loadTask();loadReading();loadReflection();renderPromises();renderChecklist();renderSupport();updateTimer();
+  ConnectaMeetingUI.createMeetingUI({document,store,notify:toast,confirm:message=>confirm(message),isOnline:()=>navigator.onLine!==false}).init();
+  ConnectaRecoveryBridgeUI.createRecoveryBridgeUI({document,store,notify:toast,confirm:message=>confirm(message),openUrgentSupport:()=>{supportStep=4;renderSupport();$("#supportDialog").showModal()}}).init();
+  ConnectaRecoveryCapitalUI.createRecoveryCapitalUI({document,store,notify:toast}).init();
+  ConnectaContinuityUI.createContinuityUI({document,store,notify:toast}).init();
+  ConnectaSafetyPlanUI.createSafetyPlanUI({document,store,notify:toast,confirm:message=>confirm(message)}).init();
+  const sc=store.get("safety-"+todayKey,null);if(sc){const b=$(`[data-safety="${sc.value}"]`);if(b)b.classList.add("selected");$("#urgentBox").classList.toggle("show",sc.value==="unsafe")}
+  const ts=store.get("textScale",1);document.documentElement.style.setProperty("--text-scale",ts);
+  ConnectaBetaUI.createBetaUI({document,store,notify:toast,confirm:message=>confirm(message)}).init();
+  if("serviceWorker" in navigator)navigator.serviceWorker.register("./service-worker.js");
+
+  // --- Optional Supabase cloud backup ---
+  const authDialog = byId("authDialog");
+  const authForm = byId("authForm");
+  const authEmail = byId("authEmail");
+  const authPassword = byId("authPassword");
+  const authError = byId("authError");
+  const authSection = byId("authSection");
+  const cloudClient = window.SupabaseClient;
+
+  function setAuthMessage(message, isError = true) {
+    authError.textContent = message;
+    authError.classList.toggle("error", isError);
+  }
+
+  function showAuthDialog() {
+    setAuthMessage("");
+    authEmail.value = "";
+    authPassword.value = "";
+    authDialog.showModal();
+  }
+
+  async function updateAuthUI() {
+    if (!authSection) return;
+
+    if (!cloudClient) {
+      authSection.innerHTML = `<p class="status-line error">Cloud sync could not start because its client is unavailable.</p>`;
+      return;
+    }
+
+    if (!cloudClient.isConfigured()) {
+      authSection.innerHTML = `<p class="status-line error">Cloud sync needs a Supabase project URL and public anon key in <code>api-client.js</code>.</p>`;
+      return;
+    }
+
+    authSection.innerHTML = `<p class="status-line">Checking cloud account…</p>`;
+
+    try {
+      if (!(await cloudClient.isLoggedIn())) {
+        authSection.innerHTML = `<button class="primary" id="openAuthModal" type="button">Sign in or create account</button>`;
+        byId("openAuthModal").addEventListener("click", showAuthDialog);
+        return;
+      }
+
+      const user = await cloudClient.getUser();
+      const email = user && user.email ? escapeHtml(user.email) : "your account";
+      authSection.innerHTML = `
+        <p class="status-line">Signed in as <strong>${email}</strong>.</p>
+        <div class="action-row">
+          <button class="primary" id="pushSyncBtn" type="button">Upload this device</button>
+          <button class="secondary" id="pullSyncBtn" type="button">Restore from cloud</button>
+          <button class="ghost" id="logoutBtn" type="button">Sign out</button>
+        </div>
+        <p class="muted small">Upload replaces the seven supported cloud records with this device’s copies. Restore overwrites those local records and reloads Atlas.</p>
+      `;
+
+      byId("pushSyncBtn").addEventListener("click", async () => {
+        if (!confirm("Upload supported Atlas data from this device to your Supabase account?")) return;
+        const button = byId("pushSyncBtn");
+        button.disabled = true;
+        button.textContent = "Uploading…";
+        try {
+          const result = await cloudClient.syncPush();
+          toast(`Cloud backup updated (${result.count} records).`);
+        } catch (error) {
+          toast(`Cloud upload failed: ${error.message}`);
+        } finally {
+          button.disabled = false;
+          button.textContent = "Upload this device";
+        }
+      });
+
+      byId("pullSyncBtn").addEventListener("click", async () => {
+        if (!confirm("Restore supported Atlas data from the cloud? This replaces those records on this device.")) return;
+        const button = byId("pullSyncBtn");
+        button.disabled = true;
+        button.textContent = "Restoring…";
+        try {
+          await cloudClient.syncPull();
+        } catch (error) {
+          button.disabled = false;
+          button.textContent = "Restore from cloud";
+          toast(`Cloud restore failed: ${error.message}`);
+        }
+      });
+
+      byId("logoutBtn").addEventListener("click", async () => {
+        const button = byId("logoutBtn");
+        button.disabled = true;
+        try {
+          await cloudClient.signOut();
+          await updateAuthUI();
+        } catch (error) {
+          button.disabled = false;
+          toast(`Sign out failed: ${error.message}`);
+        }
+      });
+    } catch (error) {
+      authSection.innerHTML = `<p class="status-line error"></p><button class="secondary" id="retryCloudBtn" type="button">Retry</button>`;
+      authSection.querySelector("p").textContent = `Cloud account check failed: ${error.message}`;
+      byId("retryCloudBtn").addEventListener("click", updateAuthUI);
+    }
+  }
+
+  if (cloudClient) {
+    void updateAuthUI();
+
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!authForm.reportValidity()) return;
+      setAuthMessage("");
+      try {
+        await cloudClient.signIn(authEmail.value, authPassword.value);
+        authDialog.close();
+        await updateAuthUI();
+      } catch (error) {
+        setAuthMessage(error.message);
+      }
+    });
+
+    byId("authRegisterBtn").addEventListener("click", async () => {
+      if (!authForm.reportValidity()) return;
+      setAuthMessage("");
+      try {
+        const result = await cloudClient.signUp(authEmail.value, authPassword.value);
+        if (result.session) {
+          authDialog.close();
+          await updateAuthUI();
+        } else {
+          setAuthMessage("Account created. Check your email to confirm it, then sign in.", false);
+        }
+      } catch (error) {
+        setAuthMessage(error.message);
+      }
+    });
+  }
+}
+init();
+</script>
+</body>
+</html>

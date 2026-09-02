@@ -1,0 +1,23 @@
+{
+  "name": "Atlas Recovery Safety Net",
+  "short_name": "Atlas",
+  "description": "A free, private-first recovery safety and continuity app.",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "lang": "en-GB",
+  "display": "standalone",
+  "background_color": "#F8F8F3",
+  "theme_color": "#355846",
+  "icons": [
+    { "src": "icons/connecta-icon-16.png", "type": "image/png", "sizes": "16x16", "purpose": "any" },
+    { "src": "icons/connecta-icon-32.png", "type": "image/png", "sizes": "32x32", "purpose": "any" },
+    { "src": "icons/connecta-icon-48.png", "type": "image/png", "sizes": "48x48", "purpose": "any" },
+    { "src": "icons/connecta-icon-72.png", "type": "image/png", "sizes": "72x72", "purpose": "any" },
+    { "src": "icons/connecta-icon-96.png", "type": "image/png", "sizes": "96x96", "purpose": "any" },
+    { "src": "icons/connecta-icon-128.png", "type": "image/png", "sizes": "128x128", "purpose": "any" },
+    { "src": "icons/connecta-icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any maskable" },
+    { "src": "icons/connecta-icon-256.png", "type": "image/png", "sizes": "256x256", "purpose": "any" },
+    { "src": "icons/connecta-icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" }
+  ]
+}
